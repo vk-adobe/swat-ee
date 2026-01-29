@@ -30,17 +30,28 @@ async function tryVendorSiteVersion(vendorUrl) {
 }
 
 // Helper: retry with exponential backoff for rate-limit (429) errors
-async function callAIWithRetry(fn, maxRetries = 3) {
+async function callAIWithRetry(fn, maxRetries = 2, timeout = 8000) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      return await fn()
+      // Add timeout to prevent hanging on quota exhaustion
+      return await Promise.race([
+        fn(),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('API call timeout')), timeout)
+        )
+      ])
     } catch (err) {
       const is429 = err.response?.status === 429 || err.message?.includes('429')
-      if (!is429 || attempt === maxRetries) throw err
-      // Exponential backoff: 2s, 4s, 8s (longer delays for Perplexity)
-      const delayMs = Math.pow(2, attempt) * 1000
-      console.warn(`Rate limit (429); retrying in ${delayMs}ms (attempt ${attempt}/${maxRetries})`)
-      await new Promise(r => setTimeout(r, delayMs))
+      const isTimeout = err.message?.includes('timeout')
+      
+      if ((is429 || isTimeout) && attempt < maxRetries) {
+        // Only retry once for quota exhaustion, then fail fast
+        const delayMs = 1000
+        console.warn(`Rate limit or timeout; retrying in ${delayMs}ms (attempt ${attempt}/${maxRetries})`)
+        await new Promise(r => setTimeout(r, delayMs))
+      } else {
+        throw err
+      }
     }
   }
 }
@@ -83,8 +94,8 @@ function normalizeEvaluationShape(input) {
 }
 
 // Phase 1: Research what the module does using AI
-async function researchModuleInfo(moduleName, description) {
-  const cacheKey = `${moduleName}::${description || ''}`
+async function researchModuleInfo(moduleName, description, aiProvider = 'perplexity') {
+  const cacheKey = `${moduleName}::${description || ''}::${aiProvider}`
   if (moduleResearchCache[cacheKey]) return moduleResearchCache[cacheKey]
   const researchPrompt = `You are researching an Adobe Commerce (Magento 2) extension/module.
 
@@ -108,9 +119,8 @@ Respond with ONLY a JSON object (no markdown, no extra text):
 If unsure, provide your best guess. Always return valid JSON.`
 
   try {
-    const provider = (process.env.AI_PROVIDER || 'openai').toLowerCase()
-
-    if (provider === 'perplexity') {
+    // Use provided aiProvider instead of environment variable
+    if (aiProvider === 'perplexity') {
       if (!process.env.PERPLEXITY_API_KEY) {
         throw new Error('PERPLEXITY_API_KEY not configured')
       }
@@ -137,7 +147,7 @@ If unsure, provide your best guess. Always return valid JSON.`
       const content = response.data?.choices?.[0]?.message?.content || '{}'
       const jsonMatch = content.match(/\{[\s\S]*\}/)
       const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
-      console.info(`Research complete for ${moduleName}:`, parsed)
+      console.info(`Research complete for ${moduleName} (Perplexity):`, parsed)
       moduleResearchCache[cacheKey] = parsed
       return parsed
     } else {
@@ -158,17 +168,18 @@ If unsure, provide your best guess. Always return valid JSON.`
       const content = response.choices[0]?.message?.content || '{}'
       const jsonMatch = content.match(/\{[\s\S]*\}/)
       const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
-      console.info(`Research complete for ${moduleName}:`, parsed)
+      console.info(`Research complete for ${moduleName} (OpenAI):`, parsed)
       moduleResearchCache[cacheKey] = parsed
       return parsed
     }
   } catch (err) {
-    console.error(`Research failed for ${moduleName}:`, err.message)
-    
-    // Check if it's a rate limit error and log it
     const is429 = err.response?.status === 429 || err.message?.includes('429')
-    if (is429) {
-      console.warn(`Rate limit hit during research for ${moduleName}. Retries exhausted.`)
+    const isQuotaError = err.message?.includes('quota') || err.message?.includes('exceeded')
+    
+    if (is429 || isQuotaError) {
+      console.error(`OpenAI API QUOTA EXCEEDED for ${moduleName}. Please check your OpenAI account billing at https://platform.openai.com/account/billing/overview`)
+    } else {
+      console.error(`Research failed for ${moduleName}:`, err.message)
     }
     
     return { purpose: 'Unknown', vendor_url: '', common_versions: '', notes: 'Research failed' }
@@ -176,8 +187,8 @@ If unsure, provide your best guess. Always return valid JSON.`
 }
 
 // Phase 2: Evaluate against Adobe Commerce native features
-async function evaluateAgainstNative(moduleName, purpose, foundVersion) {
-  const evalCacheKey = `${moduleName}::${purpose || ''}::${foundVersion || ''}`
+async function evaluateAgainstNative(moduleName, purpose, foundVersion, aiProvider = 'perplexity') {
+  const evalCacheKey = `${moduleName}::${purpose || ''}::${foundVersion || ''}::${aiProvider}`
   if (moduleEvalCache[evalCacheKey]) return moduleEvalCache[evalCacheKey]
   const evaluationPrompt = `You are an Adobe Commerce (Magento 2) consultant evaluating whether a custom extension is necessary.
 
@@ -201,9 +212,8 @@ Always return valid JSON.`
 
   try {
     const MAX_TOKENS = parseInt(process.env.EVAL_MAX_TOKENS || '300', 10)
-    const provider = (process.env.AI_PROVIDER || 'openai').toLowerCase()
-
-    if (provider === 'perplexity') {
+    // Use provided aiProvider instead of environment variable
+    if (aiProvider === 'perplexity') {
       if (!process.env.PERPLEXITY_API_KEY) {
         throw new Error('PERPLEXITY_API_KEY not configured')
       }
@@ -231,7 +241,7 @@ Always return valid JSON.`
       const jsonMatch = content.match(/\{[\s\S]*\}/)
       const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
       const normalized = normalizeEvaluationShape(parsed)
-      console.info(`Evaluation complete for ${moduleName}:`, normalized)
+      console.info(`Evaluation complete for ${moduleName} (Perplexity):`, normalized)
       moduleEvalCache[evalCacheKey] = normalized
       return normalized
     } else {
@@ -253,26 +263,28 @@ Always return valid JSON.`
       const jsonMatch = content.match(/\{[\s\S]*\}/)
       const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
       const normalized = normalizeEvaluationShape(parsed)
-      console.info(`Evaluation complete for ${moduleName}:`, normalized)
+      console.info(`Evaluation complete for ${moduleName} (OpenAI):`, normalized)
       moduleEvalCache[evalCacheKey] = normalized
       return normalized
     }
   } catch (err) {
-    console.error(`Evaluation failed for ${moduleName}:`, err.message)
-    
-    // Check if it's a rate limit error
+    // Check if it's a rate limit or quota error
     const is429 = err.response?.status === 429 || err.message?.includes('429')
+    const isQuotaError = err.message?.includes('quota') || err.message?.includes('exceeded')
     
-    if (is429) {
-      console.warn(`Rate limit (429) hit for ${moduleName}. Using conservative fallback.`)
+    if (is429 || isQuotaError) {
+      console.error(`OpenAI API QUOTA EXCEEDED for ${moduleName}. Please check your OpenAI account billing at https://platform.openai.com/account/billing/overview`)
       return {
         recommendation: 'KEEP',
         confidence: 50,
-        native_alternative: 'Unknown (rate limited)',
-        reason: 'AI service is rate limited. Using conservative KEEP recommendation. Please try again later.',
-        upgrade_note: 'Service temporarily unavailable',
+        native_alternative: 'Unknown (quota exceeded)',
+        reason: 'OpenAI API quota exceeded. Please upgrade your OpenAI account. Using conservative KEEP recommendation.',
+        upgrade_note: 'Please add payment method at https://platform.openai.com/account/billing/overview',
       }
     }
+    
+    console.error(`Evaluation failed for ${moduleName}:`, err.message)
+
     
     return {
       recommendation: 'KEEP',
@@ -284,10 +296,24 @@ Always return valid JSON.`
   }
 }
 
-export async function evaluateExtensions(withVersions, progressCallback) {
-  console.info('evaluateExtensions called. OPENAI_API_KEY present?', !!process.env.OPENAI_API_KEY)
+export async function evaluateExtensions(withVersions, aiProvider = 'perplexity', progressCallback) {
+  // Handle callback parameter position for backwards compatibility
+  if (typeof aiProvider === 'function') {
+    progressCallback = aiProvider
+    aiProvider = 'perplexity'
+  }
+
+  console.info(`evaluateExtensions called with provider: ${aiProvider}`)
+  console.info('OPENAI_API_KEY present?', !!process.env.OPENAI_API_KEY)
+  
+  // Validate provider
+  const validProviders = ['perplexity', 'openai']
+  if (!validProviders.includes(aiProvider)) {
+    throw new Error(`Invalid AI provider: ${aiProvider}. Must be one of: ${validProviders.join(', ')}`)
+  }
+
   // Ensure OpenAI client reflects current environment at call time (handles restarts)
-  if (!client && process.env.OPENAI_API_KEY) {
+  if (aiProvider === 'openai' && !client && process.env.OPENAI_API_KEY) {
     client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
     console.info('OpenAI client instantiated')
   }
@@ -322,7 +348,7 @@ export async function evaluateExtensions(withVersions, progressCallback) {
       let research = { purpose: item.description || item.moduleName, vendor_url: '' }
       if (!fastMode) {
         console.info('Phase 1: Researching module purpose...')
-        research = await researchModuleInfo(item.moduleName, item.description)
+        research = await researchModuleInfo(item.moduleName, item.description, aiProvider)
       } else {
         console.info('Fast mode enabled: skipping research phase')
       }
@@ -373,7 +399,7 @@ export async function evaluateExtensions(withVersions, progressCallback) {
 
       // Phase 2: Evaluate against Adobe Commerce native features
       console.info('Phase 2: Evaluating against native features...')
-      const evaluation = await evaluateAgainstNative(item.moduleName, research.purpose, item.latestVersion)
+      const evaluation = await evaluateAgainstNative(item.moduleName, research.purpose, item.latestVersion, aiProvider)
 
       if (interCallDelayMs > 0) await new Promise(r => setTimeout(r, interCallDelayMs))
 
