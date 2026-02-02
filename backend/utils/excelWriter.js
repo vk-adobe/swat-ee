@@ -13,11 +13,12 @@ export async function writeResultsToExcel(inputFile, evaluated, outputFile) {
       return {
         ...row,
         found_package: evalData?.foundPackage || '',
-        latest_version: evalData?.latestVersion || '',
+        latest_version: (evalData?.latestVersion && String(evalData.latestVersion).match(/^v?\d{1,4}(\.\d{1,4}){1,3}([-.]?(?:p|patch|pl)\d+)?$/i)) ? evalData.latestVersion : '',
         latest_url: evalData?.latestUrl || '',
         recommended_action: evalData?.recommendedAction || '',
         confidence_pct: evalData?.confidence || '',
         native_alternative: evalData?.nativeAlternative || '',
+        native_coverage: evalData?.nativeCoverage || '',
         upgrade_note: evalData?.upgradeNote || '',
         explanation: evalData?.explanation || '',
         citations: (evalData?.citations || []).join('; '),

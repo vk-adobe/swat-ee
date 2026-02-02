@@ -71,13 +71,39 @@ async function processEvaluationJob(jobId, input) {
       jobManager.updateJob(jobId, { status, progress })
     })
 
+    // Initialize per-module status tracking
+    const items = modules.map((mod) => ({
+      rowIndex: mod.rowIndex,
+      moduleName: mod.moduleName,
+      status: 'pending',
+    }))
+    jobManager.updateJob(jobId, { total: modules.length, items })
+
     // Step 2: Process modules (version lookup + AI evaluation)
-    const evaluated = await moduleLoadingService.processModules(modules, input.aiProvider, (status, progress) => {
-      if (status) {
-        jobManager.updateJob(jobId, { status, progress })
-      } else {
-        jobManager.updateProgress(jobId, progress)
-      }
+    const evaluated = await moduleLoadingService.processModules(modules, input.aiProvider, {
+      onStatusUpdate: (status, progress) => {
+        if (status) {
+          jobManager.updateJob(jobId, { status, progress })
+        } else {
+          jobManager.updateProgress(jobId, progress)
+        }
+      },
+      onProgress: (progress) => {
+        // Scale AI evaluation from 60-90% of total
+        jobManager.updateProgress(jobId, 60 + progress * 30)
+      },
+      onItemStatus: ({ rowIndex, moduleName, status }) => {
+        const job = jobManager.getJob(jobId)
+        if (!job?.items) return
+        const index = job.items.findIndex((item) => item.rowIndex === rowIndex)
+        const next = [...job.items]
+        if (index >= 0) {
+          next[index] = { ...next[index], status, moduleName: next[index].moduleName || moduleName }
+        } else {
+          next.push({ rowIndex, moduleName, status })
+        }
+        jobManager.updateJob(jobId, { items: next })
+      },
     })
 
     // Step 3: Generate Excel report

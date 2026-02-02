@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './index.css'
 import {
@@ -14,7 +14,7 @@ function FormSection({ form, onSubmit, error }) {
     <div className="space-y-6">
       {/* Project ID Input */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">Project ID (Optional)</label>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">Project ID</label>
         <input
           type="text"
           value={form.projectId}
@@ -97,7 +97,7 @@ function FormSection({ form, onSubmit, error }) {
       <button
         onClick={onSubmit}
         disabled={!form.isFormValid()}
-        className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-3 px-4 rounded-lg transition"
+        className="w-full bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 hover:from-indigo-700 hover:via-blue-700 hover:to-cyan-600 disabled:from-gray-400 disabled:via-gray-400 disabled:to-gray-400 text-white font-bold py-3 px-4 rounded-lg transition"
       >
         Start Evaluation
       </button>
@@ -106,21 +106,79 @@ function FormSection({ form, onSubmit, error }) {
 }
 
 // Processing Component
-function ProcessingSection({ job, progress }) {
+function ProcessingSection({ job }) {
+  const items = Array.isArray(job.items) ? job.items : []
+  const total = job.total || items.length
+  const processedCount = items.filter((item) => item.status && item.status !== 'pending').length
+  const progressPct = typeof job.progress === 'number' ? Math.max(0, Math.min(100, job.progress)) : 0
+
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-gray-800 mb-2">Processing: {job.status.replace(/_/g, ' ')}</h2>
-        <div className="w-full bg-gray-200 rounded-full h-4">
-          <div className="bg-blue-600 h-4 rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
-        </div>
-        <p className="text-sm text-gray-600 mt-2">{Math.round(progress)}% complete</p>
+        <h2 className="text-lg font-semibold text-gray-800 mb-2">Evaluating Extensions</h2>
+        <p className="text-sm text-gray-600">
+          {processedCount} of {total} processed
+        </p>
+        {job.projectId && (
+          <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-sm text-indigo-700">
+            <span className="font-semibold">Project ID</span>
+            <span className="font-mono">{job.projectId}</span>
+          </div>
+        )}
       </div>
+
+      <div className="space-y-2">
+        <div className="flex items-center justify-between text-xs text-gray-600">
+          <span>Status: {job.status.replace(/_/g, ' ')}</span>
+          <span>{Math.round(progressPct)}%</span>
+        </div>
+        <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            className="h-2 bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-400 transition-all duration-300"
+            style={{ width: `${progressPct}%` }}
+          />
+        </div>
+      </div>
+
+      {job.status === 'fetching_extensions' && (
+        <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-700 space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+            Fetching extensions from external API...
+          </div>
+          <div className="w-full h-2 bg-blue-100 rounded-full overflow-hidden">
+            <div
+              className="h-2 bg-blue-500 transition-all duration-300"
+              style={{ width: `${progressPct}%` }}
+            />
+          </div>
+        </div>
+      )}
+
       <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
         <p className="text-sm text-gray-700">
           <strong>Current Step:</strong> {job.status.replace(/_/g, ' ')}
         </p>
       </div>
+
+      {items.length === 0 && (
+        <div className="text-sm text-gray-600">Preparing extension list…</div>
+      )}
+
+      {items.length > 0 && (
+        <div className="border rounded-lg overflow-hidden">
+          <div className="max-h-[420px] overflow-y-auto divide-y">
+            {items.map((item) => (
+              <div key={item.rowIndex} className="flex items-center justify-between px-4 py-2">
+                <span className="text-sm text-gray-800">{item.moduleName || `Row ${item.rowIndex + 1}`}</span>
+                <span className="text-xs font-semibold px-2 py-1 rounded-full bg-gray-100 text-gray-700">
+                  {item.status || 'pending'}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -129,38 +187,101 @@ function ProcessingSection({ job, progress }) {
 function ResultsTable({ rows, visibleCount, onLoadMore }) {
   if (rows.length === 0) return <div className="text-sm text-gray-600">No rows found.</div>
 
-  const columns = [
+  const preferredColumns = [
     'Extension / Module Name', 'Functionality & Business Details', 'Enabled / Disabled',
+    'Found Package', 'Latest Version', 'Latest URL', 'Recommended Action', 'Confidence %',
+    'Native Alternative', 'Native Coverage', 'Upgrade Note', 'Explanation', 'Citations', 'Status',
     'found_package', 'latest_version', 'latest_url', 'recommended_action', 'confidence_pct',
-    'native_alternative', 'upgrade_note', 'explanation', 'citations', 'processed_status'
+    'native_alternative', 'native_coverage', 'upgrade_note', 'explanation', 'citations', 'processed_status'
   ]
+
+  const rowKeys = Object.keys(rows[0] || {})
+  const columns = [
+    ...preferredColumns.filter((col) => rowKeys.includes(col)),
+    ...rowKeys.filter((col) => !preferredColumns.includes(col)),
+  ]
+
+  const [viewMode, setViewMode] = useState('table')
+  const formatLabel = (label) => {
+    if (!label) return ''
+    const titled = label
+      .replace(/_/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase()
+      .replace(/\b\w/g, (char) => char.toUpperCase())
+    return titled
+      .replace(/\bId\b/g, 'ID')
+      .replace(/\bUrl\b/g, 'URL')
+      .replace(/\bAi\b/g, 'AI')
+      .replace(/\bApi\b/g, 'API')
+  }
 
   return (
     <>
-      <div className="overflow-x-auto overflow-y-auto max-h-[540px] border rounded">
-        <table className="min-w-[1200px] text-sm">
-          <thead className="bg-gray-50 sticky top-0 z-10">
-            <tr>
-              {columns.map((col) => (
-                <th key={col} className="text-left font-semibold text-gray-700 px-3 py-2 border-b whitespace-nowrap">
-                  {col}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.slice(0, visibleCount).map((r, idx) => (
-              <tr key={idx} className="odd:bg-white even:bg-gray-50">
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <div className="text-xs text-gray-500">
+          Showing {Math.min(visibleCount, rows.length)} of {rows.length} rows
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setViewMode('table')}
+            className={`px-3 py-1 rounded-full text-xs font-semibold ${viewMode === 'table' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-600'}`}
+          >
+            Table View
+          </button>
+          <button
+            onClick={() => setViewMode('details')}
+            className={`px-3 py-1 rounded-full text-xs font-semibold ${viewMode === 'details' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-600'}`}
+          >
+            Detail View
+          </button>
+        </div>
+      </div>
+
+      {viewMode === 'table' && (
+        <div className="overflow-x-auto overflow-y-auto max-h-[540px] border rounded-lg shadow-sm">
+          <table className="min-w-[1400px] text-xs">
+            <thead className="bg-gray-50 sticky top-0 z-10">
+              <tr>
                 {columns.map((col) => (
-                  <td key={col} className="px-3 py-2 align-top border-b text-gray-800 whitespace-pre-wrap break-words max-w-xs">
-                    {String(r[col] ?? '')}
-                  </td>
+                  <th key={col} className="text-left font-semibold text-gray-700 px-3 py-2 border-b whitespace-nowrap">
+                    {formatLabel(col)}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="bg-white">
+              {rows.slice(0, visibleCount).map((r, idx) => (
+                <tr key={idx} className="even:bg-gray-50">
+                  {columns.map((col) => (
+                    <td key={col} className="px-3 py-2 align-top border-b text-gray-800 whitespace-pre-wrap break-words max-w-[260px]">
+                      {String(r[col] ?? '')}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {viewMode === 'details' && (
+        <div className="space-y-3">
+          {rows.slice(0, visibleCount).map((r, idx) => (
+            <div key={idx} className="border rounded-lg p-4 bg-white shadow-sm">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {columns.map((col) => (
+                  <div key={col} className="text-xs">
+                    <div className="text-gray-500 font-semibold">{formatLabel(col)}</div>
+                    <div className="text-gray-800 whitespace-pre-wrap break-words">{String(r[col] ?? '')}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       {rows.length > visibleCount && (
         <div className="mt-3 text-center">
           <button onClick={onLoadMore} className="text-blue-600 hover:text-blue-700 font-semibold">
@@ -196,9 +317,9 @@ function CompletedSection({ job, rows, visibleCount, loading, error, onLoadMore,
       <div className="bg-white border border-gray-200 rounded-lg p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-lg font-semibold text-gray-800">Results Preview</h3>
-          <button
+              <button
             onClick={onDownload}
-            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-3 rounded-lg transition flex items-center gap-2"
+                className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-semibold py-2 px-3 rounded-lg transition flex items-center gap-2 shadow-sm"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -214,7 +335,7 @@ function CompletedSection({ job, rows, visibleCount, loading, error, onLoadMore,
 
       <button
         onClick={onReset}
-        className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded-lg transition"
+        className="w-full bg-gradient-to-r from-slate-200 to-slate-300 hover:from-slate-300 hover:to-slate-400 text-gray-800 font-bold py-3 px-4 rounded-lg transition"
       >
         Evaluate Another File
       </button>
@@ -235,7 +356,7 @@ function FailedSection({ error, onRetry }) {
       </div>
       <button
         onClick={onRetry}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition"
+        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition"
       >
         Try Again
       </button>
@@ -284,22 +405,31 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+    <div className="min-h-screen bg-slate-50 p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">📊 Extension Evaluator</h1>
-          <p className="text-gray-600 text-lg">Analyze Adobe Commerce extensions and get recommendations</p>
+        <div className="mb-10">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Extension Evaluator</h1>
+              <p className="text-gray-600 mt-1">Analyze Adobe Commerce extensions and get recommendations</p>
+            </div>
+            <div className="hidden md:flex items-center gap-2 text-xs text-gray-500">
+              <span className="px-2 py-1 rounded-full bg-white border">AI‑assisted</span>
+              <span className="px-2 py-1 rounded-full bg-white border">Packagist + GitHub</span>
+              <span className="px-2 py-1 rounded-full bg-white border">Excel report</span>
+            </div>
+          </div>
         </div>
 
         {/* Main Card */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
+        <div className="bg-white rounded-xl shadow-sm border p-8">
           {polling.status === 'idle' && (
             <FormSection form={form} onSubmit={handleUpload} error={polling.error} />
           )}
 
           {polling.status === 'processing' && polling.job && (
-            <ProcessingSection job={polling.job} progress={polling.progress} />
+            <ProcessingSection job={polling.job} />
           )}
 
           {polling.status === 'completed' && (
@@ -321,7 +451,7 @@ export default function App() {
         </div>
 
         {/* Footer */}
-        <div className="mt-8 text-center text-gray-600 text-sm">
+        <div className="mt-8 text-center text-gray-500 text-sm">
           <p>Upload an Excel file with extension names or provide a Project ID</p>
           <p className="mt-2">The evaluator will check latest versions and provide Adobe Commerce recommendations</p>
         </div>

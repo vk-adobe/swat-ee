@@ -48,7 +48,53 @@ function getCacheKey(prefix, ...parts) {
  * @returns {boolean}
  */
 function isStableVersion(version) {
-  return version && !version.includes('dev') && !version.includes('beta')
+  return version && !version.includes('dev') && !version.includes('beta') && !version.includes('alpha') && !version.includes('rc')
+}
+
+function normalizeVersion(version) {
+  if (!version) return ''
+  return String(version).trim().replace(/^v/i, '')
+}
+
+function extractNumericVersion(version) {
+  if (!version) return ''
+  const normalized = normalizeVersion(version)
+  const match = normalized.match(/^\d{1,4}(\.\d{1,4}){1,3}/)
+  return match ? match[0] : ''
+}
+
+function isNumericVersion(version) {
+  return Boolean(extractNumericVersion(version))
+}
+
+function isReasonableVersion(version) {
+  const numeric = extractNumericVersion(version)
+  if (!numeric) return false
+  const parts = numeric.split('.').map((v) => parseInt(v, 10))
+  if (parts.some((v) => Number.isNaN(v))) return false
+
+  const [major, minor = 0, patch = 0] = parts
+  // Allow calendar-based versions like 2024.12(.x)
+  if (major >= 2000 && major <= 2100) {
+    if (minor < 1 || minor > 12) return false
+    if (patch < 0 || patch > 31) return false
+    return true
+  }
+
+  // Semver-like: reject obviously bogus ranges
+  return parts.every((v) => v >= 0 && v <= 100)
+}
+
+function compareVersions(a, b) {
+  const aParts = extractNumericVersion(a).split('.').map((v) => parseInt(v, 10))
+  const bParts = extractNumericVersion(b).split('.').map((v) => parseInt(v, 10))
+  const len = Math.max(aParts.length, bParts.length)
+  for (let i = 0; i < len; i++) {
+    const av = aParts[i] ?? 0
+    const bv = bParts[i] ?? 0
+    if (av !== bv) return av > bv ? -1 : 1
+  }
+  return 0
 }
 
 /**
@@ -71,8 +117,17 @@ async function lookupPackagistVersion(packageName) {
       return { found: false, package: packageName }
     }
 
-    const versions = response.data.packages[packageName]
-    const latestStable = versions.find(isStableVersion) || versions[0]
+    const versions = response.data.packages[packageName] || []
+    const stable = versions.filter((v) => isStableVersion(v.version))
+    const candidates = stable
+      .map((v) => ({
+        ...v,
+        _normalized: v.version_normalized || extractNumericVersion(v.version),
+      }))
+      .filter((v) => isReasonableVersion(v._normalized))
+      .sort((a, b) => compareVersions(a._normalized, b._normalized))
+
+    const latestStable = candidates[0] || stable[0]
 
     if (latestStable?.version) {
       const result = {
@@ -129,10 +184,15 @@ async function lookupGitHubVersion(vendor, repo) {
     })
 
     if (response.data?.tag_name || response.data?.name) {
+      const rawVersion = response.data.tag_name || response.data.name
+      const normalized = extractNumericVersion(rawVersion)
+      if (!normalized || !isReasonableVersion(normalized)) {
+        return { found: false }
+      }
       const result = {
         found: true,
         package: `${vendor}/${repo}`,
-        latestVersion: response.data.tag_name || response.data.name,
+        latestVersion: rawVersion,
         latestUrl: response.data.html_url,
       }
       lookupCache[cacheKey] = result
@@ -263,9 +323,24 @@ async function lookupModuleVersion(item, skipErrors = true) {
       }
     }
 
-    return found
-      ? { ...item, ...found, processedStatus: 'version_found' }
-      : { ...item, processedStatus: 'version_not_found' }
+    if (found) {
+      return {
+        ...item,
+        ...found,
+        foundPackage: item.foundPackage || found.foundPackage,
+        latestVersion: isReasonableVersion(found.latestVersion)
+          ? normalizeVersion(found.latestVersion)
+          : null,
+        processedStatus: 'version_found',
+      }
+    }
+
+    return {
+      ...item,
+      foundPackage: item.foundPackage || null,
+      latestVersion: null,
+      processedStatus: 'version_not_found',
+    }
   } catch (err) {
     console.error(`Error looking up ${item.moduleName}:`, err.message)
     if (skipErrors) {

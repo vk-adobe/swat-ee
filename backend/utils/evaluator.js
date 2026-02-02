@@ -9,25 +9,8 @@ if (process.env.OPENAI_API_KEY) {
 // Simple in-memory caches to avoid repeated calls in a single process
 const moduleResearchCache = {}
 const moduleEvalCache = {}
-// Try to read the vendor website to detect a latest version string
-async function tryVendorSiteVersion(vendorUrl) {
-  if (!vendorUrl) return null
-  try {
-    const res = await axios.get(vendorUrl, { timeout: 8000 })
-    const html = String(res.data || '')
-    // Extract candidate version strings like 1.2.3, v1.2.3, 2024.12 etc.
-    const matches = html.match(/(?:v|version[:\s]*)?([0-9]{1,4}\.[0-9]{1,3}(?:\.[0-9]{1,3})?)/gi) || []
-    // Normalize and pick the most plausible by sorting descending lexicographically (approximation)
-    const versions = matches
-      .map(m => (m.match(/([0-9]{1,4}\.[0-9]{1,3}(?:\.[0-9]{1,3})?)/)?.[1] || '').trim())
-      .filter(Boolean)
-    if (!versions.length) return null
-    const best = versions.sort((a, b) => (a === b ? 0 : a < b ? 1 : -1))[0]
-    return { latestVersion: best, latestUrl: vendorUrl }
-  } catch (_) {
-    return null
-  }
-}
+// Note: we intentionally avoid scraping vendor websites for versions
+// because it produces unreliable results (e.g., placeholder or unrelated numbers).
 
 // Helper: retry with exponential backoff for rate-limit (429) errors
 async function callAIWithRetry(fn, maxRetries = 2, timeout = 8000) {
@@ -79,6 +62,8 @@ function normalizeEvaluationShape(input) {
   const conf = Number(obj.confidence ?? obj.confidence_pct ?? obj.score ?? 50)
   const reason = obj.reason || obj.explanation || obj.summary || ''
   const nat = obj.native_alternative || obj.nativeAlternative || obj.native || ''
+  const coverageRaw = obj.coverage || obj.native_coverage || obj.coverage_level || ''
+  const coverage = String(coverageRaw || '').toLowerCase()
   const upg = obj.upgrade_note || obj.upgradeNote || obj.minimum_version || ''
   const cites = Array.isArray(obj.citations)
     ? obj.citations
@@ -88,35 +73,70 @@ function normalizeEvaluationShape(input) {
     confidence: isNaN(conf) ? 50 : Math.max(0, Math.min(100, Math.round(conf))),
     reason,
     native_alternative: nat,
-    upgrade_note: upg,
+    coverage: ['equivalent', 'partial', 'none'].includes(coverage) ? coverage : '',
+    upgrade_note: sanitizeUpgradeNote(upg),
     citations: cites,
   }
+}
+
+function isReasonableVersion(version) {
+  if (!version) return false
+  const match = String(version).trim().replace(/^v/i, '').match(/^\d{1,4}(\.\d{1,4}){1,3}/)
+  if (!match) return false
+  const parts = match[0].split('.').map((v) => parseInt(v, 10))
+  if (parts.some((v) => Number.isNaN(v))) return false
+  const [major, minor = 0, patch = 0] = parts
+  if (major >= 2000 && major <= 2100) {
+    if (minor < 1 || minor > 12) return false
+    if (patch < 0 || patch > 31) return false
+    return true
+  }
+  return parts.every((v) => v >= 0 && v <= 100)
+}
+
+function sanitizeLatestVersion(version) {
+  if (!version) return ''
+  const normalized = String(version).trim()
+  return isReasonableVersion(normalized) ? normalized.replace(/^v/i, '') : ''
+}
+
+function sanitizeUpgradeNote(note) {
+  if (!note) return ''
+  const versionRegex = /\b\d{1,4}(?:\.\d{1,4}){1,3}\b/g
+  const matches = note.match(versionRegex) || []
+  const hasBad = matches.some((v) => !isReasonableVersion(v))
+  if (!hasBad) return note
+  // Drop the note if it contains unreasonable placeholder versions
+  return ''
 }
 
 // Phase 1: Research what the module does using AI
 async function researchModuleInfo(moduleName, description, aiProvider = 'perplexity') {
   const cacheKey = `${moduleName}::${description || ''}::${aiProvider}`
   if (moduleResearchCache[cacheKey]) return moduleResearchCache[cacheKey]
-  const researchPrompt = `You are researching an Adobe Commerce (Magento 2) extension/module.
+  const researchPrompt = `You are analyzing an Adobe Commerce (Magento 2) extension/module to understand its real functionality.
 
 Module: ${moduleName}
 User Description: ${description || '(No description provided)'}
 
-Search your knowledge for:
-1. What does this module typically do?
-2. Where would I find the vendor/developer's website?
-3. What versions are commonly available?
-4. Is this a popular/well-maintained extension?
+Use your product knowledge to determine:
+1. The primary functionality and scope (what it does, who uses it, where it fits in Commerce).
+2. Key user-facing or admin-facing features (3-6 bullet-style phrases).
+3. Any known vendor or official source URL (vendor site or GitHub).
+4. Any common version patterns (if known).
+5. Confidence level in your understanding (0-100).
 
 Respond with ONLY a JSON object (no markdown, no extra text):
 {
-  "purpose": "What the module does (2-3 sentences)",
+  "purpose": "2-4 sentences describing exact functionality and scope",
+  "capabilities": ["short feature phrase", "short feature phrase"],
   "vendor_url": "Official website or GitHub repo URL if known",
   "common_versions": "Typical version numbers",
-  "notes": "Any important context"
+  "notes": "Any important context or uncertainty",
+  "confidence": 0-100
 }
 
-If unsure, provide your best guess. Always return valid JSON.`
+If unsure, still return valid JSON and state uncertainty in notes.`
 
   try {
     // Use provided aiProvider instead of environment variable
@@ -190,25 +210,37 @@ If unsure, provide your best guess. Always return valid JSON.`
 async function evaluateAgainstNative(moduleName, purpose, foundVersion, aiProvider = 'perplexity') {
   const evalCacheKey = `${moduleName}::${purpose || ''}::${foundVersion || ''}::${aiProvider}`
   if (moduleEvalCache[evalCacheKey]) return moduleEvalCache[evalCacheKey]
-  const evaluationPrompt = `You are an Adobe Commerce (Magento 2) consultant evaluating whether a custom extension is necessary.
+  const evaluationPrompt = `You are an Adobe Commerce (Magento 2) consultant deciding whether this extension is needed, or can be replaced by native functionality.
 
 Extension: ${moduleName}
-Purpose: ${purpose}
+Purpose (from research): ${purpose}
 Currently Available Version: ${foundVersion || 'Unknown/Not in Packagist'}
 
-Adobe Commerce OOTB Features available:
+Adobe Commerce OOTB Features (partial list):
 ${adobeCommerceOOTBFeatures}
 
-Provide a JSON response with:
+Evaluate in this order:
+1. Identify the exact business function (payment, shipping, catalog, merchandising, marketing, search, admin UX, integrations, etc.).
+2. Determine whether Adobe Commerce provides equivalent native capability.
+3. If native exists, specify what feature and whether it is equivalent, partial, or requires configuration/third-party services.
+4. If native does NOT exist, justify KEEP (or UPDATE if version is outdated).
+5. If the extension is obsolete or unused, recommend REMOVE with rationale.
+
+Return ONLY valid JSON with:
 {
   "recommendation": "KEEP" | "UPDATE" | "REPLACE_WITH_NATIVE" | "REMOVE",
   "confidence": 0-100,
-  "native_alternative": "Which native feature replaces this, if any",
-  "reason": "2-3 sentence explanation",
-  "upgrade_note": "If native feature is available only in newer AC versions, mention minimum version needed"
+  "native_alternative": "Exact native feature name (or 'None')",
+  "coverage": "equivalent" | "partial" | "none",
+  "reason": "2-4 sentences explaining the decision",
+  "upgrade_note": "If native feature requires a newer Commerce version, mention minimum version"
 }
 
-Always return valid JSON.`
+Rules:
+- If unsure about native coverage, use "partial" and lower confidence.
+- Prefer "REPLACE_WITH_NATIVE" only when native coverage is equivalent or close with minor config.
+- Use "UPDATE" when the extension is needed but version is old or missing.
+- Always return valid JSON, no markdown.`
 
   try {
     const MAX_TOKENS = parseInt(process.env.EVAL_MAX_TOKENS || '300', 10)
@@ -303,6 +335,12 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
     aiProvider = 'perplexity'
   }
 
+  const callbacks = typeof progressCallback === 'object' && progressCallback !== null
+    ? progressCallback
+    : { onProgress: progressCallback }
+  const onProgress = typeof callbacks.onProgress === 'function' ? callbacks.onProgress : null
+  const onItemStatus = typeof callbacks.onItemStatus === 'function' ? callbacks.onItemStatus : null
+
   console.info(`evaluateExtensions called with provider: ${aiProvider}`)
   console.info('OPENAI_API_KEY present?', !!process.env.OPENAI_API_KEY)
   
@@ -329,14 +367,18 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
     try {
       // Allow explicit mock mode for deterministic testing
       if (process.env.OPENAI_MODE === 'mock') {
+        if (onItemStatus) {
+          onItemStatus({ rowIndex: item.rowIndex, moduleName: item.moduleName, status: 'ai_mocked' })
+        }
         processed++
-        progressCallback(processed / total)
+        if (onProgress) onProgress(processed / total)
         results.push({
           ...item,
           recommendedAction: 'KEEP',
           confidence: 80,
           explanation: 'Mock evaluation (OPENAI_MODE=mock)',
           nativeAlternative: 'N/A',
+          nativeCoverage: 'none',
           upgradeNote: 'N/A',
           processedStatus: 'ai_mocked',
         })
@@ -344,6 +386,10 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
       }
 
       console.info(`\n=== Evaluating ${item.moduleName} ===`)
+
+      if (onItemStatus) {
+        onItemStatus({ rowIndex: item.rowIndex, moduleName: item.moduleName, status: 'evaluating' })
+      }
 
       let research = { purpose: item.description || item.moduleName, vendor_url: '' }
       if (!fastMode) {
@@ -386,17 +432,6 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
         }
       } catch (_) {}
 
-      // If still missing or to double-check, attempt vendor site HTML scrape for a version hint
-      try {
-        if (research.vendor_url && (!item.latestVersion || !item.latestUrl)) {
-          const v = await tryVendorSiteVersion(research.vendor_url)
-          if (v?.latestVersion) {
-            item.latestVersion = item.latestVersion || v.latestVersion
-            item.latestUrl = item.latestUrl || v.latestUrl
-          }
-        }
-      } catch (_) {}
-
       // Phase 2: Evaluate against Adobe Commerce native features
       console.info('Phase 2: Evaluating against native features...')
       const evaluation = await evaluateAgainstNative(item.moduleName, research.purpose, item.latestVersion, aiProvider)
@@ -404,7 +439,7 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
       if (interCallDelayMs > 0) await new Promise(r => setTimeout(r, interCallDelayMs))
 
       processed++
-      progressCallback(processed / total)
+      if (onProgress) onProgress(processed / total)
 
       // Build citations from multiple sources
       const urlRegex = /(https?:\/\/[\w.-]+\.[\w.-]+[^\s"']*)/g
@@ -422,24 +457,34 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
         confidence: evaluation.confidence || 50,
         explanation: evaluation.reason || evaluation.explanation || 'Evaluation completed',
         nativeAlternative: evaluation.native_alternative || 'N/A',
+        nativeCoverage: evaluation.coverage || '',
+        // Latest version comes strictly from lookup (Packagist/GitHub), not AI
+        latestVersion: sanitizeLatestVersion(item.latestVersion || ''),
         upgradeNote: evaluation.upgrade_note || '',
         citations,
         processedStatus: 'ai_evaluated',
       }
 
       console.info(`Result for ${item.moduleName}: ${result.recommendedAction} (${result.confidence}%)`)
+      if (onItemStatus) {
+        onItemStatus({ rowIndex: item.rowIndex, moduleName: item.moduleName, status: result.processedStatus })
+      }
       results.push(result)
     } catch (err) {
       processed++
-      progressCallback(processed / total)
+      if (onProgress) onProgress(processed / total)
       console.error(`Failed to evaluate ${item.moduleName}:`, err.message)
 
+      if (onItemStatus) {
+        onItemStatus({ rowIndex: item.rowIndex, moduleName: item.moduleName, status: 'ai_failed' })
+      }
       results.push({
         ...item,
         recommendedAction: 'ERROR',
         confidence: 0,
         explanation: `Evaluation failed: ${err.message}`,
         nativeAlternative: 'Unknown',
+        nativeCoverage: '',
         upgradeNote: '',
         citations: [],
         processedStatus: 'ai_failed',

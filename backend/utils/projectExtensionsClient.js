@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+let cachedAccessToken = null
+let cachedTokenExpiry = null
+
 class ProjectExtensionsClient {
   constructor(config = {}) {
     this.authUrl = config.authUrl || process.env.AUTH_URL
@@ -15,6 +18,11 @@ class ProjectExtensionsClient {
 
   async getAccessToken() {
     // Return cached token if valid
+    if (cachedAccessToken && cachedTokenExpiry && Date.now() < cachedTokenExpiry) {
+      this.accessToken = cachedAccessToken
+      this.tokenExpiry = cachedTokenExpiry
+      return cachedAccessToken
+    }
     if (this.accessToken && this.tokenExpiry && Date.now() < this.tokenExpiry) {
       return this.accessToken
     }
@@ -34,8 +42,15 @@ class ProjectExtensionsClient {
       })
 
       this.accessToken = response.data.access_token
-      const expiresIn = parseInt(response.data.expires_in, 10) || 86400
-      this.tokenExpiry = Date.now() + expiresIn * 1000
+      const expiresInRaw =
+        response.data.expires_in ??
+        response.data.expires_id ??
+        response.data.expiresId
+      const expiresIn = parseInt(expiresInRaw, 10) || 86400
+      const bufferSeconds = 60
+      this.tokenExpiry = Date.now() + Math.max(0, expiresIn - bufferSeconds) * 1000
+      cachedAccessToken = this.accessToken
+      cachedTokenExpiry = this.tokenExpiry
 
       return this.accessToken
     } catch (err) {

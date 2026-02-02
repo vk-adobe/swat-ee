@@ -51,7 +51,7 @@ class ModuleLoadingService {
    * @private
    */
   async _loadFromProjectId(projectId, limit, onStatusUpdate) {
-    onStatusUpdate('fetching_extensions', 15)
+    onStatusUpdate('fetching_extensions', 5)
 
     try {
       const extensionsClient = new ProjectExtensionsClient()
@@ -59,6 +59,7 @@ class ModuleLoadingService {
       
       console.log(`Fetched ${modulesCount} modules for project ${projectId}`)
 
+      onStatusUpdate('fetching_extensions', 15)
       onStatusUpdate('normalizing', 20)
       let modules = this._normalizeProjectModules(fetchedModules)
 
@@ -88,8 +89,8 @@ class ModuleLoadingService {
       description: module.composerName || module.moduleName,
       enabled: module.isEnabled ? 'Enabled' : 'Disabled',
       packageCandidates: module.composerName ? [module.composerName] : [],
-      foundPackage: null,
-      latestVersion: module.version || null,
+      foundPackage: module.version || null,
+      latestVersion: null,
       latestUrl: null,
       recommendedAction: null,
       confidence: null,
@@ -106,18 +107,22 @@ class ModuleLoadingService {
    * @param {function} onStatusUpdate - callback(status, progress)
    * @returns {Promise<Array>} - evaluated modules
    */
-  async processModules(modules, aiProvider = 'perplexity', onStatusUpdate) {
+  async processModules(modules, aiProvider = 'perplexity', callbacks = {}) {
     if (!Array.isArray(modules) || modules.length === 0) {
       throw new Error('No modules to process')
     }
 
-    onStatusUpdate('looking_up_versions', 40)
+    const onStatusUpdate = callbacks.onStatusUpdate
+    const onProgress = callbacks.onProgress
+    const onItemStatus = callbacks.onItemStatus
+
+    if (onStatusUpdate) onStatusUpdate('looking_up_versions', 40)
     const withVersions = await lookupVersions(modules)
 
-    onStatusUpdate('evaluating', 60)
-    const evaluated = await evaluateExtensions(withVersions, aiProvider, (progress) => {
-      // Scale AI evaluation from 60-90% of total
-      onStatusUpdate(null, 60 + progress * 0.3)
+    if (onStatusUpdate) onStatusUpdate('evaluating', 60)
+    const evaluated = await evaluateExtensions(withVersions, aiProvider, {
+      onProgress,
+      onItemStatus,
     })
 
     return evaluated
