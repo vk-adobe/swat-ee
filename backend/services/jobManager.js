@@ -21,12 +21,14 @@ class JobManager {
       id: jobId,
       projectId: input.projectId || null,
       isFileUpload: input.isFileUpload || false,
+      aiProvider: input.aiProvider || null,
       status: 'queued',
       progress: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
       error: null,
       outputFile: null,
+      cancelled: false,
     }
 
     return jobId
@@ -86,6 +88,19 @@ class JobManager {
       status: 'completed',
       outputFile,
       progress: 100,
+    })
+  }
+
+  /**
+   * Mark job as cancelled
+   * @param {string} jobId
+   */
+  setCancelled(jobId) {
+    this.updateJob(jobId, {
+      status: 'cancelled',
+      error: 'Job cancelled by user',
+      progress: Math.min(this.jobs[jobId]?.progress || 0, 99),
+      cancelled: true,
     })
   }
 

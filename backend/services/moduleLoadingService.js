@@ -1,3 +1,5 @@
+import { DEFAULT_AI_PROVIDER } from '../config/aiProviders.js'
+import { getPartnerSkipPrefixes } from '../config/adobeCommercePartners.js'
 import { parseExcel, normalizeModuleNames } from '../utils/parser.js'
 import { lookupVersions } from '../utils/versionLookup.js'
 import { evaluateExtensions } from '../utils/evaluator.js'
@@ -103,11 +105,11 @@ class ModuleLoadingService {
   /**
    * Process modules through version lookup and AI evaluation
    * @param {Array} modules - loaded modules
-   * @param {string} aiProvider - 'perplexity' or 'openai'
+   * @param {string} aiProvider - id from config/aiProviders.js (e.g. perplexity, openai, openai_compatible)
    * @param {function} onStatusUpdate - callback(status, progress)
    * @returns {Promise<Array>} - evaluated modules
    */
-  async processModules(modules, aiProvider = 'perplexity', callbacks = {}) {
+  async processModules(modules, aiProvider = DEFAULT_AI_PROVIDER, callbacks = {}) {
     if (!Array.isArray(modules) || modules.length === 0) {
       throw new Error('No modules to process')
     }
@@ -115,14 +117,19 @@ class ModuleLoadingService {
     const onStatusUpdate = callbacks.onStatusUpdate
     const onProgress = callbacks.onProgress
     const onItemStatus = callbacks.onItemStatus
+    const shouldAbort = callbacks.shouldAbort
+    const partnerSkipPrefixes = getPartnerSkipPrefixes(callbacks.partnerId)
 
     if (onStatusUpdate) onStatusUpdate('looking_up_versions', 40)
-    const withVersions = await lookupVersions(modules)
+    const withVersions = await lookupVersions(modules, { partnerSkipPrefixes })
+    if (shouldAbort && shouldAbort()) return []
 
     if (onStatusUpdate) onStatusUpdate('evaluating', 60)
     const evaluated = await evaluateExtensions(withVersions, aiProvider, {
       onProgress,
       onItemStatus,
+      shouldAbort,
+      partnerSkipPrefixes,
     })
 
     return evaluated

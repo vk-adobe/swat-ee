@@ -1,0 +1,4744 @@
+{
+  "schemaVersion": 1,
+  "description": "Adobe Commerce extension vendors — listing harvest + optional per-page snippets from vendor websites. Used as offline context for evaluation.",
+  "generatedAt": "2026-04-21T12:59:35.473Z",
+  "vendorCount": 15,
+  "vendors": [
+    {
+      "id": "amasty",
+      "name": "Amasty",
+      "website": "https://amasty.com",
+      "listingUrls": [
+        "https://amasty.com/magento-2-extensions.html"
+      ],
+      "extensions": [],
+      "extensionCount": 0,
+      "scrapedAt": "2026-04-21T12:59:35.612Z"
+    },
+    {
+      "id": "mageplaza",
+      "name": "Mageplaza",
+      "website": "https://www.mageplaza.com",
+      "listingUrls": [
+        "https://www.mageplaza.com/magento-2-extensions/"
+      ],
+      "extensions": [
+        {
+          "slug": "magento-2-extensions",
+          "title": "Magento 2 Extensions",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/"
+        },
+        {
+          "slug": "magento-2-one-step-checkout-extension",
+          "title": "One Step Checkout Hot",
+          "productUrl": "https://www.mageplaza.com/magento-2-one-step-checkout-extension/"
+        },
+        {
+          "slug": "magento-2-product-feed-extension",
+          "title": "Product Feed",
+          "productUrl": "https://www.mageplaza.com/magento-2-product-feed-extension/"
+        },
+        {
+          "slug": "magento-2-seo-extension",
+          "title": "SEO Hot",
+          "productUrl": "https://www.mageplaza.com/magento-2-seo-extension/"
+        },
+        {
+          "slug": "magento-2-reward-points-extension",
+          "title": "Reward Points",
+          "productUrl": "https://www.mageplaza.com/magento-2-reward-points-extension/"
+        },
+        {
+          "slug": "magento-2-layered-navigation",
+          "title": "Layered Navigation",
+          "productUrl": "https://www.mageplaza.com/magento-2-layered-navigation/"
+        },
+        {
+          "slug": "magento-2-google-tag-manager",
+          "title": "Google Tag Manager Hot",
+          "productUrl": "https://www.mageplaza.com/magento-2-google-tag-manager/"
+        },
+        {
+          "slug": "magento-2-gift-card-extension",
+          "title": "Gift Card",
+          "productUrl": "https://www.mageplaza.com/magento-2-gift-card-extension/"
+        },
+        {
+          "slug": "magento-2-pdf-invoice-extension",
+          "title": "PDF Invoice",
+          "productUrl": "https://www.mageplaza.com/magento-2-pdf-invoice-extension/"
+        },
+        {
+          "slug": "magento-2-store-locator-extension",
+          "title": "Store Locator & Pickup Hot",
+          "productUrl": "https://www.mageplaza.com/magento-2-store-locator-extension/"
+        },
+        {
+          "slug": "magento-2-webhook",
+          "title": "Webhook",
+          "productUrl": "https://www.mageplaza.com/magento-2-webhook/"
+        },
+        {
+          "slug": "hyva-theme-compatible",
+          "title": "Hyva-ready (89+)",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/hyva-theme-compatible.html"
+        },
+        {
+          "slug": "magento-2-abandoned-cart-email",
+          "title": "Abandoned Cart Email",
+          "productUrl": "https://www.mageplaza.com/magento-2-abandoned-cart-email/"
+        },
+        {
+          "slug": "magento-2-instagram-feed",
+          "title": "Instagram Feed",
+          "productUrl": "https://www.mageplaza.com/magento-2-instagram-feed/"
+        },
+        {
+          "slug": "magento-2-product-labels",
+          "title": "Product Labels Hot",
+          "productUrl": "https://www.mageplaza.com/magento-2-product-labels/"
+        },
+        {
+          "slug": "magento-2-order-export",
+          "title": "Order Export",
+          "productUrl": "https://www.mageplaza.com/magento-2-order-export/"
+        },
+        {
+          "slug": "magento-2-free-extensions",
+          "title": "Free (12+)",
+          "productUrl": "https://www.mageplaza.com/magento-2-free-extensions/"
+        },
+        {
+          "slug": "magento-2-better-blog",
+          "title": "Blog Hot",
+          "productUrl": "https://www.mageplaza.com/magento-2-better-blog/"
+        },
+        {
+          "slug": "magento-2-smtp",
+          "title": "SMTP",
+          "productUrl": "https://www.mageplaza.com/magento-2-smtp/"
+        },
+        {
+          "slug": "magento-2-social-login-extension",
+          "title": "Social Login",
+          "productUrl": "https://www.mageplaza.com/magento-2-social-login-extension/"
+        },
+        {
+          "slug": "magento-2-banner-slider-extension",
+          "title": "Banner Slider",
+          "productUrl": "https://www.mageplaza.com/magento-2-banner-slider-extension/"
+        },
+        {
+          "slug": "magento-2-extra-fee",
+          "title": "Extra Fee",
+          "productUrl": "https://www.mageplaza.com/magento-2-extra-fee/"
+        },
+        {
+          "slug": "magento-2-order-attributes",
+          "title": "Order Attributes",
+          "productUrl": "https://www.mageplaza.com/magento-2-order-attributes/"
+        },
+        {
+          "slug": "magento-2-payment-restriction",
+          "title": "Payment Restrictions",
+          "productUrl": "https://www.mageplaza.com/magento-2-payment-restriction/"
+        },
+        {
+          "slug": "magento-2-coupon-code",
+          "title": "Coupon Code",
+          "productUrl": "https://www.mageplaza.com/magento-2-coupon-code/"
+        },
+        {
+          "slug": "b2b",
+          "title": "Marketing (39)",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/b2b.html"
+        },
+        {
+          "slug": "magento-2-faq-extension",
+          "title": "FAQ",
+          "productUrl": "https://www.mageplaza.com/magento-2-faq-extension/"
+        },
+        {
+          "slug": "magento-2-free-shipping-bar",
+          "title": "Free Shipping Bar",
+          "productUrl": "https://www.mageplaza.com/magento-2-free-shipping-bar/"
+        },
+        {
+          "slug": "magento-2-better-product-reviews",
+          "title": "Better Product Reviews",
+          "productUrl": "https://www.mageplaza.com/magento-2-better-product-reviews/"
+        },
+        {
+          "slug": "magento-2-affiliate-extension",
+          "title": "Affiliate",
+          "productUrl": "https://www.mageplaza.com/magento-2-affiliate-extension/"
+        },
+        {
+          "slug": "gifts-promotions",
+          "title": "Sales (29+)",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/gifts-promotions.html"
+        },
+        {
+          "slug": "magento-2-free-gift",
+          "title": "Free Gifts Hot",
+          "productUrl": "https://www.mageplaza.com/magento-2-free-gift/"
+        },
+        {
+          "slug": "magento-2-automatic-related-products",
+          "title": "Automatic Related Products",
+          "productUrl": "https://www.mageplaza.com/magento-2-automatic-related-products/"
+        },
+        {
+          "slug": "magento-2-table-rate-shipping",
+          "title": "Table Rate Shipping",
+          "productUrl": "https://www.mageplaza.com/magento-2-table-rate-shipping/"
+        },
+        {
+          "slug": "magento-2-better-tier-price",
+          "title": "Better Tier Price",
+          "productUrl": "https://www.mageplaza.com/magento-2-better-tier-price/"
+        },
+        {
+          "slug": "magento-2-customer-approval",
+          "title": "Customer Approval",
+          "productUrl": "https://www.mageplaza.com/magento-2-customer-approval/"
+        },
+        {
+          "slug": "magento-2-catalog-permissions",
+          "title": "Catalog Permissions Hot",
+          "productUrl": "https://www.mageplaza.com/magento-2-catalog-permissions/"
+        },
+        {
+          "slug": "magento-2-call-for-price",
+          "title": "Call for Price",
+          "productUrl": "https://www.mageplaza.com/magento-2-call-for-price/"
+        },
+        {
+          "slug": "magento-2-request-for-quote",
+          "title": "Request for Quote",
+          "productUrl": "https://www.mageplaza.com/magento-2-request-for-quote/"
+        },
+        {
+          "slug": "magento-development",
+          "title": "Magento Development Services",
+          "productUrl": "https://www.mageplaza.com/services/magento-development/"
+        },
+        {
+          "slug": "magento-2-hire-developer",
+          "title": "Hire Magento Developers",
+          "productUrl": "https://www.mageplaza.com/services/magento-2-hire-developer/"
+        },
+        {
+          "slug": "magento-rapid-deployment-packages",
+          "title": "Magento Rapid Deployment Packages",
+          "productUrl": "https://www.mageplaza.com/services/magento-rapid-deployment-packages/"
+        },
+        {
+          "slug": "magento-hyva-theme-development",
+          "title": "Magento Hyvä Theme Development Services",
+          "productUrl": "https://www.mageplaza.com/services/magento-hyva-theme-development/"
+        },
+        {
+          "slug": "magento-2-migration-service",
+          "title": "Magento Data Migration",
+          "productUrl": "https://www.mageplaza.com/services/magento-2-migration-service/"
+        },
+        {
+          "slug": "magento-to-shopify-migration",
+          "title": "Magento to Shopify Migration",
+          "productUrl": "https://www.mageplaza.com/services/magento-to-shopify-migration/"
+        },
+        {
+          "slug": "magento-integration-service",
+          "title": "Magento Integration",
+          "productUrl": "https://www.mageplaza.com/services/magento-integration-service/"
+        },
+        {
+          "slug": "magento-2-support-maintenance-services",
+          "title": "Magento Support & Maintenance",
+          "productUrl": "https://www.mageplaza.com/services/magento-2-support-maintenance-services/"
+        },
+        {
+          "slug": "magento-2-performance-optimization-services",
+          "title": "Magento Performance Optimization",
+          "productUrl": "https://www.mageplaza.com/services/magento-2-performance-optimization-services/"
+        },
+        {
+          "slug": "magento-2-upgrade-service",
+          "title": "Magento Upgrade Service",
+          "productUrl": "https://www.mageplaza.com/services/magento-2-upgrade-service/"
+        },
+        {
+          "slug": "magento-2-seo-services",
+          "title": "Magento SEO Services",
+          "productUrl": "https://www.mageplaza.com/services/magento-2-seo-services/"
+        },
+        {
+          "slug": "magento-security-patches",
+          "title": "Magento Security Patches",
+          "productUrl": "https://www.mageplaza.com/services/magento-security-patches/"
+        },
+        {
+          "slug": "magento-site-audit-services",
+          "title": "Magento Site Audit (FREE)",
+          "productUrl": "https://www.mageplaza.com/services/magento-site-audit-services/"
+        },
+        {
+          "slug": "magento-seo-audit",
+          "title": "Magento SEO Audit",
+          "productUrl": "https://www.mageplaza.com/services/magento-seo-audit/"
+        },
+        {
+          "slug": "magento-ux-audit",
+          "title": "Magento UI/UX Audit",
+          "productUrl": "https://www.mageplaza.com/services/magento-ux-audit/"
+        },
+        {
+          "slug": "magento-code-audit",
+          "title": "Magento Code Audit",
+          "productUrl": "https://www.mageplaza.com/services/magento-code-audit/"
+        },
+        {
+          "slug": "magento-security-audit",
+          "title": "Magento Security Audit",
+          "productUrl": "https://www.mageplaza.com/services/magento-security-audit/"
+        },
+        {
+          "slug": "magento-performance-audit",
+          "title": "Performance Audit",
+          "productUrl": "https://www.mageplaza.com/services/magento-performance-audit/"
+        },
+        {
+          "slug": "magento-2",
+          "title": "Magento 2",
+          "productUrl": "https://www.mageplaza.com/blog/magento-2/"
+        },
+        {
+          "slug": "partner-program",
+          "title": "partner-program",
+          "productUrl": "https://www.mageplaza.com/partner-program.html"
+        },
+        {
+          "slug": "hyva-checkout-compatible",
+          "title": "Hyva Checkout Ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/hyva-checkout-compatible.html"
+        },
+        {
+          "slug": "2-4-8-compatible",
+          "title": "Magento 2.4.8 Compatibility",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/2-4-8-compatible.html"
+        },
+        {
+          "slug": "api-graphql",
+          "title": "API/GraphQL Ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/api-graphql.html"
+        },
+        {
+          "slug": "solution-packs",
+          "title": "Solution Packs",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/solution-packs.html"
+        },
+        {
+          "slug": "magento-2-pwa-extensions",
+          "title": "PWA Extensions for Magento 2",
+          "productUrl": "https://www.mageplaza.com/magento-2-pwa-extensions/"
+        },
+        {
+          "slug": "user-experience",
+          "title": "Personalization & experience management",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/user-experience.html"
+        },
+        {
+          "slug": "product-enhancements",
+          "title": "Product content",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/product-enhancements.html"
+        },
+        {
+          "slug": "navigation",
+          "title": "Site search & navigation",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/navigation.html"
+        },
+        {
+          "slug": "rich-media",
+          "title": "Rich media",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/rich-media.html"
+        },
+        {
+          "slug": "translations",
+          "title": "Translations & localization",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/translations.html"
+        },
+        {
+          "slug": "seo-suite",
+          "title": "SEO/SEM",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/seo-suite.html"
+        },
+        {
+          "slug": "email",
+          "title": "Email",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/email.html"
+        },
+        {
+          "slug": "integration",
+          "title": "Integration & CRM",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/integration.html"
+        },
+        {
+          "slug": "advertising",
+          "title": "Advertising",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/advertising.html"
+        },
+        {
+          "slug": "marketing",
+          "title": "Other",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/marketing.html"
+        },
+        {
+          "slug": "payment",
+          "title": "Payment",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/payment.html"
+        },
+        {
+          "slug": "security",
+          "title": "Fraud/Security",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/security.html"
+        },
+        {
+          "slug": "payment-integration",
+          "title": "Payment integration",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/payment-integration.html"
+        },
+        {
+          "slug": "reporting-analytics",
+          "title": "Reporting & Analytics",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/reporting-analytics.html"
+        },
+        {
+          "slug": "marketplace-feeds",
+          "title": "Marketplace feeds",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/marketplace-feeds.html"
+        },
+        {
+          "slug": "product-recommendation",
+          "title": "Product recommendation",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/product-recommendation.html"
+        },
+        {
+          "slug": "rewards",
+          "title": "Rewards & loyalty",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/rewards.html"
+        },
+        {
+          "slug": "sales-motivation",
+          "title": "Other",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/sales-motivation.html"
+        },
+        {
+          "slug": "order-management",
+          "title": "Order Management",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/order-management.html"
+        },
+        {
+          "slug": "shipping-payment",
+          "title": "Shipping",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/shipping-payment.html"
+        },
+        {
+          "slug": "administration",
+          "title": "Administration",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/administration.html"
+        },
+        {
+          "slug": "performance",
+          "title": "Performance",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/performance.html"
+        },
+        {
+          "slug": "language-packs",
+          "title": "Language Packs",
+          "productUrl": "https://www.mageplaza.com/magento-2-extensions/language-packs.html"
+        },
+        {
+          "slug": "magento-2-shop-by-brand",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-shop-by-brand/"
+        },
+        {
+          "slug": "magento-2-advanced-reports-extension",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-advanced-reports-extension/"
+        },
+        {
+          "slug": "magento-2-gdpr-extension",
+          "title": "Hyva ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-gdpr-extension/"
+        },
+        {
+          "slug": "magento-2-quick-order",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-quick-order/"
+        },
+        {
+          "slug": "magento-2-ajax-layered-navigation",
+          "title": "Hyva ready Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-ajax-layered-navigation/"
+        },
+        {
+          "slug": "magento-2-delete-orders",
+          "title": "Hyva ready Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-delete-orders/"
+        },
+        {
+          "slug": "magento-2-product-slider-extension",
+          "title": "Hyva ready Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-product-slider-extension/"
+        },
+        {
+          "slug": "magento-2-customer-attributes",
+          "title": "Hyva ready Best seller API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-customer-attributes/"
+        },
+        {
+          "slug": "magento-2-product-questions",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-product-questions/"
+        },
+        {
+          "slug": "magento-2-rma",
+          "title": "Hyva ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-rma/"
+        },
+        {
+          "slug": "magento-2-pre-order",
+          "title": "Hyva ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-pre-order/"
+        },
+        {
+          "slug": "magento-2-size-chart",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-size-chart/"
+        },
+        {
+          "slug": "magento-2-custom-form",
+          "title": "Hyva ready Best seller",
+          "productUrl": "https://www.mageplaza.com/magento-2-custom-form/"
+        },
+        {
+          "slug": "magento-2-product-attachments",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-product-attachments/"
+        },
+        {
+          "slug": "magento-2-store-credit",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-store-credit/"
+        },
+        {
+          "slug": "magento-2-out-of-stock-notification",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-out-of-stock-notification/"
+        },
+        {
+          "slug": "magento-2-configurable-preselect",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-configurable-preselect/"
+        },
+        {
+          "slug": "magento-2-frequently-bought-together",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-frequently-bought-together/"
+        },
+        {
+          "slug": "magento-2-gift-wrap",
+          "title": "Hyva ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-gift-wrap/"
+        },
+        {
+          "slug": "magento-2-webp-image-optimizer",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-webp-image-optimizer/"
+        },
+        {
+          "slug": "magento-2-search-extension",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-search-extension/"
+        },
+        {
+          "slug": "magento-2-custom-order-number",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-custom-order-number/"
+        },
+        {
+          "slug": "magento-2-edit-order",
+          "title": "Hyva ready Best seller PWA-ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-edit-order/"
+        },
+        {
+          "slug": "magento-2-mass-order-actions",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-mass-order-actions/"
+        },
+        {
+          "slug": "magento-2-store-switcher",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-store-switcher/"
+        },
+        {
+          "slug": "magento-2-security",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-security/"
+        },
+        {
+          "slug": "magento-2-barcode",
+          "title": "Hyva ready PWA-ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-barcode/"
+        },
+        {
+          "slug": "magento-2-order-grid",
+          "title": "Hyva ready PWA-ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-order-grid/"
+        },
+        {
+          "slug": "magento-2-order-archive",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-order-archive/"
+        },
+        {
+          "slug": "magento-2-follow-up-email",
+          "title": "PWA-ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-follow-up-email/"
+        },
+        {
+          "slug": "magento-2-order-history",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-order-history/"
+        },
+        {
+          "slug": "magento-2-product-options",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-product-options/"
+        },
+        {
+          "slug": "magento-2-order-labels-extension",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-order-labels-extension/"
+        },
+        {
+          "slug": "magento-2-quick-view",
+          "title": "Hyva ready PWA-ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-quick-view/"
+        },
+        {
+          "slug": "magento-2-import-export-categories",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-import-export-categories/"
+        },
+        {
+          "slug": "magento-2-quickbooks-online",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-quickbooks-online/"
+        },
+        {
+          "slug": "magento-2-required-login",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-required-login/"
+        },
+        {
+          "slug": "magento-2-admin-permissions",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-admin-permissions/"
+        },
+        {
+          "slug": "magento-2-product-grid",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-product-grid/"
+        },
+        {
+          "slug": "magento-2-countdown-timer",
+          "title": "Hyva ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-countdown-timer/"
+        },
+        {
+          "slug": "magento-2-sitemap-extension",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-sitemap-extension/"
+        },
+        {
+          "slug": "magento-2-hide-price",
+          "title": "Hyva ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-hide-price/"
+        },
+        {
+          "slug": "magento-2-cron-schedule",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-cron-schedule/"
+        },
+        {
+          "slug": "magento-2-delivery-time-extension",
+          "title": "Hyva ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-delivery-time-extension/"
+        },
+        {
+          "slug": "magento-2-lookbook",
+          "title": "Hyva ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-lookbook/"
+        },
+        {
+          "slug": "magento-2-twitter-widget",
+          "title": "Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-twitter-widget/"
+        },
+        {
+          "slug": "magento-2-company-accounts-extension",
+          "title": "Hyva ready PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-company-accounts-extension/"
+        },
+        {
+          "slug": "magento-2-email-attachments",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-email-attachments/"
+        },
+        {
+          "slug": "magento-2-facebook-plugin",
+          "title": "Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-facebook-plugin/"
+        },
+        {
+          "slug": "magento-2-better-popup",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-better-popup/"
+        },
+        {
+          "slug": "magento-2-newsletter-popup",
+          "title": "magento-2-newsletter-popup",
+          "productUrl": "https://www.mageplaza.com/magento-2-newsletter-popup/"
+        },
+        {
+          "slug": "magento-2-custom-stock-status",
+          "title": "PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-custom-stock-status/"
+        },
+        {
+          "slug": "magento-2-better-wishlist",
+          "title": "Hyva ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-better-wishlist/"
+        },
+        {
+          "slug": "magento-2-share-cart",
+          "title": "Hyva ready Free API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-share-cart/"
+        },
+        {
+          "slug": "magento-2-social-share",
+          "title": "Hyva ready Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-social-share/"
+        },
+        {
+          "slug": "magento-2-store-pickup-extension",
+          "title": "Hyva ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-store-pickup-extension/"
+        },
+        {
+          "slug": "magento-2-special-promotions",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-special-promotions/"
+        },
+        {
+          "slug": "magento-2-shipping-restrictions",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-shipping-restrictions/"
+        },
+        {
+          "slug": "magento-2-installation-service",
+          "title": "magento-2-installation-service",
+          "productUrl": "https://www.mageplaza.com/magento-2-installation-service/"
+        },
+        {
+          "slug": "magento-2-currency-formatter",
+          "title": "Hyva ready Best seller",
+          "productUrl": "https://www.mageplaza.com/magento-2-currency-formatter/"
+        },
+        {
+          "slug": "magento-2-b2b",
+          "title": "-25%",
+          "productUrl": "https://www.mageplaza.com/magento-2-b2b/"
+        },
+        {
+          "slug": "magento-2-order-management-suite",
+          "title": "-25%",
+          "productUrl": "https://www.mageplaza.com/magento-2-order-management-suite/"
+        },
+        {
+          "slug": "magento-2-social-suite",
+          "title": "Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-social-suite/"
+        },
+        {
+          "slug": "magento-2-starter-pack",
+          "title": "-25% API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-starter-pack/"
+        },
+        {
+          "slug": "magento-2-payment-suite",
+          "title": "-25% API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-payment-suite/"
+        },
+        {
+          "slug": "magento-2-backend-tools",
+          "title": "Hyva ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-backend-tools/"
+        },
+        {
+          "slug": "magento-2-promotion-suite",
+          "title": "-25%",
+          "productUrl": "https://www.mageplaza.com/magento-2-promotion-suite/"
+        },
+        {
+          "slug": "magento-2-b2b-signup",
+          "title": "-25% Hyva ready Best seller API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-b2b-signup/"
+        },
+        {
+          "slug": "magento-2-improved-sorting",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-improved-sorting/"
+        },
+        {
+          "slug": "magento-2-google-recaptcha",
+          "title": "Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-google-recaptcha/"
+        },
+        {
+          "slug": "magento-2-seo-friendly-url",
+          "title": "magento-2-seo-friendly-url",
+          "productUrl": "https://www.mageplaza.com/magento-2-seo-friendly-url/"
+        },
+        {
+          "slug": "magento-2-loyalty-program",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-loyalty-program/"
+        },
+        {
+          "slug": "magento-2-daily-deal-extension",
+          "title": "PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-daily-deal-extension/"
+        },
+        {
+          "slug": "magento-2-stripe",
+          "title": "magento-2-stripe",
+          "productUrl": "https://www.mageplaza.com/magento-2-stripe/"
+        },
+        {
+          "slug": "magento-2-product-finder",
+          "title": "magento-2-product-finder",
+          "productUrl": "https://www.mageplaza.com/magento-2-product-finder/"
+        },
+        {
+          "slug": "magento-2-multichannel-selling",
+          "title": "PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-multichannel-selling/"
+        },
+        {
+          "slug": "magento-2-membership",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-membership/"
+        },
+        {
+          "slug": "magento-2-age-verification",
+          "title": "magento-2-age-verification",
+          "productUrl": "https://www.mageplaza.com/magento-2-age-verification/"
+        },
+        {
+          "slug": "magento-2-freshsales",
+          "title": "magento-2-freshsales",
+          "productUrl": "https://www.mageplaza.com/magento-2-freshsales/"
+        },
+        {
+          "slug": "magento-2-salesforce",
+          "title": "magento-2-salesforce",
+          "productUrl": "https://www.mageplaza.com/magento-2-salesforce/"
+        },
+        {
+          "slug": "magento-2-cartasi",
+          "title": "magento-2-cartasi",
+          "productUrl": "https://www.mageplaza.com/magento-2-cartasi/"
+        },
+        {
+          "slug": "magento-2-2checkout",
+          "title": "magento-2-2checkout",
+          "productUrl": "https://www.mageplaza.com/magento-2-2checkout/"
+        },
+        {
+          "slug": "magento-2-promo-bar",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-promo-bar/"
+        },
+        {
+          "slug": "magento-2-subscription-recurring-payments",
+          "title": "magento-2-subscription-recurring-payments",
+          "productUrl": "https://www.mageplaza.com/magento-2-subscription-recurring-payments/"
+        },
+        {
+          "slug": "magento-2-pay360",
+          "title": "magento-2-pay360",
+          "productUrl": "https://www.mageplaza.com/magento-2-pay360/"
+        },
+        {
+          "slug": "magento-2-abn-amro",
+          "title": "magento-2-abn-amro",
+          "productUrl": "https://www.mageplaza.com/magento-2-abn-amro/"
+        },
+        {
+          "slug": "magento-2-commweb",
+          "title": "magento-2-commweb",
+          "productUrl": "https://www.mageplaza.com/magento-2-commweb/"
+        },
+        {
+          "slug": "magento-2-westpac-payway",
+          "title": "magento-2-westpac-payway",
+          "productUrl": "https://www.mageplaza.com/magento-2-westpac-payway/"
+        },
+        {
+          "slug": "magento-2-barclaycard",
+          "title": "magento-2-barclaycard",
+          "productUrl": "https://www.mageplaza.com/magento-2-barclaycard/"
+        },
+        {
+          "slug": "magento-2-lazy-loading",
+          "title": "magento-2-lazy-loading",
+          "productUrl": "https://www.mageplaza.com/magento-2-lazy-loading/"
+        },
+        {
+          "slug": "magento-2-quick-flush-cache",
+          "title": "magento-2-quick-flush-cache",
+          "productUrl": "https://www.mageplaza.com/magento-2-quick-flush-cache/"
+        },
+        {
+          "slug": "magento-2-wepay",
+          "title": "magento-2-wepay",
+          "productUrl": "https://www.mageplaza.com/magento-2-wepay/"
+        },
+        {
+          "slug": "magento-2-name-your-price",
+          "title": "magento-2-name-your-price",
+          "productUrl": "https://www.mageplaza.com/magento-2-name-your-price/"
+        },
+        {
+          "slug": "magento-2-sage-pay",
+          "title": "PWA-ready",
+          "productUrl": "https://www.mageplaza.com/magento-2-sage-pay/"
+        },
+        {
+          "slug": "magento-2-securepay",
+          "title": "magento-2-securepay",
+          "productUrl": "https://www.mageplaza.com/magento-2-securepay/"
+        },
+        {
+          "slug": "magento-2-thank-you-page",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-thank-you-page/"
+        },
+        {
+          "slug": "magento-2-better-maintenance",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-better-maintenance/"
+        },
+        {
+          "slug": "magento-2-better-static-block",
+          "title": "magento-2-better-static-block",
+          "productUrl": "https://www.mageplaza.com/magento-2-better-static-block/"
+        },
+        {
+          "slug": "magento-2-promo-banner",
+          "title": "PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-promo-banner/"
+        },
+        {
+          "slug": "magento-2-canada-post",
+          "title": "magento-2-canada-post",
+          "productUrl": "https://www.mageplaza.com/magento-2-canada-post/"
+        },
+        {
+          "slug": "magento-2-milestone",
+          "title": "PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-milestone/"
+        },
+        {
+          "slug": "magento-2-recent-sales-notification",
+          "title": "PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-recent-sales-notification/"
+        },
+        {
+          "slug": "magento-2-shipping-cost",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-shipping-cost/"
+        },
+        {
+          "slug": "magento-2-better-change-qty",
+          "title": "magento-2-better-change-qty",
+          "productUrl": "https://www.mageplaza.com/magento-2-better-change-qty/"
+        },
+        {
+          "slug": "magento-2-google-maps",
+          "title": "Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-google-maps/"
+        },
+        {
+          "slug": "magento-2-multi-flat-rates-shipping",
+          "title": "Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-multi-flat-rates-shipping/"
+        },
+        {
+          "slug": "magento-2-backend-reindex",
+          "title": "magento-2-backend-reindex",
+          "productUrl": "https://www.mageplaza.com/magento-2-backend-reindex/"
+        },
+        {
+          "slug": "magento-2-two-factor-authentication",
+          "title": "Free",
+          "productUrl": "https://www.mageplaza.com/magento-2-two-factor-authentication/"
+        },
+        {
+          "slug": "magento-2-sms-notification",
+          "title": "PWA-ready API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-sms-notification/"
+        },
+        {
+          "slug": "magento-2-table-category-view",
+          "title": "magento-2-table-category-view",
+          "productUrl": "https://www.mageplaza.com/magento-2-table-category-view/"
+        },
+        {
+          "slug": "magento-2-login-as-customer",
+          "title": "magento-2-login-as-customer",
+          "productUrl": "https://www.mageplaza.com/magento-2-login-as-customer/"
+        },
+        {
+          "slug": "magento-2-zoho-crm-integration-extension",
+          "title": "magento-2-zoho-crm-integration-extension",
+          "productUrl": "https://www.mageplaza.com/magento-2-zoho-crm-integration-extension/"
+        },
+        {
+          "slug": "magento-2-cro",
+          "title": "magento-2-cro",
+          "productUrl": "https://www.mageplaza.com/magento-2-cro/"
+        },
+        {
+          "slug": "magento-2-shipping-suite",
+          "title": "magento-2-shipping-suite",
+          "productUrl": "https://www.mageplaza.com/magento-2-shipping-suite/"
+        },
+        {
+          "slug": "magento-2-product-management-suite",
+          "title": "magento-2-product-management-suite",
+          "productUrl": "https://www.mageplaza.com/magento-2-product-management-suite/"
+        },
+        {
+          "slug": "magento-2-selling-more",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-selling-more/"
+        },
+        {
+          "slug": "magento-2-checkout-flow-pro",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-checkout-flow-pro/"
+        },
+        {
+          "slug": "magento-2-shipping-pro",
+          "title": "API-GraphQL",
+          "productUrl": "https://www.mageplaza.com/magento-2-shipping-pro/"
+        },
+        {
+          "slug": "tos",
+          "title": "Terms & Conditions",
+          "productUrl": "https://www.mageplaza.com/tos.html"
+        }
+      ],
+      "extensionCount": 206,
+      "scrapedAt": "2026-04-21T12:59:36.001Z"
+    },
+    {
+      "id": "mirasvit",
+      "name": "Mirasvit",
+      "website": "https://mirasvit.com",
+      "listingUrls": [
+        "https://mirasvit.com/magento-2-extensions.html"
+      ],
+      "extensions": [
+        {
+          "slug": "magento-extensions",
+          "title": "Magento Extensions",
+          "productUrl": "https://mirasvit.com/magento-extensions.html"
+        },
+        {
+          "slug": "advanced-magento-search",
+          "title": "Advanced Search",
+          "productUrl": "https://mirasvit.com/magento-extensions/advanced-magento-search.html"
+        },
+        {
+          "slug": "magento-seo",
+          "title": "SEO Enhancement",
+          "productUrl": "https://mirasvit.com/magento-extensions/magento-seo.html"
+        },
+        {
+          "slug": "performance-optimization",
+          "title": "Performance Optimization",
+          "productUrl": "https://mirasvit.com/magento-extensions/performance-optimization.html"
+        },
+        {
+          "slug": "sales-motivation",
+          "title": "Sales Motivation",
+          "productUrl": "https://mirasvit.com/magento-extensions/sales-motivation.html"
+        },
+        {
+          "slug": "magento-navigation",
+          "title": "Improved Navigation",
+          "productUrl": "https://mirasvit.com/magento-extensions/magento-navigation.html"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Magento 2 Extensions",
+          "productUrl": "https://mirasvit.com/magento-2-extensions.html"
+        },
+        {
+          "slug": "magento-2-ai-extensions",
+          "title": "AI Tools",
+          "productUrl": "https://mirasvit.com/magento-2-ai-extensions.html"
+        },
+        {
+          "slug": "magento-2-navigation-extensions",
+          "title": "Navigation & Search",
+          "productUrl": "https://mirasvit.com/magento-2-navigation-extensions.html"
+        },
+        {
+          "slug": "magento-2-seo-extensions",
+          "title": "Higher Positions in Google",
+          "productUrl": "https://mirasvit.com/magento-2-seo-extensions.html"
+        },
+        {
+          "slug": "magento-2-sales-boosters-extensions",
+          "title": "Sales Boosters",
+          "productUrl": "https://mirasvit.com/magento-2-sales-boosters-extensions.html"
+        },
+        {
+          "slug": "magento-2-speed-optimization-extensions",
+          "title": "Site Speed Increase",
+          "productUrl": "https://mirasvit.com/magento-2-speed-optimization-extensions.html"
+        },
+        {
+          "slug": "magento-2-customer-support-extensions",
+          "title": "Customer Care & Support",
+          "productUrl": "https://mirasvit.com/magento-2-customer-support-extensions.html"
+        },
+        {
+          "slug": "magento-2-user-experience-extensions",
+          "title": "User Experience",
+          "productUrl": "https://mirasvit.com/magento-2-user-experience-extensions.html"
+        },
+        {
+          "slug": "magento-2-productivity-extensions",
+          "title": "Productivity",
+          "productUrl": "https://mirasvit.com/magento-2-productivity-extensions.html"
+        },
+        {
+          "slug": "hyva-theme",
+          "title": "Hyvä Theme",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/hyva-theme.html"
+        },
+        {
+          "slug": "magento-2-extension-research",
+          "title": "Ideas For New Products",
+          "productUrl": "https://mirasvit.com/magento-2-extension-research.html"
+        },
+        {
+          "slug": "shopify-apps",
+          "title": "Shopify Apps 5",
+          "productUrl": "https://mirasvit.com/shopify-apps.html"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Most Popular",
+          "productUrl": "https://mirasvit.com/magento-2-extensions.html?product_list_order=most-popular"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Most Recent",
+          "productUrl": "https://mirasvit.com/magento-2-extensions.html?product_list_order=recent"
+        },
+        {
+          "slug": "magento-2-mcp-ai-integration",
+          "title": "magento-2-mcp-ai-integration",
+          "productUrl": "https://mirasvit.com/magento-2-mcp-ai-integration.html"
+        },
+        {
+          "slug": "magento-2-mcp-ai-integration",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-mcp-ai-integration.html#reviews"
+        },
+        {
+          "slug": "elastic-search-ultimate",
+          "title": "elastic-search-ultimate",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/elastic-search-ultimate.html"
+        },
+        {
+          "slug": "elastic-search-ultimate",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/elastic-search-ultimate.html#reviews"
+        },
+        {
+          "slug": "advanced-product-feeds",
+          "title": "advanced-product-feeds",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/advanced-product-feeds.html"
+        },
+        {
+          "slug": "advanced-product-feeds",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/advanced-product-feeds.html#reviews"
+        },
+        {
+          "slug": "advanced-seo-suite",
+          "title": "advanced-seo-suite",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/advanced-seo-suite.html"
+        },
+        {
+          "slug": "advanced-seo-suite",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/advanced-seo-suite.html#reviews"
+        },
+        {
+          "slug": "advanced-reports",
+          "title": "advanced-reports",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/advanced-reports.html"
+        },
+        {
+          "slug": "advanced-reports",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/advanced-reports.html#reviews"
+        },
+        {
+          "slug": "magento-2-extended-shopping-cart-rules",
+          "title": "magento-2-extended-shopping-cart-rules",
+          "productUrl": "https://mirasvit.com/magento-2-extended-shopping-cart-rules.html"
+        },
+        {
+          "slug": "magento-2-extended-shopping-cart-rules",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-extended-shopping-cart-rules.html#reviews"
+        },
+        {
+          "slug": "layered-navigation",
+          "title": "layered-navigation",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/layered-navigation.html"
+        },
+        {
+          "slug": "layered-navigation",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/layered-navigation.html#reviews"
+        },
+        {
+          "slug": "magento-2-improved-sorting",
+          "title": "magento-2-improved-sorting",
+          "productUrl": "https://mirasvit.com/magento-2-improved-sorting.html"
+        },
+        {
+          "slug": "magento-2-improved-sorting",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-improved-sorting.html#reviews"
+        },
+        {
+          "slug": "full-page-cache-warmer",
+          "title": "full-page-cache-warmer",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/full-page-cache-warmer.html"
+        },
+        {
+          "slug": "full-page-cache-warmer",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/full-page-cache-warmer.html#reviews"
+        },
+        {
+          "slug": "magento-2-automatic-related-products",
+          "title": "magento-2-automatic-related-products",
+          "productUrl": "https://mirasvit.com/magento-2-automatic-related-products.html"
+        },
+        {
+          "slug": "magento-2-automatic-related-products",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-automatic-related-products.html#reviews"
+        },
+        {
+          "slug": "follow-up-email",
+          "title": "follow-up-email",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/follow-up-email.html"
+        },
+        {
+          "slug": "follow-up-email",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/follow-up-email.html#reviews"
+        },
+        {
+          "slug": "affiliate",
+          "title": "affiliate",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/affiliate.html"
+        },
+        {
+          "slug": "affiliate",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/affiliate.html#reviews"
+        },
+        {
+          "slug": "magento-2-google-tag-manager",
+          "title": "magento-2-google-tag-manager",
+          "productUrl": "https://mirasvit.com/magento-2-google-tag-manager.html"
+        },
+        {
+          "slug": "magento-2-google-tag-manager",
+          "title": "4,8",
+          "productUrl": "https://mirasvit.com/magento-2-google-tag-manager.html#reviews"
+        },
+        {
+          "slug": "magento-2-dynamic-category",
+          "title": "magento-2-dynamic-category",
+          "productUrl": "https://mirasvit.com/magento-2-dynamic-category.html"
+        },
+        {
+          "slug": "magento-2-dynamic-category",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-dynamic-category.html#reviews"
+        },
+        {
+          "slug": "magento-2-ai-assistant",
+          "title": "magento-2-ai-assistant",
+          "productUrl": "https://mirasvit.com/magento-2-ai-assistant.html"
+        },
+        {
+          "slug": "magento-2-ai-assistant",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-ai-assistant.html#reviews"
+        },
+        {
+          "slug": "reward-points-referral-program",
+          "title": "reward-points-referral-program",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/reward-points-referral-program.html"
+        },
+        {
+          "slug": "reward-points-referral-program",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/reward-points-referral-program.html#reviews"
+        },
+        {
+          "slug": "magento-2-gdpr",
+          "title": "magento-2-gdpr",
+          "productUrl": "https://mirasvit.com/magento-2-gdpr.html"
+        },
+        {
+          "slug": "magento-2-gdpr",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-gdpr.html#reviews"
+        },
+        {
+          "slug": "product-labels",
+          "title": "product-labels",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/product-labels.html"
+        },
+        {
+          "slug": "product-labels",
+          "title": "4,8",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/product-labels.html#reviews"
+        },
+        {
+          "slug": "magento-2-facebook-pixel",
+          "title": "magento-2-facebook-pixel",
+          "productUrl": "https://mirasvit.com/magento-2-facebook-pixel.html"
+        },
+        {
+          "slug": "magento-2-facebook-pixel",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-facebook-pixel.html#reviews"
+        },
+        {
+          "slug": "magento-2-ai-copilot",
+          "title": "magento-2-ai-copilot",
+          "productUrl": "https://mirasvit.com/magento-2-ai-copilot.html"
+        },
+        {
+          "slug": "magento-2-ai-copilot",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-ai-copilot.html#reviews"
+        },
+        {
+          "slug": "store-credit-refund",
+          "title": "store-credit-refund",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/store-credit-refund.html"
+        },
+        {
+          "slug": "store-credit-refund",
+          "title": "4,8",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/store-credit-refund.html#reviews"
+        },
+        {
+          "slug": "magento-2-gpt-chatbot",
+          "title": "magento-2-gpt-chatbot",
+          "productUrl": "https://mirasvit.com/magento-2-gpt-chatbot.html"
+        },
+        {
+          "slug": "magento-2-gpt-chatbot",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-gpt-chatbot.html#reviews"
+        },
+        {
+          "slug": "magento-2-form-builder",
+          "title": "magento-2-form-builder",
+          "productUrl": "https://mirasvit.com/magento-2-form-builder.html"
+        },
+        {
+          "slug": "magento-2-form-builder",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-form-builder.html#reviews"
+        },
+        {
+          "slug": "rma",
+          "title": "rma",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/rma.html"
+        },
+        {
+          "slug": "rma",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/rma.html#reviews"
+        },
+        {
+          "slug": "magento-2-order-management",
+          "title": "magento-2-order-management",
+          "productUrl": "https://mirasvit.com/magento-2-order-management.html"
+        },
+        {
+          "slug": "magento-2-order-management",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-order-management.html#reviews"
+        },
+        {
+          "slug": "magento-2-google-page-speed-optimizer",
+          "title": "magento-2-google-page-speed-optimizer",
+          "productUrl": "https://mirasvit.com/magento-2-google-page-speed-optimizer.html"
+        },
+        {
+          "slug": "magento-2-google-page-speed-optimizer",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-google-page-speed-optimizer.html#reviews"
+        },
+        {
+          "slug": "magento-2-product-kit",
+          "title": "#.# # #.# #",
+          "productUrl": "https://mirasvit.com/magento-2-product-kit.html"
+        },
+        {
+          "slug": "magento-2-product-kit",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-product-kit.html#reviews"
+        },
+        {
+          "slug": "magento-2-shipping-rules",
+          "title": "magento-2-shipping-rules",
+          "productUrl": "https://mirasvit.com/magento-2-shipping-rules.html"
+        },
+        {
+          "slug": "magento-2-shipping-rules",
+          "title": "4,8",
+          "productUrl": "https://mirasvit.com/magento-2-shipping-rules.html#reviews"
+        },
+        {
+          "slug": "magento-2-promo-banners",
+          "title": "magento-2-promo-banners",
+          "productUrl": "https://mirasvit.com/magento-2-promo-banners.html"
+        },
+        {
+          "slug": "magento-2-promo-banners",
+          "title": "4,5",
+          "productUrl": "https://mirasvit.com/magento-2-promo-banners.html#reviews"
+        },
+        {
+          "slug": "helpdesk",
+          "title": "helpdesk",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/helpdesk.html"
+        },
+        {
+          "slug": "helpdesk",
+          "title": "4,9",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/helpdesk.html#reviews"
+        },
+        {
+          "slug": "magento-2-product-attachments",
+          "title": "magento-2-product-attachments",
+          "productUrl": "https://mirasvit.com/magento-2-product-attachments.html"
+        },
+        {
+          "slug": "magento-2-product-attachments",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-product-attachments.html#reviews"
+        },
+        {
+          "slug": "knowledge-base",
+          "title": "knowledge-base",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/knowledge-base.html"
+        },
+        {
+          "slug": "knowledge-base",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/knowledge-base.html#reviews"
+        },
+        {
+          "slug": "improved-asynchronous-reindex",
+          "title": "improved-asynchronous-reindex",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/improved-asynchronous-reindex.html"
+        },
+        {
+          "slug": "improved-asynchronous-reindex",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/improved-asynchronous-reindex.html#reviews"
+        },
+        {
+          "slug": "magento-2-geo-ip-redirect",
+          "title": "IP GeolocationRedirect",
+          "productUrl": "https://mirasvit.com/magento-2-geo-ip-redirect.html"
+        },
+        {
+          "slug": "magento-2-geo-ip-redirect",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-geo-ip-redirect.html#reviews"
+        },
+        {
+          "slug": "magento-2-mass-product-actions",
+          "title": "magento-2-mass-product-actions",
+          "productUrl": "https://mirasvit.com/magento-2-mass-product-actions.html"
+        },
+        {
+          "slug": "magento-2-mass-product-actions",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-mass-product-actions.html#reviews"
+        },
+        {
+          "slug": "magento-2-google-shopping-feed",
+          "title": "magento-2-google-shopping-feed",
+          "productUrl": "https://mirasvit.com/magento-2-google-shopping-feed.html"
+        },
+        {
+          "slug": "magento-2-surcharge-additional-payment-fee",
+          "title": "magento-2-surcharge-additional-payment-fee",
+          "productUrl": "https://mirasvit.com/magento-2-surcharge-additional-payment-fee.html"
+        },
+        {
+          "slug": "fraud-detection-prevent-chargeback",
+          "title": "fraud-detection-prevent-chargeback",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/fraud-detection-prevent-chargeback.html"
+        },
+        {
+          "slug": "fraud-detection-prevent-chargeback",
+          "title": "4,5",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/fraud-detection-prevent-chargeback.html#reviews"
+        },
+        {
+          "slug": "magento-2-backend-search",
+          "title": "magento-2-backend-search",
+          "productUrl": "https://mirasvit.com/magento-2-backend-search.html"
+        },
+        {
+          "slug": "magento-2-backend-search",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-backend-search.html#reviews"
+        },
+        {
+          "slug": "magento-2-tiktok-pixel",
+          "title": "magento-2-tiktok-pixel",
+          "productUrl": "https://mirasvit.com/magento-2-tiktok-pixel.html"
+        },
+        {
+          "slug": "magento-2-advanced-reviews",
+          "title": "magento-2-advanced-reviews",
+          "productUrl": "https://mirasvit.com/magento-2-advanced-reviews.html"
+        },
+        {
+          "slug": "magento-2-advanced-reviews",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-advanced-reviews.html#reviews"
+        },
+        {
+          "slug": "magento-2-ai-image-editor",
+          "title": "magento-2-ai-image-editor",
+          "productUrl": "https://mirasvit.com/magento-2-ai-image-editor.html"
+        },
+        {
+          "slug": "magento-2-product-finder",
+          "title": "magento-2-product-finder",
+          "productUrl": "https://mirasvit.com/magento-2-product-finder.html"
+        },
+        {
+          "slug": "magento-2-product-finder",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-product-finder.html#reviews"
+        },
+        {
+          "slug": "magento-2-social-login",
+          "title": "magento-2-social-login",
+          "productUrl": "https://mirasvit.com/magento-2-social-login.html"
+        },
+        {
+          "slug": "magento-2-social-login",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-social-login.html#reviews"
+        },
+        {
+          "slug": "magento-2-inventory-planner",
+          "title": "magento-2-inventory-planner",
+          "productUrl": "https://mirasvit.com/magento-2-inventory-planner.html"
+        },
+        {
+          "slug": "magento-2-inventory-planner",
+          "title": "4,6",
+          "productUrl": "https://mirasvit.com/magento-2-inventory-planner.html#reviews"
+        },
+        {
+          "slug": "magento-2-shipping-restrictions",
+          "title": "magento-2-shipping-restrictions",
+          "productUrl": "https://mirasvit.com/magento-2-shipping-restrictions.html"
+        },
+        {
+          "slug": "magento-2-shipping-restrictions",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-shipping-restrictions.html#reviews"
+        },
+        {
+          "slug": "issues-watcher-notification",
+          "title": "issues-watcher-notification",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/issues-watcher-notification.html"
+        },
+        {
+          "slug": "issues-watcher-notification",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/issues-watcher-notification.html#reviews"
+        },
+        {
+          "slug": "magento-2-extra-payment",
+          "title": "magento-2-extra-payment",
+          "productUrl": "https://mirasvit.com/magento-2-extra-payment.html"
+        },
+        {
+          "slug": "magento-2-extra-payment",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-extra-payment.html#reviews"
+        },
+        {
+          "slug": "magento-2-admin-bookmarks",
+          "title": "magento-2-admin-bookmarks",
+          "productUrl": "https://mirasvit.com/magento-2-admin-bookmarks.html"
+        },
+        {
+          "slug": "magento-2-admin-bookmarks",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-admin-bookmarks.html#reviews"
+        },
+        {
+          "slug": "magento-2-shipping-table-rates",
+          "title": "magento-2-shipping-table-rates",
+          "productUrl": "https://mirasvit.com/magento-2-shipping-table-rates.html"
+        },
+        {
+          "slug": "magento-2-shipping-table-rates",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-shipping-table-rates.html#reviews"
+        },
+        {
+          "slug": "search-autocomplete-suggestions",
+          "title": "SAS2 Created with Sketch.",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/search-autocomplete-suggestions.html"
+        },
+        {
+          "slug": "search-autocomplete-suggestions",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/search-autocomplete-suggestions.html#reviews"
+        },
+        {
+          "slug": "search-spell-correction",
+          "title": "SSC2 Created with Sketch.",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/search-spell-correction.html"
+        },
+        {
+          "slug": "search-spell-correction",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/search-spell-correction.html#reviews"
+        },
+        {
+          "slug": "magento-sphinx-search",
+          "title": "SSP2 Created with Sketch.",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/magento-sphinx-search.html"
+        },
+        {
+          "slug": "magento-sphinx-search",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/magento-sphinx-search.html#reviews"
+        },
+        {
+          "slug": "sphinx-search-ultimate",
+          "title": "sphinx-search-ultimate",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/sphinx-search-ultimate.html"
+        },
+        {
+          "slug": "sphinx-search-ultimate",
+          "title": "5,0",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/sphinx-search-ultimate.html#reviews"
+        },
+        {
+          "slug": "stability-suite",
+          "title": "stability-suite",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/stability-suite.html"
+        },
+        {
+          "slug": "stability-suite",
+          "title": "4,8",
+          "productUrl": "https://mirasvit.com/magento-2-extensions/stability-suite.html#reviews"
+        },
+        {
+          "slug": "magento-2-facebook-feed",
+          "title": "magento-2-facebook-feed",
+          "productUrl": "https://mirasvit.com/magento-2-facebook-feed.html"
+        },
+        {
+          "slug": "magento-2-instagram-feed",
+          "title": "magento-2-instagram-feed",
+          "productUrl": "https://mirasvit.com/magento-2-instagram-feed.html"
+        },
+        {
+          "slug": "magento-2-custom-order-number",
+          "title": "magento-2-custom-order-number",
+          "productUrl": "https://mirasvit.com/magento-2-custom-order-number.html"
+        },
+        {
+          "slug": "magento-2-loyalty-program",
+          "title": "magento-2-loyalty-program",
+          "productUrl": "https://mirasvit.com/magento-2-loyalty-program.html"
+        },
+        {
+          "slug": "magento-2-shop-by-brand",
+          "title": "magento-2-shop-by-brand",
+          "productUrl": "https://mirasvit.com/magento-2-shop-by-brand.html"
+        },
+        {
+          "slug": "magento-2-refer-a-friend",
+          "title": "magento-2-refer-a-friend",
+          "productUrl": "https://mirasvit.com/magento-2-refer-a-friend.html"
+        },
+        {
+          "slug": "magento-2-also-bought",
+          "title": "magento-2-also-bought",
+          "productUrl": "https://mirasvit.com/magento-2-also-bought.html"
+        },
+        {
+          "slug": "magento-2-unique-product-url",
+          "title": "magento-2-unique-product-url",
+          "productUrl": "https://mirasvit.com/magento-2-unique-product-url.html"
+        },
+        {
+          "slug": "magento-2-meta-tags-templates",
+          "title": "magento-2-meta-tags-templates",
+          "productUrl": "https://mirasvit.com/magento-2-meta-tags-templates.html"
+        },
+        {
+          "slug": "magento-2-lazy-load",
+          "title": "magento-2-lazy-load",
+          "productUrl": "https://mirasvit.com/magento-2-lazy-load.html"
+        },
+        {
+          "slug": "magento-2-infinite-scroll",
+          "title": "magento-2-infinite-scroll",
+          "productUrl": "https://mirasvit.com/magento-2-infinite-scroll.html"
+        },
+        {
+          "slug": "magento-2-abandoned-cart-email",
+          "title": "magento-2-abandoned-cart-email",
+          "productUrl": "https://mirasvit.com/magento-2-abandoned-cart-email.html"
+        },
+        {
+          "slug": "magento-2-cookie-consent-gdpr",
+          "title": "magento-2-cookie-consent-gdpr",
+          "productUrl": "https://mirasvit.com/magento-2-cookie-consent-gdpr.html"
+        },
+        {
+          "slug": "magento-2-google-sitemap",
+          "title": "magento-2-google-sitemap",
+          "productUrl": "https://mirasvit.com/magento-2-google-sitemap.html"
+        },
+        {
+          "slug": "magento-2-also-viewed",
+          "title": "magento-2-also-viewed",
+          "productUrl": "https://mirasvit.com/magento-2-also-viewed.html"
+        },
+        {
+          "slug": "magento-2-html-sitemap",
+          "title": "magento-2-html-sitemap",
+          "productUrl": "https://mirasvit.com/magento-2-html-sitemap.html"
+        },
+        {
+          "slug": "magento-2-bought-together",
+          "title": "magento-2-bought-together",
+          "productUrl": "https://mirasvit.com/magento-2-bought-together.html"
+        },
+        {
+          "slug": "magento2-upsell-cross-sell",
+          "title": "magento2-upsell-cross-sell",
+          "productUrl": "https://mirasvit.com/magento2-upsell-cross-sell.html"
+        },
+        {
+          "slug": "magento-2-cross-linking",
+          "title": "magento-2-cross-linking",
+          "productUrl": "https://mirasvit.com/magento-2-cross-linking.html"
+        },
+        {
+          "slug": "magento-2-google-account-login",
+          "title": "magento-2-google-account-login",
+          "productUrl": "https://mirasvit.com/magento-2-google-account-login.html"
+        },
+        {
+          "slug": "partners",
+          "title": "Our partners",
+          "productUrl": "https://mirasvit.com/partners.html"
+        },
+        {
+          "slug": "license-agreement",
+          "title": "License Agreement",
+          "productUrl": "https://mirasvit.com/license-agreement.html"
+        },
+        {
+          "slug": "license-agreement",
+          "title": "Refund Policy",
+          "productUrl": "https://mirasvit.com/license-agreement.html#refund"
+        },
+        {
+          "slug": "rewards-policy",
+          "title": "Discount program",
+          "productUrl": "https://mirasvit.com/rewards-policy.html"
+        },
+        {
+          "slug": "affiliate-program",
+          "title": "Affiliate program",
+          "productUrl": "https://mirasvit.com/affiliate-program.html"
+        },
+        {
+          "slug": "knowledge-base",
+          "title": "Knowledge Base",
+          "productUrl": "https://mirasvit.com/knowledge-base.html"
+        },
+        {
+          "slug": "extension-comparisons",
+          "title": "Extension Comparisons",
+          "productUrl": "https://mirasvit.com/extension-comparisons.html"
+        }
+      ],
+      "extensionCount": 153,
+      "scrapedAt": "2026-04-21T12:59:37.902Z"
+    },
+    {
+      "id": "aheadworks",
+      "name": "Aheadworks",
+      "website": "https://aheadworks.com",
+      "listingUrls": [
+        "https://aheadworks.com/magento-2-extensions"
+      ],
+      "extensions": [],
+      "extensionCount": 0,
+      "scrapedAt": "2026-04-21T12:59:37.950Z"
+    },
+    {
+      "id": "bsscommerce",
+      "name": "BSS Commerce",
+      "website": "https://bsscommerce.com",
+      "listingUrls": [
+        "https://bsscommerce.com/magento-2-extensions.html"
+      ],
+      "extensions": [],
+      "extensionCount": 0,
+      "scrapedAt": "2026-04-21T12:59:37.991Z"
+    },
+    {
+      "id": "swissup",
+      "name": "Swissuplabs",
+      "website": "https://swissuplabs.com",
+      "listingUrls": [
+        "https://swissuplabs.com/extensions.html"
+      ],
+      "extensions": [
+        {
+          "slug": "magento-2",
+          "title": "Magento 2 extensions",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2.html"
+        },
+        {
+          "slug": "magento-themes",
+          "title": "Magento 2 themes",
+          "productUrl": "https://swissuplabs.com/magento-themes.html"
+        },
+        {
+          "slug": "magento-1",
+          "title": "Magento 1 modules",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-1.html"
+        },
+        {
+          "slug": "magento-extensions",
+          "title": "Magento 1 extensions 46item",
+          "productUrl": "https://swissuplabs.com/magento-extensions.html?cat=16"
+        },
+        {
+          "slug": "magento-extensions",
+          "title": "Magento 2 extensions 48item",
+          "productUrl": "https://swissuplabs.com/magento-extensions.html?cat=17"
+        },
+        {
+          "slug": "magento-2-breeze-enterprise",
+          "title": "magento-2-breeze-enterprise",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-breeze-enterprise.html"
+        },
+        {
+          "slug": "magento-2-breeze-enterprise",
+          "title": "1 Review",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-breeze-enterprise.html#reviews"
+        },
+        {
+          "slug": "magento-speculation-rules",
+          "title": "magento-speculation-rules",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-speculation-rules.html"
+        },
+        {
+          "slug": "magento-2-chat-gpt-assistant",
+          "title": "magento-2-chat-gpt-assistant",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-chat-gpt-assistant.html"
+        },
+        {
+          "slug": "magento-2-breeze-evolution-theme",
+          "title": "magento-2-breeze-evolution-theme",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-breeze-evolution-theme.html"
+        },
+        {
+          "slug": "magento-2-breeze-evolution-theme",
+          "title": "2 Reviews",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-breeze-evolution-theme.html#reviews"
+        },
+        {
+          "slug": "magento-2-breeze-blank-theme",
+          "title": "magento-2-breeze-blank-theme",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-breeze-blank-theme.html"
+        },
+        {
+          "slug": "magento-2-breeze-blank-theme",
+          "title": "1 Review",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-breeze-blank-theme.html#reviews"
+        },
+        {
+          "slug": "magento-2-breeze-module",
+          "title": "magento-2-breeze-module",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-breeze-module.html"
+        },
+        {
+          "slug": "magento-2-breeze-module",
+          "title": "1 Review",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-breeze-module.html#reviews"
+        },
+        {
+          "slug": "magento-2-page-builder",
+          "title": "magento-2-page-builder",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-page-builder.html"
+        },
+        {
+          "slug": "magento-2-page-builder",
+          "title": "1 Review",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-page-builder.html#reviews"
+        },
+        {
+          "slug": "one-step-checkout-extension-for-magento-2",
+          "title": "one-step-checkout-extension-for-magento-2",
+          "productUrl": "https://swissuplabs.com/magento-extensions/one-step-checkout-extension-for-magento-2.html"
+        },
+        {
+          "slug": "one-step-checkout-extension-for-magento-2",
+          "title": "10 Reviews",
+          "productUrl": "https://swissuplabs.com/magento-extensions/one-step-checkout-extension-for-magento-2.html#reviews"
+        },
+        {
+          "slug": "magento-2-navigation-pro-extension",
+          "title": "magento-2-navigation-pro-extension",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-navigation-pro-extension.html"
+        },
+        {
+          "slug": "magento-2-navigation-pro-extension",
+          "title": "3 Reviews",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2-navigation-pro-extension.html#reviews"
+        },
+        {
+          "slug": "layered-navigation-extension-for-magento-2",
+          "title": "layered-navigation-extension-for-magento-2",
+          "productUrl": "https://swissuplabs.com/magento-extensions/layered-navigation-extension-for-magento-2.html"
+        },
+        {
+          "slug": "layered-navigation-extension-for-magento-2",
+          "title": "1 Review",
+          "productUrl": "https://swissuplabs.com/magento-extensions/layered-navigation-extension-for-magento-2.html#reviews"
+        },
+        {
+          "slug": "page-speed-magento-2",
+          "title": "page-speed-magento-2",
+          "productUrl": "https://swissuplabs.com/magento-extensions/page-speed-magento-2.html"
+        },
+        {
+          "slug": "page-speed-magento-2",
+          "title": "2 Reviews",
+          "productUrl": "https://swissuplabs.com/magento-extensions/page-speed-magento-2.html#reviews"
+        },
+        {
+          "slug": "magento-2abandoned-cart-extension",
+          "title": "magento-2abandoned-cart-extension",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2abandoned-cart-extension.html"
+        },
+        {
+          "slug": "magento-extensions",
+          "title": "Page 2",
+          "productUrl": "https://swissuplabs.com/magento-extensions.html?p=2"
+        },
+        {
+          "slug": "magento-extensions",
+          "title": "Page 3",
+          "productUrl": "https://swissuplabs.com/magento-extensions.html?p=3"
+        },
+        {
+          "slug": "magento-extensions",
+          "title": "Page 4",
+          "productUrl": "https://swissuplabs.com/magento-extensions.html?p=4"
+        },
+        {
+          "slug": "magento-extensions",
+          "title": "Page 5",
+          "productUrl": "https://swissuplabs.com/magento-extensions.html?p=5"
+        },
+        {
+          "slug": "magento-2-extension-installations-instructions",
+          "title": "Installation manual",
+          "productUrl": "https://swissuplabs.com/magento-2-extension-installations-instructions"
+        },
+        {
+          "slug": "magento-extensions",
+          "title": "Magento Extensions",
+          "productUrl": "https://swissuplabs.com/magento-extensions.html"
+        },
+        {
+          "slug": "magento-2-free-extensions",
+          "title": "Free Magento Extensions",
+          "productUrl": "https://swissuplabs.com/magento-extensions/magento-2/magento-2-free-extensions.html"
+        },
+        {
+          "slug": "free-magento-2-theme-absolute",
+          "title": "Free Magento Themes",
+          "productUrl": "https://swissuplabs.com/free-magento-2-theme-absolute.html"
+        }
+      ],
+      "extensionCount": 34,
+      "scrapedAt": "2026-04-21T12:59:40.420Z"
+    },
+    {
+      "id": "wyomind",
+      "name": "Wyomind",
+      "website": "https://www.wyomind.com",
+      "listingUrls": [
+        "https://www.wyomind.com/magento2-extensions.html"
+      ],
+      "extensions": [
+        {
+          "slug": "magento2",
+          "title": "Magento® 2 extensions",
+          "productUrl": "https://www.wyomind.com/magento2/"
+        },
+        {
+          "slug": "google-shopping-magento",
+          "title": "Simple Google Shopping best-seller",
+          "productUrl": "https://www.wyomind.com/magento2/google-shopping-magento.html"
+        },
+        {
+          "slug": "data-feed-manager-magento",
+          "title": "Data Feed Manager must-have",
+          "productUrl": "https://www.wyomind.com/magento2/data-feed-manager-magento.html"
+        },
+        {
+          "slug": "facebook-product-feed-magento-2",
+          "title": "Facebook Product Feed",
+          "productUrl": "https://www.wyomind.com/magento2/facebook-product-feed-magento-2.html"
+        },
+        {
+          "slug": "google-shopping-actions-magento-2",
+          "title": "Buy on Google",
+          "productUrl": "https://www.wyomind.com/magento2/google-shopping-actions-magento-2.html"
+        },
+        {
+          "slug": "google-customer-reviews-magento",
+          "title": "Google Customer Reviews must-have",
+          "productUrl": "https://www.wyomind.com/magento2/google-customer-reviews-magento.html"
+        },
+        {
+          "slug": "google-merchant-promotions-magento",
+          "title": "Google Merchant Promotions",
+          "productUrl": "https://www.wyomind.com/magento2/google-merchant-promotions-magento.html"
+        },
+        {
+          "slug": "google-product-ratings-magento",
+          "title": "Google Product Ratings",
+          "productUrl": "https://www.wyomind.com/magento2/google-product-ratings-magento.html"
+        },
+        {
+          "slug": "google-rich-snippets-magento",
+          "title": "Google Rich Snippets",
+          "productUrl": "https://www.wyomind.com/magento2/google-rich-snippets-magento.html"
+        },
+        {
+          "slug": "elasticsearch-browser-magento-2",
+          "title": "Elasticsearch® Browser free",
+          "productUrl": "https://www.wyomind.com/magento2/elasticsearch-browser-magento-2.html"
+        },
+        {
+          "slug": "elasticsearch-multifaceted-autocomplete-magento-2",
+          "title": "Multifaceted Autocomplete",
+          "productUrl": "https://www.wyomind.com/magento2/elasticsearch-multifaceted-autocomplete-magento-2.html"
+        },
+        {
+          "slug": "elasticsearch-layered-navigation-magento-2",
+          "title": "Advanced Layered Navigation",
+          "productUrl": "https://www.wyomind.com/magento2/elasticsearch-layered-navigation-magento-2.html"
+        },
+        {
+          "slug": "elastic-search-magento",
+          "title": "Enhanced Autocomplete must-have",
+          "productUrl": "https://www.wyomind.com/magento2/elastic-search-magento.html"
+        },
+        {
+          "slug": "elasticsearch-suite-magento-2",
+          "title": "Elasticsearch® Suite",
+          "productUrl": "https://www.wyomind.com/magento2/elasticsearch-suite-magento-2.html"
+        },
+        {
+          "slug": "multi-stock-inventory-improve-order-management-2",
+          "title": "MSI Order Management",
+          "productUrl": "https://www.wyomind.com/magento2/multi-stock-inventory-improve-order-management-2.html"
+        },
+        {
+          "slug": "multi-stock-inventory-permissions-management-magento-2",
+          "title": "MSI Permissions",
+          "productUrl": "https://www.wyomind.com/magento2/multi-stock-inventory-permissions-management-magento-2.html"
+        },
+        {
+          "slug": "multi-stock-inventory-improve-stock-management-2",
+          "title": "MSI Stock Management",
+          "productUrl": "https://www.wyomind.com/magento2/multi-stock-inventory-improve-stock-management-2.html"
+        },
+        {
+          "slug": "multi-stock-inventory-backorders-magento-2",
+          "title": "MSI Backorders",
+          "productUrl": "https://www.wyomind.com/magento2/multi-stock-inventory-backorders-magento-2.html"
+        },
+        {
+          "slug": "multi-stock-inventory-custom-attributes-magento-2",
+          "title": "MSI Custom Attributes",
+          "productUrl": "https://www.wyomind.com/magento2/multi-stock-inventory-custom-attributes-magento-2.html"
+        },
+        {
+          "slug": "multi-stock-inventory-stock-status-magento-2",
+          "title": "MSI Stock Status",
+          "productUrl": "https://www.wyomind.com/magento2/multi-stock-inventory-stock-status-magento-2.html"
+        },
+        {
+          "slug": "advanced-multi-stock-inventory-magento-2",
+          "title": "MSI Suite",
+          "productUrl": "https://www.wyomind.com/magento2/advanced-multi-stock-inventory-magento-2.html"
+        },
+        {
+          "slug": "click-n-collect-magento-2",
+          "title": "Click & Collect",
+          "productUrl": "https://www.wyomind.com/magento2/click-n-collect-magento-2.html"
+        },
+        {
+          "slug": "store-locator-magento-2",
+          "title": "Store Locator",
+          "productUrl": "https://www.wyomind.com/magento2/store-locator-magento-2.html"
+        },
+        {
+          "slug": "improved-search-magento-2",
+          "title": "Improved Search",
+          "productUrl": "https://www.wyomind.com/magento2/improved-search-magento-2.html"
+        },
+        {
+          "slug": "back-in-stock-notifications-for-guests-magento-2",
+          "title": "Back In Stock Notifications",
+          "productUrl": "https://www.wyomind.com/magento2/back-in-stock-notifications-for-guests-magento-2.html"
+        },
+        {
+          "slug": "category-navigation-magento-2",
+          "title": "Category Navigation",
+          "productUrl": "https://www.wyomind.com/magento2/category-navigation-magento-2.html"
+        },
+        {
+          "slug": "helpdesk-magento-2",
+          "title": "Help Desk",
+          "productUrl": "https://www.wyomind.com/magento2/helpdesk-magento-2.html"
+        },
+        {
+          "slug": "quick-view-magento-2",
+          "title": "Quick View",
+          "productUrl": "https://www.wyomind.com/magento2/quick-view-magento-2.html"
+        },
+        {
+          "slug": "quick-order-magento-2",
+          "title": "Quick Order",
+          "productUrl": "https://www.wyomind.com/magento2/quick-order-magento-2.html"
+        },
+        {
+          "slug": "point-of-sale-magento",
+          "title": "Point Of Sale",
+          "productUrl": "https://www.wyomind.com/magento2/point-of-sale-magento.html"
+        },
+        {
+          "slug": "shop-by-brand-magento-2",
+          "title": "Shop By Brand",
+          "productUrl": "https://www.wyomind.com/magento2/shop-by-brand-magento-2.html"
+        },
+        {
+          "slug": "advanced-inventory-magento",
+          "title": "Advanced Inventory",
+          "productUrl": "https://www.wyomind.com/magento2/advanced-inventory-magento.html"
+        },
+        {
+          "slug": "mass-stock-update-magento",
+          "title": "Mass Stock Update",
+          "productUrl": "https://www.wyomind.com/magento2/mass-stock-update-magento.html"
+        },
+        {
+          "slug": "estimated-delivery-date-magento",
+          "title": "Estimated Delivery Date",
+          "productUrl": "https://www.wyomind.com/magento2/estimated-delivery-date-magento.html"
+        },
+        {
+          "slug": "order-update-magento-2",
+          "title": "Mass Order Update",
+          "productUrl": "https://www.wyomind.com/magento2/order-update-magento-2.html"
+        },
+        {
+          "slug": "orders-export-tool-magento",
+          "title": "Mass Order Export",
+          "productUrl": "https://www.wyomind.com/magento2/orders-export-tool-magento.html"
+        },
+        {
+          "slug": "salescast-magento",
+          "title": "Salescast Connector",
+          "productUrl": "https://www.wyomind.com/magento2/salescast-magento.html"
+        },
+        {
+          "slug": "order-eraser-magento",
+          "title": "Order Eraser free",
+          "productUrl": "https://www.wyomind.com/magento2/order-eraser-magento.html"
+        },
+        {
+          "slug": "improved-success-page-magento-2",
+          "title": "Improved Success Page",
+          "productUrl": "https://www.wyomind.com/magento2/improved-success-page-magento-2.html"
+        },
+        {
+          "slug": "store-pickup-magento",
+          "title": "Pickup@Store",
+          "productUrl": "https://www.wyomind.com/magento2/store-pickup-magento.html"
+        },
+        {
+          "slug": "payment-method-rules-magento",
+          "title": "Payment Method Rules",
+          "productUrl": "https://www.wyomind.com/magento2/payment-method-rules-magento.html"
+        },
+        {
+          "slug": "erp-logistics-suite-magento-2",
+          "title": "ERP & Logistics suite",
+          "productUrl": "https://www.wyomind.com/magento2/erp-logistics-suite-magento-2.html"
+        },
+        {
+          "slug": "cron-scheduler-pro-magento",
+          "title": "Cron Scheduler Pro",
+          "productUrl": "https://www.wyomind.com/magento2/cron-scheduler-pro-magento.html"
+        },
+        {
+          "slug": "cron-scheduler-magento",
+          "title": "Cron Scheduler free",
+          "productUrl": "https://www.wyomind.com/magento2/cron-scheduler-magento.html"
+        },
+        {
+          "slug": "mass-product-update-import-magento",
+          "title": "Mass Product Import & Update",
+          "productUrl": "https://www.wyomind.com/magento2/mass-product-update-import-magento.html"
+        },
+        {
+          "slug": "dynamic-category-magento",
+          "title": "Dynamic Category",
+          "productUrl": "https://www.wyomind.com/magento2/dynamic-category-magento.html"
+        },
+        {
+          "slug": "watchlog-security-enhancement-magento",
+          "title": "Watchlog Pro",
+          "productUrl": "https://www.wyomind.com/magento2/watchlog-security-enhancement-magento.html"
+        },
+        {
+          "slug": "security-enhancement-magento",
+          "title": "Watchlog free",
+          "productUrl": "https://www.wyomind.com/magento2/security-enhancement-magento.html"
+        },
+        {
+          "slug": "mageteam-collaborate-within-magento",
+          "title": "Mageteam",
+          "productUrl": "https://www.wyomind.com/magento2/mageteam-collaborate-within-magento.html"
+        },
+        {
+          "slug": "support-upgrade",
+          "title": "Support & Upgrade plan",
+          "productUrl": "https://www.wyomind.com/magento2/support-upgrade.html"
+        },
+        {
+          "slug": "installation-service",
+          "title": "Installation Service",
+          "productUrl": "https://www.wyomind.com/magento2/installation-service.html"
+        },
+        {
+          "slug": "magento",
+          "title": "Magento® 1 extensions",
+          "productUrl": "https://www.wyomind.com/magento/"
+        },
+        {
+          "slug": "google-shopping-magento",
+          "title": "Simple Google Shopping best-seller",
+          "productUrl": "https://www.wyomind.com/google-shopping-magento.html"
+        },
+        {
+          "slug": "data-feed-manager-magento",
+          "title": "Data Feed Manager must-have",
+          "productUrl": "https://www.wyomind.com/data-feed-manager-magento.html"
+        },
+        {
+          "slug": "google-customer-reviews-magento",
+          "title": "Google Customer Reviews must-have",
+          "productUrl": "https://www.wyomind.com/google-customer-reviews-magento.html"
+        },
+        {
+          "slug": "google-merchant-promotions-magento",
+          "title": "Google Merchant Promotions",
+          "productUrl": "https://www.wyomind.com/google-merchant-promotions-magento.html"
+        },
+        {
+          "slug": "google-product-ratings-magento",
+          "title": "Google Product Ratings",
+          "productUrl": "https://www.wyomind.com/google-product-ratings-magento.html"
+        },
+        {
+          "slug": "google-rich-snippets-magento",
+          "title": "Google Rich Snippets",
+          "productUrl": "https://www.wyomind.com/google-rich-snippets-magento.html"
+        },
+        {
+          "slug": "enhanced-autocomplete-magento",
+          "title": "Enhanced Autocomplete for Elasticsearch 6-7",
+          "productUrl": "https://www.wyomind.com/enhanced-autocomplete-magento.html"
+        },
+        {
+          "slug": "elastic-search-magento",
+          "title": "Enhanced Autocomplete must-have",
+          "productUrl": "https://www.wyomind.com/elastic-search-magento.html"
+        },
+        {
+          "slug": "full-page-cache-magento",
+          "title": "Full Page Cache",
+          "productUrl": "https://www.wyomind.com/full-page-cache-magento.html"
+        },
+        {
+          "slug": "ajax-layer-pro-magento",
+          "title": "Ajax Layer Pro",
+          "productUrl": "https://www.wyomind.com/ajax-layer-pro-magento.html"
+        },
+        {
+          "slug": "attribute-option-pro-magento",
+          "title": "Attribute Option Pro",
+          "productUrl": "https://www.wyomind.com/attribute-option-pro-magento.html"
+        },
+        {
+          "slug": "flash-media-gallery-magento",
+          "title": "Flash Media Gallery free",
+          "productUrl": "https://www.wyomind.com/flash-media-gallery-magento.html"
+        },
+        {
+          "slug": "quantity-switcher-magento",
+          "title": "Quantity Switcher free",
+          "productUrl": "https://www.wyomind.com/quantity-switcher-magento.html"
+        },
+        {
+          "slug": "file-attachments-magento",
+          "title": "Product Attachments",
+          "productUrl": "https://www.wyomind.com/file-attachments-magento.html"
+        },
+        {
+          "slug": "competition-creator-magento",
+          "title": "Competition Creator",
+          "productUrl": "https://www.wyomind.com/competition-creator-magento.html"
+        },
+        {
+          "slug": "point-of-sale-magento",
+          "title": "Point Of Sale",
+          "productUrl": "https://www.wyomind.com/point-of-sale-magento.html"
+        },
+        {
+          "slug": "advanced-inventory-magento",
+          "title": "Advanced Inventory",
+          "productUrl": "https://www.wyomind.com/advanced-inventory-magento.html"
+        },
+        {
+          "slug": "mass-stock-update-magento",
+          "title": "Mass Stock Update",
+          "productUrl": "https://www.wyomind.com/mass-stock-update-magento.html"
+        },
+        {
+          "slug": "stock-barcode-scanner-magento",
+          "title": "Stock Barcode Scanner",
+          "productUrl": "https://www.wyomind.com/stock-barcode-scanner-magento.html"
+        },
+        {
+          "slug": "real-inventory-magento",
+          "title": "Real Inventory free",
+          "productUrl": "https://www.wyomind.com/real-inventory-magento.html"
+        },
+        {
+          "slug": "estimated-delivery-date-magento",
+          "title": "Estimated Delivery Date",
+          "productUrl": "https://www.wyomind.com/estimated-delivery-date-magento.html"
+        },
+        {
+          "slug": "orders-export-tool-magento",
+          "title": "Mass Order Export",
+          "productUrl": "https://www.wyomind.com/orders-export-tool-magento.html"
+        },
+        {
+          "slug": "salescast-magento",
+          "title": "Salescast Connector",
+          "productUrl": "https://www.wyomind.com/salescast-magento.html"
+        },
+        {
+          "slug": "order-eraser-magento",
+          "title": "Order Eraser free",
+          "productUrl": "https://www.wyomind.com/order-eraser-magento.html"
+        },
+        {
+          "slug": "store-pickup-magento",
+          "title": "Pickup@Store",
+          "productUrl": "https://www.wyomind.com/store-pickup-magento.html"
+        },
+        {
+          "slug": "payment-method-rules-magento",
+          "title": "Payment Method Rules",
+          "productUrl": "https://www.wyomind.com/payment-method-rules-magento.html"
+        },
+        {
+          "slug": "mass-product-update-import-magento",
+          "title": "Mass Product Import & Update",
+          "productUrl": "https://www.wyomind.com/mass-product-update-import-magento.html"
+        },
+        {
+          "slug": "cms-tree-magento",
+          "title": "CMS Tree",
+          "productUrl": "https://www.wyomind.com/cms-tree-magento.html"
+        },
+        {
+          "slug": "dynamic-category-magento",
+          "title": "Dynamic Category",
+          "productUrl": "https://www.wyomind.com/dynamic-category-magento.html"
+        },
+        {
+          "slug": "watchlog-security-enhancement-magento",
+          "title": "Watchlog Pro",
+          "productUrl": "https://www.wyomind.com/watchlog-security-enhancement-magento.html"
+        },
+        {
+          "slug": "security-enhancement-magento",
+          "title": "Watchlog free",
+          "productUrl": "https://www.wyomind.com/security-enhancement-magento.html"
+        },
+        {
+          "slug": "support-upgrade",
+          "title": "Support & Upgrade plan",
+          "productUrl": "https://www.wyomind.com/support-upgrade.html"
+        },
+        {
+          "slug": "installation-service",
+          "title": "Installation Service",
+          "productUrl": "https://www.wyomind.com/installation-service.html"
+        },
+        {
+          "slug": "partner-program",
+          "title": "Partners",
+          "productUrl": "https://www.wyomind.com/partner-program.html"
+        },
+        {
+          "slug": "hosting-partners",
+          "title": "Hosting Partners",
+          "productUrl": "https://www.wyomind.com/hosting-partners.html"
+        },
+        {
+          "slug": "development-partners",
+          "title": "Development Partners",
+          "productUrl": "https://www.wyomind.com/development-partners.html"
+        },
+        {
+          "slug": "solution-partners",
+          "title": "Solution partners",
+          "productUrl": "https://www.wyomind.com/solution-partners.html"
+        },
+        {
+          "slug": "404-error",
+          "title": "Switch to USD",
+          "productUrl": "https://www.wyomind.com/404-error.html?c=usd"
+        },
+        {
+          "slug": "404-error",
+          "title": "Switch to FR",
+          "productUrl": "https://www.wyomind.com/fr/404-error.html"
+        },
+        {
+          "slug": "pay-as-you-go-development",
+          "title": "Pay-as-you-go development",
+          "productUrl": "https://www.wyomind.com/pay-as-you-go-development.html"
+        },
+        {
+          "slug": "faq",
+          "title": "Faq Magento 1",
+          "productUrl": "https://www.wyomind.com/magento/faq.html"
+        },
+        {
+          "slug": "faq",
+          "title": "Faq Magento 2",
+          "productUrl": "https://www.wyomind.com/magento2/faq.html"
+        },
+        {
+          "slug": "faq",
+          "title": "Faq Woocommerce",
+          "productUrl": "https://www.wyomind.com/woocommerce/faq.html"
+        }
+      ],
+      "extensionCount": 95,
+      "scrapedAt": "2026-04-21T12:59:41.678Z"
+    },
+    {
+      "id": "mageworx",
+      "name": "Mageworx",
+      "website": "https://www.mageworx.com",
+      "listingUrls": [
+        "https://www.mageworx.com/magento2-extensions.html"
+      ],
+      "extensions": [
+        {
+          "slug": "magento-2-seo-extension",
+          "title": "SEO Suite M2",
+          "productUrl": "https://www.mageworx.com/magento-2-seo-extension.html"
+        },
+        {
+          "slug": "magento-2-advanced-product-options-suite",
+          "title": "Advanced Options M2",
+          "productUrl": "https://www.mageworx.com/magento-2-advanced-product-options-suite.html"
+        },
+        {
+          "slug": "magento-2-shipping-suite",
+          "title": "Shipping Suite M2",
+          "productUrl": "https://www.mageworx.com/magento-2-shipping-suite.html"
+        },
+        {
+          "slug": "magento2-order-management-extension",
+          "title": "Orders Management M2",
+          "productUrl": "https://www.mageworx.com/magento2-order-management-extension.html"
+        },
+        {
+          "slug": "magento2-onepage-checkout",
+          "title": "Checkout Suite M2",
+          "productUrl": "https://www.mageworx.com/magento2-onepage-checkout.html"
+        },
+        {
+          "slug": "magento-2-ultimate-sales-boost",
+          "title": "Ultimate Sales Boost Need to give your Magento store an ultimate sales boost? Build urgency, scarcity, and trust with the help of countdown timers, products popularity popups, stock status, etc.",
+          "productUrl": "https://www.mageworx.com/magento-2-ultimate-sales-boost.html"
+        },
+        {
+          "slug": "magento-2-store-locator-and-pickup",
+          "title": "Store Locator & In-Store Pickup Magento 2 Store Locator extension to introduce BOPIS. No-contact delivery. Curbside pickup. Items’ availability tracking. Store locations on Google Maps.",
+          "productUrl": "https://www.mageworx.com/magento-2-store-locator-and-pickup.html"
+        },
+        {
+          "slug": "delivery-date-magento-2",
+          "title": "Delivery Date & Time All you need to display estimated shipment dates in your Magento-based store. Checkout page delivery. Shipping date restrictions and extra charges for specific time slots.",
+          "productUrl": "https://www.mageworx.com/delivery-date-magento-2.html"
+        },
+        {
+          "slug": "magento2-extensions",
+          "title": "All Magento 2 extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions.html"
+        },
+        {
+          "slug": "magento-extensions",
+          "title": "All Magento 1 extensions",
+          "productUrl": "https://www.mageworx.com/magento-extensions.html"
+        },
+        {
+          "slug": "magento-2-faq",
+          "title": "FAQ A flexible FAQ extension that helps you create, manage, and display frequently asked questions on your Magento 2 store. It improves customer experience by providing quick answers, reduces support load, and enhances SEO with structured, well-organized content.",
+          "productUrl": "https://www.mageworx.com/magento-2-faq.html"
+        },
+        {
+          "slug": "magento-2-ai-product-compare",
+          "title": "AI Product Compare This AI Product Compare extension helps customers quickly compare products in your store using AI-powered insights. Multi-store and multi-language support.",
+          "productUrl": "https://www.mageworx.com/magento-2-ai-product-compare.html"
+        },
+        {
+          "slug": "magento-2-gift-cards",
+          "title": "Gift Cards Online and offline Magento 2 gift card giving made easy. Flexible pricing schemes, multi-store gift cards, flexible pricing configuration possibilities.",
+          "productUrl": "https://www.mageworx.com/magento-2-gift-cards.html"
+        },
+        {
+          "slug": "magento-2-extra-product-fees",
+          "title": "Multi Fees Magento 2 extra fee extension that allows you to set up any Magento fee, including product, shopping cart, shipping methods, license, handling, and transaction fees.",
+          "productUrl": "https://www.mageworx.com/magento-2-extra-product-fees.html"
+        },
+        {
+          "slug": "magento-2-reward-points",
+          "title": "Reward Points Build a Magento 2 reward points program that works! Reward your most active and loyal customers, motivate hesitating ones and generate more profit for each order.",
+          "productUrl": "https://www.mageworx.com/magento-2-reward-points.html"
+        },
+        {
+          "slug": "magento-2-themes-ready",
+          "title": "All Hyva-ready extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/magento-2-themes-ready.html"
+        },
+        {
+          "slug": "hyva-checkout-extensions",
+          "title": "All Hyva Checkout extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/hyva-checkout-extensions.html"
+        },
+        {
+          "slug": "chatgpt-magento2-extensions",
+          "title": "All AI-powered extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/chatgpt-magento2-extensions.html"
+        },
+        {
+          "slug": "magento2-landing-pages",
+          "title": "Landing Pages The Landing Pages Magento extension allows you to create SEO- and user-friendly landing pages for your marketing campaigns. Pages creation in bulk.",
+          "productUrl": "https://www.mageworx.com/magento2-landing-pages.html"
+        },
+        {
+          "slug": "magento-2-layered-navigation",
+          "title": "Layered Navigation A set of flexible features to make Magento layered navigation search engine and user-friendly. Advanced configuration of filter attributes.",
+          "productUrl": "https://www.mageworx.com/magento-2-layered-navigation.html"
+        },
+        {
+          "slug": "magento2-extended-rich-snippets",
+          "title": "Extended Rich Snippets Draw users' attention and win the click with more detailed Magento rich snippets. Developed according to the latest Google and Schema.org standards.",
+          "productUrl": "https://www.mageworx.com/magento2-extended-rich-snippets.html"
+        },
+        {
+          "slug": "magento2-meta-seo-templates",
+          "title": "SEO Meta Templates The Magento 2 SEO Meta Tags Template module to optimize product and category page metadata, keywords, short and detailed descriptions.",
+          "productUrl": "https://www.mageworx.com/magento2-meta-seo-templates.html"
+        },
+        {
+          "slug": "magento2-cross-linking-extension",
+          "title": "Cross Linking All you need to create and manage Magento 2 cross-linking SEO. Internal links optimization on the product, category, and CMS pages. Linking to relevant external sources.",
+          "productUrl": "https://www.mageworx.com/magento2-cross-linking-extension.html"
+        },
+        {
+          "slug": "magento-2-sitemap-extension",
+          "title": "Sitemap Suite XML and HTML Magento 2 sitemaps to enhance your site’s crawling, indexation, and navigation. Magento 2 Cron for automatic sitemaps navigation.",
+          "productUrl": "https://www.mageworx.com/magento-2-sitemap-extension.html"
+        },
+        {
+          "slug": "short-category-product-urls",
+          "title": "Short Category & Product URLs Make product and category pages better crawled by the search engine spiders. Use the Magento Short URL extension to remove parent categories from URLs.",
+          "productUrl": "https://www.mageworx.com/short-category-product-urls.html"
+        },
+        {
+          "slug": "seo-tools-services",
+          "title": "All SEO extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/seo-tools-services.html"
+        },
+        {
+          "slug": "magento2-shipping-table-rates",
+          "title": "Shipping Table Rates With our Magento 2 Shipping Table Rates extension, you can overcome the default limitations and create an unlimited number of carriers, methods, and shipping rates.",
+          "productUrl": "https://www.mageworx.com/magento2-shipping-table-rates.html"
+        },
+        {
+          "slug": "magento-2-shipping-cost-calculator",
+          "title": "Shipping Calculator on Product Page Increase conversion rates and improve customer experience by letting your shoppers calculate the cost of shipping right on your product pages. Estimated shipping block.",
+          "productUrl": "https://www.mageworx.com/magento-2-shipping-cost-calculator.html"
+        },
+        {
+          "slug": "magento-2-green-delivery",
+          "title": "Green Delivery This Green Delivery module helps quickly offer such an option in your Magento-based store. Multi-store and multi-language support.",
+          "productUrl": "https://www.mageworx.com/magento-2-green-delivery.html"
+        },
+        {
+          "slug": "magento-2-no-contact-delivery",
+          "title": "No-Contact Delivery / Curbside Pickup This Free Curbside Pickup module helps quickly offer the no-contact delivery option in your Magento-based store. Multi-store and multi-language support.",
+          "productUrl": "https://www.mageworx.com/magento-2-no-contact-delivery.html"
+        },
+        {
+          "slug": "shipping-extensions",
+          "title": "All shipping extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/shipping-extensions.html"
+        },
+        {
+          "slug": "magento-2-marketing-and-sales-suite",
+          "title": "Marketing & Sales Suite There’s no better tool to tackle Magento 2 marketing automation than this suite. Rewards program, recent sales notifications, countdown timers, review reminders, discounts.",
+          "productUrl": "https://www.mageworx.com/magento-2-marketing-and-sales-suite.html"
+        },
+        {
+          "slug": "magento2-product-reviews-and-ratings",
+          "title": "Advanced Product Reviews & Reminders Use Magento 2 Review Reminder to increase trust in your brand by transforming Magento 2 reviews into advanced product feedback. Trigger email/popup review reminders.",
+          "productUrl": "https://www.mageworx.com/magento2-product-reviews-and-ratings.html"
+        },
+        {
+          "slug": "magento-2-product-countdown-timer",
+          "title": "Product Countdown Timers Magento 2 Countdown Timer extension to add beautifully visualized timers to your product pages. The module comes with 20+ highly customizable design templates.",
+          "productUrl": "https://www.mageworx.com/magento-2-product-countdown-timer.html"
+        },
+        {
+          "slug": "magento-2-affiliate-extension",
+          "title": "Affiliate Magento 2 Affiliate module helps you launch, run and manage flexible affiliate marketing programs. It allows you to effectively market your products with a low budget, low effort, and time while enjoying high ROI.",
+          "productUrl": "https://www.mageworx.com/magento-2-affiliate-extension.html"
+        },
+        {
+          "slug": "marketing-extensions",
+          "title": "All marketing extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/marketing-extensions.html"
+        },
+        {
+          "slug": "magento-2-product-attachments",
+          "title": "File Downloads and Product Attachments Add any kind and any format of Magento 2 product attachments to your product pages―equip them with product videos, user guides, price lists, etc.",
+          "productUrl": "https://www.mageworx.com/magento-2-product-attachments.html"
+        },
+        {
+          "slug": "magento2-customer-group-prices",
+          "title": "Customer Group Prices Diversify your pricing strategy with custom Magento customer group prices. Set custom prices for wholesale and retail shoppers. Special deals for targeted groups.",
+          "productUrl": "https://www.mageworx.com/magento2-customer-group-prices.html"
+        },
+        {
+          "slug": "magento-2-prices-per-customer",
+          "title": "Prices per Customer Add a personalized touch to your Magento pricing with the help of this Magento Price per Customer module. Mass update customer prices. Prices import/export.",
+          "productUrl": "https://www.mageworx.com/magento-2-prices-per-customer.html"
+        },
+        {
+          "slug": "magento-2-product-custom-options-templates",
+          "title": "Product Custom Options Templates Ease the pain of manual Magento custom options configuration. Create any number of custom options templates like color, size, dimensions, etc., in a few clicks.",
+          "productUrl": "https://www.mageworx.com/magento-2-product-custom-options-templates.html"
+        },
+        {
+          "slug": "magento-2-event-management",
+          "title": "Event Management by Staylime Create, manage and sell Magento events. Let shoppers search for, wishlist, review any type of events as Magento products: conferences, concerts, parties, etc.",
+          "productUrl": "https://www.mageworx.com/magento-2-event-management.html"
+        },
+        {
+          "slug": "product-management-extensions",
+          "title": "All product management extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/product-management-extensions.html"
+        },
+        {
+          "slug": "magento2-order-editor-extension",
+          "title": "Order Editor Magento edit order without canceling. Add, delete, and remove any order details, order customers' billing, payment, and shipping info. Order edit logs and staff permissions.",
+          "productUrl": "https://www.mageworx.com/magento2-order-editor-extension.html"
+        },
+        {
+          "slug": "magento-2-orders-grid",
+          "title": "Extended Orders Grid Extend and customize the default Magento 2 orders grid. Easily add 28 extra colums with essential order parameters, perform order mass-actions, synch order data and more.",
+          "productUrl": "https://www.mageworx.com/magento-2-orders-grid.html"
+        },
+        {
+          "slug": "magento-2-custom-order-number",
+          "title": "Custom Order Number Expand the native numbering scheme with the Magento 2 Custom Order Number module. Edit order length, add custom prefixes, increment prefixes, etc.",
+          "productUrl": "https://www.mageworx.com/magento-2-custom-order-number.html"
+        },
+        {
+          "slug": "order-management-extensions",
+          "title": "All order management extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/order-management-extensions.html"
+        },
+        {
+          "slug": "shop-by-brand-magento-2",
+          "title": "Shop by Brand Brands create desire, a sense of belonging, status, and prestige. Use Magento Shop by Brand to bridge the distance between your customers and their favorite offerings.",
+          "productUrl": "https://www.mageworx.com/shop-by-brand-magento-2.html"
+        },
+        {
+          "slug": "free-extensions",
+          "title": "All free extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/free-extensions.html"
+        },
+        {
+          "slug": "magento-2-hyva-checkout-extensions",
+          "title": "Hyva checkout extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/magento-2-hyva-checkout-extensions.html"
+        },
+        {
+          "slug": "magento-checkout-extensions",
+          "title": "Magento checkout extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/magento-checkout-extensions.html"
+        },
+        {
+          "slug": "prices-currencies-extensions",
+          "title": "Magento multiple currencies & pricing",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/prices-currencies-extensions.html"
+        },
+        {
+          "slug": "promotions-motivation-extensions",
+          "title": "Promotion and motivation",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/promotions-motivation-extensions.html"
+        },
+        {
+          "slug": "user-experience-extensions",
+          "title": "User experience",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/user-experience-extensions.html"
+        },
+        {
+          "slug": "admin-extensions",
+          "title": "Admin extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/admin-extensions.html"
+        },
+        {
+          "slug": "search-plugins",
+          "title": "Search extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/search-plugins.html"
+        },
+        {
+          "slug": "pwa-ready",
+          "title": ".st0{fill:#282828;} Magento 2 PWA extensions",
+          "productUrl": "https://www.mageworx.com/magento2-extensions/pwa-ready.html"
+        },
+        {
+          "slug": "magento-2-marketing-and-sales-suite",
+          "title": "10 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-marketing-and-sales-suite.html#reviews"
+        },
+        {
+          "slug": "magento-2-marketing-and-sales-suite",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-marketing-and-sales-suite.html#review-form"
+        },
+        {
+          "slug": "magento2-onepage-checkout",
+          "title": "13 Reviews",
+          "productUrl": "https://www.mageworx.com/magento2-onepage-checkout.html#reviews"
+        },
+        {
+          "slug": "magento2-onepage-checkout",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento2-onepage-checkout.html#review-form"
+        },
+        {
+          "slug": "magento-2-shipping-suite",
+          "title": "106 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-shipping-suite.html#reviews"
+        },
+        {
+          "slug": "magento-2-shipping-suite",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-shipping-suite.html#review-form"
+        },
+        {
+          "slug": "magento-2-seo-extension",
+          "title": "373 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-seo-extension.html#reviews"
+        },
+        {
+          "slug": "magento-2-seo-extension",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-seo-extension.html#review-form"
+        },
+        {
+          "slug": "magento-2-advanced-product-options-suite",
+          "title": "336 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-advanced-product-options-suite.html#reviews"
+        },
+        {
+          "slug": "magento-2-advanced-product-options-suite",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-advanced-product-options-suite.html#review-form"
+        },
+        {
+          "slug": "magento2-order-management-extension",
+          "title": "134 Reviews",
+          "productUrl": "https://www.mageworx.com/magento2-order-management-extension.html#reviews"
+        },
+        {
+          "slug": "magento2-order-management-extension",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento2-order-management-extension.html#review-form"
+        },
+        {
+          "slug": "magento-2-gift-cards",
+          "title": "87 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-gift-cards.html#reviews"
+        },
+        {
+          "slug": "magento-2-gift-cards",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-gift-cards.html#review-form"
+        },
+        {
+          "slug": "magento-2-extra-product-fees",
+          "title": "94 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-extra-product-fees.html#reviews"
+        },
+        {
+          "slug": "magento-2-extra-product-fees",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-extra-product-fees.html#review-form"
+        },
+        {
+          "slug": "magento-2-reward-points",
+          "title": "59 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-reward-points.html#reviews"
+        },
+        {
+          "slug": "magento-2-reward-points",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-reward-points.html#review-form"
+        },
+        {
+          "slug": "magento-2-store-locator-and-pickup",
+          "title": "20 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-store-locator-and-pickup.html#reviews"
+        },
+        {
+          "slug": "magento-2-store-locator-and-pickup",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-store-locator-and-pickup.html#review-form"
+        },
+        {
+          "slug": "magento-2-ultimate-sales-boost",
+          "title": "3 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-ultimate-sales-boost.html#reviews"
+        },
+        {
+          "slug": "magento-2-ultimate-sales-boost",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-ultimate-sales-boost.html#review-form"
+        },
+        {
+          "slug": "delivery-date-magento-2",
+          "title": "24 Reviews",
+          "productUrl": "https://www.mageworx.com/delivery-date-magento-2.html#reviews"
+        },
+        {
+          "slug": "delivery-date-magento-2",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/delivery-date-magento-2.html#review-form"
+        },
+        {
+          "slug": "magento2-product-reviews-and-ratings",
+          "title": "11 Reviews",
+          "productUrl": "https://www.mageworx.com/magento2-product-reviews-and-ratings.html#reviews"
+        },
+        {
+          "slug": "magento2-product-reviews-and-ratings",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento2-product-reviews-and-ratings.html#review-form"
+        },
+        {
+          "slug": "magento-2-product-countdown-timer",
+          "title": "4 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-product-countdown-timer.html#reviews"
+        },
+        {
+          "slug": "magento-2-product-countdown-timer",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-product-countdown-timer.html#review-form"
+        },
+        {
+          "slug": "magento-2-sales-popup-social-proof",
+          "title": "magento-2-sales-popup-social-proof",
+          "productUrl": "https://www.mageworx.com/magento-2-sales-popup-social-proof.html"
+        },
+        {
+          "slug": "magento-2-sales-popup-social-proof",
+          "title": "7 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-sales-popup-social-proof.html#reviews"
+        },
+        {
+          "slug": "magento-2-sales-popup-social-proof",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-sales-popup-social-proof.html#review-form"
+        },
+        {
+          "slug": "magento2-shipping-table-rates",
+          "title": "4 Reviews",
+          "productUrl": "https://www.mageworx.com/magento2-shipping-table-rates.html#reviews"
+        },
+        {
+          "slug": "magento2-shipping-table-rates",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento2-shipping-table-rates.html#review-form"
+        },
+        {
+          "slug": "magento2-order-editor-extension",
+          "title": "21 Reviews",
+          "productUrl": "https://www.mageworx.com/magento2-order-editor-extension.html#reviews"
+        },
+        {
+          "slug": "magento2-order-editor-extension",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento2-order-editor-extension.html#review-form"
+        },
+        {
+          "slug": "magento2-customer-group-prices",
+          "title": "16 Reviews",
+          "productUrl": "https://www.mageworx.com/magento2-customer-group-prices.html#reviews"
+        },
+        {
+          "slug": "magento2-customer-group-prices",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento2-customer-group-prices.html#review-form"
+        },
+        {
+          "slug": "store-and-currency-switcher-magento-2",
+          "title": "store-and-currency-switcher-magento-2",
+          "productUrl": "https://www.mageworx.com/store-and-currency-switcher-magento-2.html"
+        },
+        {
+          "slug": "store-and-currency-switcher-magento-2",
+          "title": "58 Reviews",
+          "productUrl": "https://www.mageworx.com/store-and-currency-switcher-magento-2.html#reviews"
+        },
+        {
+          "slug": "store-and-currency-switcher-magento-2",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/store-and-currency-switcher-magento-2.html#review-form"
+        },
+        {
+          "slug": "magento-2-product-attachments",
+          "title": "104 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-product-attachments.html#reviews"
+        },
+        {
+          "slug": "magento-2-product-attachments",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-product-attachments.html#review-form"
+        },
+        {
+          "slug": "magento-2-prices-per-customer",
+          "title": "31 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-prices-per-customer.html#reviews"
+        },
+        {
+          "slug": "magento-2-prices-per-customer",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-prices-per-customer.html#review-form"
+        },
+        {
+          "slug": "magento-2-sitemap-extension",
+          "title": "26 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-sitemap-extension.html#reviews"
+        },
+        {
+          "slug": "magento-2-sitemap-extension",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-sitemap-extension.html#review-form"
+        },
+        {
+          "slug": "magento2-cross-linking-extension",
+          "title": "9 Reviews",
+          "productUrl": "https://www.mageworx.com/magento2-cross-linking-extension.html#reviews"
+        },
+        {
+          "slug": "magento2-cross-linking-extension",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento2-cross-linking-extension.html#review-form"
+        },
+        {
+          "slug": "magento-2-event-management",
+          "title": "4 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-event-management.html#reviews"
+        },
+        {
+          "slug": "magento-2-event-management",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-event-management.html#review-form"
+        },
+        {
+          "slug": "magento2-meta-seo-templates",
+          "title": "12 Reviews",
+          "productUrl": "https://www.mageworx.com/magento2-meta-seo-templates.html#reviews"
+        },
+        {
+          "slug": "magento2-meta-seo-templates",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento2-meta-seo-templates.html#review-form"
+        },
+        {
+          "slug": "magento-2-product-custom-options-templates",
+          "title": "11 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-product-custom-options-templates.html#reviews"
+        },
+        {
+          "slug": "magento-2-product-custom-options-templates",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-product-custom-options-templates.html#review-form"
+        },
+        {
+          "slug": "magento-2-shipping-cost-calculator",
+          "title": "8 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-shipping-cost-calculator.html#reviews"
+        },
+        {
+          "slug": "magento-2-shipping-cost-calculator",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-shipping-cost-calculator.html#review-form"
+        },
+        {
+          "slug": "magento-2-donations-suite",
+          "title": "magento-2-donations-suite",
+          "productUrl": "https://www.mageworx.com/magento-2-donations-suite.html"
+        },
+        {
+          "slug": "magento-2-donations-suite",
+          "title": "46 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-donations-suite.html#reviews"
+        },
+        {
+          "slug": "magento-2-donations-suite",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-donations-suite.html#review-form"
+        },
+        {
+          "slug": "magento2-extended-rich-snippets",
+          "title": "18 Reviews",
+          "productUrl": "https://www.mageworx.com/magento2-extended-rich-snippets.html#reviews"
+        },
+        {
+          "slug": "magento2-extended-rich-snippets",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento2-extended-rich-snippets.html#review-form"
+        },
+        {
+          "slug": "magento-2-orders-grid",
+          "title": "12 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-orders-grid.html#reviews"
+        },
+        {
+          "slug": "magento-2-orders-grid",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-orders-grid.html#review-form"
+        },
+        {
+          "slug": "magento-2-auto-currency-switcher",
+          "title": "magento-2-auto-currency-switcher",
+          "productUrl": "https://www.mageworx.com/magento-2-auto-currency-switcher.html"
+        },
+        {
+          "slug": "magento-2-auto-currency-switcher",
+          "title": "16 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-auto-currency-switcher.html#reviews"
+        },
+        {
+          "slug": "magento-2-auto-currency-switcher",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-auto-currency-switcher.html#review-form"
+        },
+        {
+          "slug": "magento-2-layered-navigation",
+          "title": "12 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-layered-navigation.html#reviews"
+        },
+        {
+          "slug": "magento-2-layered-navigation",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-layered-navigation.html#review-form"
+        },
+        {
+          "slug": "short-category-product-urls",
+          "title": "11 Reviews",
+          "productUrl": "https://www.mageworx.com/short-category-product-urls.html#reviews"
+        },
+        {
+          "slug": "short-category-product-urls",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/short-category-product-urls.html#review-form"
+        },
+        {
+          "slug": "shop-by-brand-magento-2",
+          "title": "8 Reviews",
+          "productUrl": "https://www.mageworx.com/shop-by-brand-magento-2.html#reviews"
+        },
+        {
+          "slug": "shop-by-brand-magento-2",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/shop-by-brand-magento-2.html#review-form"
+        },
+        {
+          "slug": "magento-2-affiliate-extension",
+          "title": "4 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-affiliate-extension.html#reviews"
+        },
+        {
+          "slug": "magento-2-affiliate-extension",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-affiliate-extension.html#review-form"
+        },
+        {
+          "slug": "magento2-landing-pages",
+          "title": "9 Reviews",
+          "productUrl": "https://www.mageworx.com/magento2-landing-pages.html#reviews"
+        },
+        {
+          "slug": "magento2-landing-pages",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento2-landing-pages.html#review-form"
+        },
+        {
+          "slug": "magento-2-search-autocomplete-free",
+          "title": "magento-2-search-autocomplete-free",
+          "productUrl": "https://www.mageworx.com/magento-2-search-autocomplete-free.html"
+        },
+        {
+          "slug": "magento-2-search-autocomplete-free",
+          "title": "52 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-search-autocomplete-free.html#reviews"
+        },
+        {
+          "slug": "magento-2-search-autocomplete-free",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-search-autocomplete-free.html#review-form"
+        },
+        {
+          "slug": "magento-2-others-also-bought",
+          "title": "magento-2-others-also-bought",
+          "productUrl": "https://www.mageworx.com/magento-2-others-also-bought.html"
+        },
+        {
+          "slug": "magento-2-others-also-bought",
+          "title": "33 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-others-also-bought.html#reviews"
+        },
+        {
+          "slug": "magento-2-others-also-bought",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-others-also-bought.html#review-form"
+        },
+        {
+          "slug": "magento-2-green-delivery",
+          "title": "1 Review",
+          "productUrl": "https://www.mageworx.com/magento-2-green-delivery.html#reviews"
+        },
+        {
+          "slug": "magento-2-green-delivery",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-green-delivery.html#review-form"
+        },
+        {
+          "slug": "magento-2-ai-product-compare",
+          "title": "1 Review",
+          "productUrl": "https://www.mageworx.com/magento-2-ai-product-compare.html#reviews"
+        },
+        {
+          "slug": "magento-2-ai-product-compare",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-ai-product-compare.html#review-form"
+        },
+        {
+          "slug": "magento-2-no-contact-delivery",
+          "title": "9 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-no-contact-delivery.html#reviews"
+        },
+        {
+          "slug": "magento-2-no-contact-delivery",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-no-contact-delivery.html#review-form"
+        },
+        {
+          "slug": "geo-lock-magento2-extension",
+          "title": "geo-lock-magento2-extension",
+          "productUrl": "https://www.mageworx.com/geo-lock-magento2-extension.html"
+        },
+        {
+          "slug": "geo-lock-magento2-extension",
+          "title": "25 Reviews",
+          "productUrl": "https://www.mageworx.com/geo-lock-magento2-extension.html#reviews"
+        },
+        {
+          "slug": "geo-lock-magento2-extension",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/geo-lock-magento2-extension.html#review-form"
+        },
+        {
+          "slug": "magento-2-custom-order-number",
+          "title": "12 Reviews",
+          "productUrl": "https://www.mageworx.com/magento-2-custom-order-number.html#reviews"
+        },
+        {
+          "slug": "magento-2-custom-order-number",
+          "title": "Add Your Review",
+          "productUrl": "https://www.mageworx.com/magento-2-custom-order-number.html#review-form"
+        },
+        {
+          "slug": "shopware-plugins",
+          "title": "here",
+          "productUrl": "https://www.mageworx.com/shopware-plugins.html"
+        },
+        {
+          "slug": "magento-customer-support-highlights",
+          "title": "Magento support types",
+          "productUrl": "https://www.mageworx.com/magento-customer-support-highlights"
+        },
+        {
+          "slug": "magento-subscriptions",
+          "title": "Annual updates & support",
+          "productUrl": "https://www.mageworx.com/magento-subscriptions"
+        }
+      ],
+      "extensionCount": 152,
+      "scrapedAt": "2026-04-21T12:59:42.110Z"
+    },
+    {
+      "id": "webkul",
+      "name": "Webkul",
+      "website": "https://store.webkul.com",
+      "listingUrls": [
+        "https://store.webkul.com/Magento-2.html"
+      ],
+      "extensions": [
+        {
+          "slug": "license",
+          "title": "Terms & Condition",
+          "productUrl": "https://store.webkul.com/license.html"
+        },
+        {
+          "slug": "magento-2",
+          "title": "magento-2",
+          "productUrl": "https://store.webkul.com/Magento-2.html?dir=asc&order=review"
+        },
+        {
+          "slug": "magento-2",
+          "title": "magento-2",
+          "productUrl": "https://store.webkul.com/Magento-2.html?p=2"
+        },
+        {
+          "slug": "magento-2",
+          "title": "magento-2",
+          "productUrl": "https://store.webkul.com/Magento-2.html?p=3"
+        },
+        {
+          "slug": "magento-2",
+          "title": "magento-2",
+          "productUrl": "https://store.webkul.com/Magento-2.html?p=4"
+        },
+        {
+          "slug": "magento-2",
+          "title": "magento-2",
+          "productUrl": "https://store.webkul.com/Magento-2.html?p=5"
+        },
+        {
+          "slug": "magento2-multi-vendor-marketplace",
+          "title": "magento2-multi-vendor-marketplace",
+          "productUrl": "https://store.webkul.com/magento2-multi-vendor-marketplace.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/736/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "magento2-mobile-app",
+          "title": "Sale",
+          "productUrl": "https://store.webkul.com/magento2-mobile-app.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/939/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "magento2-marketplace-mobile-app",
+          "title": "Sale",
+          "productUrl": "https://store.webkul.com/magento2-marketplace-mobile-app.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/944/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "magento2-akeneo-connector",
+          "title": "Sale",
+          "productUrl": "https://store.webkul.com/Magento2-Akeneo-Connector.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/1457/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "magento2-pos-point-of-sale",
+          "title": "Sale",
+          "productUrl": "https://store.webkul.com/Magento2-POS-Point-Of-Sale.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/1381/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "aws-speed-security-optimization-magento-2",
+          "title": "aws-speed-security-optimization-magento-2",
+          "productUrl": "https://store.webkul.com/aws-speed-security-optimization-magento-2.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/1237/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "magento2-pre-order",
+          "title": "magento2-pre-order",
+          "productUrl": "https://store.webkul.com/magento2-pre-order.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/740/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "magento2-quote-extension",
+          "title": "magento2-quote-extension",
+          "productUrl": "https://store.webkul.com/magento2-quote-extension.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/906/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "magento2-ebay-connector",
+          "title": "magento2-ebay-connector",
+          "productUrl": "https://store.webkul.com/magento2-ebay-connector.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/784/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "odoo-bridge-for-magento2",
+          "title": "odoo-bridge-for-magento2",
+          "productUrl": "https://store.webkul.com/Odoo-Bridge-For-Magento2.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/782/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "magento2-dropship-extension",
+          "title": "magento2-dropship-extension",
+          "productUrl": "https://store.webkul.com/magento2-dropship-extension.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/759/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "magento2-purchase-order",
+          "title": "magento2-purchase-order",
+          "productUrl": "https://store.webkul.com/magento2-purchase-order.html"
+        },
+        {
+          "slug": "ujlzirn41zxm272y",
+          "title": "Add to Wishlist",
+          "productUrl": "https://store.webkul.com/wishlist/index/add/product/1193/form_key/UjLZIrN41ZxM272y/"
+        },
+        {
+          "slug": "magento2-seo-extension",
+          "title": "Magento 2 SEO",
+          "productUrl": "https://store.webkul.com/magento2-seo-extension.html"
+        },
+        {
+          "slug": "magento2-layered-navigation",
+          "title": "Magento 2 Layered navigation",
+          "productUrl": "https://store.webkul.com/magento2-layered-navigation.html"
+        },
+        {
+          "slug": "booking-reservation",
+          "title": "Booking Plugins",
+          "productUrl": "https://store.webkul.com/Magento-2/Booking-Reservation.html"
+        },
+        {
+          "slug": "marketplace-addons",
+          "title": "Multi Vendor Marketplace",
+          "productUrl": "https://store.webkul.com/Magento-2/Marketplace-Addons.html"
+        },
+        {
+          "slug": "odoo-erp",
+          "title": "Odoo/ERP",
+          "productUrl": "https://store.webkul.com/Magento-2/Odoo-ERP.html"
+        },
+        {
+          "slug": "mobile",
+          "title": "Mobile Commerce",
+          "productUrl": "https://store.webkul.com/Magento-2/Mobile.html"
+        },
+        {
+          "slug": "pos",
+          "title": "POS - Point of Sale",
+          "productUrl": "https://store.webkul.com/Magento-2/POS.html"
+        },
+        {
+          "slug": "multichannel-selling",
+          "title": "Multichannel Selling",
+          "productUrl": "https://store.webkul.com/Magento-2/Multichannel-Selling.html"
+        },
+        {
+          "slug": "payment-extensions",
+          "title": "Sales Orders & Payments",
+          "productUrl": "https://store.webkul.com/Magento-2/Payment-Extensions.html"
+        },
+        {
+          "slug": "shipping",
+          "title": "Shipping & Fulfillment",
+          "productUrl": "https://store.webkul.com/Magento-2/Shipping.html"
+        },
+        {
+          "slug": "social-media",
+          "title": "Social Media",
+          "productUrl": "https://store.webkul.com/Magento-2/Social-Media.html"
+        },
+        {
+          "slug": "salesforce",
+          "title": "Salesforce",
+          "productUrl": "https://store.webkul.com/Magento-2/Salesforce.html"
+        },
+        {
+          "slug": "helpdesk",
+          "title": "Helpdesk",
+          "productUrl": "https://store.webkul.com/Magento-2/Helpdesk.html"
+        },
+        {
+          "slug": "aws-cloud",
+          "title": "Cloudkul",
+          "productUrl": "https://store.webkul.com/Magento-2/AWS-Cloud.html"
+        },
+        {
+          "slug": "connectors",
+          "title": "Connectors",
+          "productUrl": "https://store.webkul.com/Magento-2/Connectors.html"
+        },
+        {
+          "slug": "marketing-promotions",
+          "title": "Marketing & Promotions",
+          "productUrl": "https://store.webkul.com/Magento-2/Marketing-Promotions.html"
+        },
+        {
+          "slug": "b2b",
+          "title": "B2B eCommerce",
+          "productUrl": "https://store.webkul.com/Magento-2/B2B.html"
+        },
+        {
+          "slug": "hyva-theme-extensions",
+          "title": "Hyvä Theme Extensions",
+          "productUrl": "https://store.webkul.com/Magento-2/hyva-theme-extensions.html"
+        },
+        {
+          "slug": "magento2-ai-extensions",
+          "title": "Magento 2 AI extensions",
+          "productUrl": "https://store.webkul.com/Magento-2/magento2-ai-extensions.html"
+        },
+        {
+          "slug": "bagisto",
+          "title": "Bagisto",
+          "productUrl": "https://store.webkul.com/Bagisto.html"
+        },
+        {
+          "slug": "magento-2",
+          "title": "Magento 2",
+          "productUrl": "https://store.webkul.com/Magento-2.html"
+        },
+        {
+          "slug": "odoo",
+          "title": "Odoo",
+          "productUrl": "https://store.webkul.com/Odoo.html"
+        },
+        {
+          "slug": "woocommerce-plugins",
+          "title": "WooCommerce",
+          "productUrl": "https://store.webkul.com/woocommerce-plugins.html"
+        },
+        {
+          "slug": "salesforce",
+          "title": "Salesforce",
+          "productUrl": "https://store.webkul.com/Salesforce.html"
+        },
+        {
+          "slug": "shopify",
+          "title": "Shopify",
+          "productUrl": "https://store.webkul.com/Shopify.html"
+        },
+        {
+          "slug": "akeneo",
+          "title": "Akeneo",
+          "productUrl": "https://store.webkul.com/Akeneo.html"
+        },
+        {
+          "slug": "prestashop-extensions",
+          "title": "PrestaShop",
+          "productUrl": "https://store.webkul.com/PrestaShop-Extensions.html"
+        },
+        {
+          "slug": "opencart-modules",
+          "title": "OpenCart",
+          "productUrl": "https://store.webkul.com/OpenCart-Modules.html"
+        },
+        {
+          "slug": "cs-cart",
+          "title": "CS-Cart",
+          "productUrl": "https://store.webkul.com/CS-Cart.html"
+        },
+        {
+          "slug": "shopware",
+          "title": "Shopware",
+          "productUrl": "https://store.webkul.com/Shopware.html"
+        },
+        {
+          "slug": "mobile-apps",
+          "title": "Mobile App Builder",
+          "productUrl": "https://store.webkul.com/mobile-apps.html"
+        },
+        {
+          "slug": "success-stories",
+          "title": "Success Stories",
+          "productUrl": "https://store.webkul.com/success-stories.html"
+        },
+        {
+          "slug": "refund-policy",
+          "title": "Refund Policy",
+          "productUrl": "https://store.webkul.com/refund-policy.html/"
+        }
+      ],
+      "extensionCount": 63,
+      "scrapedAt": "2026-04-21T12:59:42.219Z"
+    },
+    {
+      "id": "landofcoder",
+      "name": "Landofcoder",
+      "website": "https://landofcoder.com",
+      "listingUrls": [
+        "https://landofcoder.com/magento-2-extensions.html"
+      ],
+      "extensions": [
+        {
+          "slug": "magento-2-extensions",
+          "title": "Magento 2 Extensions",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html"
+        },
+        {
+          "slug": "magento-2-mega-menu-pro",
+          "title": "#1 Mega Menu",
+          "productUrl": "https://landofcoder.com/magento-2-mega-menu-pro.html/"
+        },
+        {
+          "slug": "magento-2-form-builder",
+          "title": "#2 Form Builder",
+          "productUrl": "https://landofcoder.com/magento-2-form-builder.html/"
+        },
+        {
+          "slug": "magento-2-quote-extension",
+          "title": "#3 Request For Quote",
+          "productUrl": "https://landofcoder.com/magento-2-quote-extension.html"
+        },
+        {
+          "slug": "magento-2-auction-extension",
+          "title": "#4 Auction",
+          "productUrl": "https://landofcoder.com/magento-2-auction-extension.html"
+        },
+        {
+          "slug": "magento-2-out-of-stock-notification",
+          "title": "#5 Out Of Stock",
+          "productUrl": "https://landofcoder.com/magento-2-out-of-stock-notification.html"
+        },
+        {
+          "slug": "magento-2-marketplace-extension",
+          "title": "Multi-vendor Marketplace Suite",
+          "productUrl": "https://landofcoder.com/magento-2-marketplace-extension.html/"
+        },
+        {
+          "slug": "magento-2-marketplace-pro",
+          "title": "Marketplace Suite",
+          "productUrl": "https://landofcoder.com/magento-2-marketplace-pro.html/"
+        },
+        {
+          "slug": "magento-2-marketplace-pro-ee",
+          "title": "Marketplace Suite-EE",
+          "productUrl": "https://landofcoder.com/magento-2-marketplace-pro-ee.html/"
+        },
+        {
+          "slug": "multi-vendor-marketplace",
+          "title": "Multi-Vendor Add-ons",
+          "productUrl": "https://landofcoder.com/multi-vendor-marketplace.html/"
+        },
+        {
+          "slug": "7",
+          "title": "Services",
+          "productUrl": "https://landofcoder.com/catalog/product/view/id/380/s/magento-2-services/category/7/"
+        },
+        {
+          "slug": "magento-support-and-maintenance-service",
+          "title": "Magento Support & Maintenance",
+          "productUrl": "https://landofcoder.com/magento-support-and-maintenance-service.html"
+        },
+        {
+          "slug": "magento-migration-service",
+          "title": "Magento Migration Service",
+          "productUrl": "https://landofcoder.com/magento-migration-service.html"
+        },
+        {
+          "slug": "magento-2-installation-service",
+          "title": "Installation Service",
+          "productUrl": "https://landofcoder.com/magento-2-installation-service.html"
+        },
+        {
+          "slug": "magento-upgrade-service",
+          "title": "Magento Upgrade Service",
+          "productUrl": "https://landofcoder.com/magento-upgrade-service.html"
+        },
+        {
+          "slug": "magento-integration-service",
+          "title": "Magento Integration Service",
+          "productUrl": "https://landofcoder.com/magento-integration-service.html"
+        },
+        {
+          "slug": "magento-site-audit-service",
+          "title": "Magento Site Audit Service",
+          "productUrl": "https://landofcoder.com/magento-site-audit-service.html"
+        },
+        {
+          "slug": "hire-magento-developer",
+          "title": "Hire Magento Developers",
+          "productUrl": "https://landofcoder.com/hire-magento-developer.html"
+        },
+        {
+          "slug": "magento-customization-service",
+          "title": "Customization Service",
+          "productUrl": "https://landofcoder.com/magento-customization-service.html"
+        },
+        {
+          "slug": "magento-2-extension-development",
+          "title": "Module Development",
+          "productUrl": "https://landofcoder.com/magento-2-extension-development.html"
+        },
+        {
+          "slug": "magento-website-development",
+          "title": "Site Development",
+          "productUrl": "https://landofcoder.com/magento-website-development.html"
+        },
+        {
+          "slug": "magento-support-ticket",
+          "title": "Extended Support Pack",
+          "productUrl": "https://landofcoder.com/magento-support-ticket.html/"
+        },
+        {
+          "slug": "magento-2-extension-free",
+          "title": "FREE",
+          "productUrl": "https://landofcoder.com/magento-2-extension-free.html"
+        },
+        {
+          "slug": "magento-2-order-approval",
+          "title": "magento-2-order-approval",
+          "productUrl": "https://landofcoder.com/magento-2-order-approval.html"
+        },
+        {
+          "slug": "magento-2-order-approval-main.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/a/magento-2-order-approval-main.png"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://landofcoder.com/magento/magento-2-extensions.html/"
+        },
+        {
+          "slug": "magento-2-custom-price-pro",
+          "title": "magento-2-custom-price-pro",
+          "productUrl": "https://landofcoder.com/magento-2-custom-price-pro.html"
+        },
+        {
+          "slug": "magento-2-custom-price-pro.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/a/magento-2-custom-price-pro.png"
+        },
+        {
+          "slug": "magento-2-b2b-company-account-pro-ee",
+          "title": "magento-2-b2b-company-account-pro-ee",
+          "productUrl": "https://landofcoder.com/magento-2-b2b-company-account-pro-ee.html"
+        },
+        {
+          "slug": "magento-2-company-account-ee.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/a/magento-2-company-account-ee.png"
+        },
+        {
+          "slug": "magento-2-b2b-company-account-pro",
+          "title": "magento-2-b2b-company-account-pro",
+          "productUrl": "https://landofcoder.com/magento-2-b2b-company-account-pro.html"
+        },
+        {
+          "slug": "magento-2-company-acc-pro.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/a/magento-2-company-acc-pro.png"
+        },
+        {
+          "slug": "magento-2-company-account",
+          "title": "magento-2-company-account",
+          "productUrl": "https://landofcoder.com/magento-2-company-account.html"
+        },
+        {
+          "slug": "magento-2-b2b-company-account.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/a/magento-2-b2b-company-account.png"
+        },
+        {
+          "slug": "magento-2-affiliate-to-reward-points",
+          "title": "magento-2-affiliate-to-reward-points",
+          "productUrl": "https://landofcoder.com/magento-2-affiliate-to-reward-points.html"
+        },
+        {
+          "slug": "magento-2-affiliate-to-reward-points-main.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/a/magento-2-affiliate-to-reward-points-main.png"
+        },
+        {
+          "slug": "magento-2-product-recommendations-step",
+          "title": "magento-2-product-recommendations-step",
+          "productUrl": "https://landofcoder.com/magento-2-product-recommendations-step.html"
+        },
+        {
+          "slug": "magento-2-product-recommendations-main.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/a/magento-2-product-recommendations-main.png"
+        },
+        {
+          "slug": "magento-2-payment-restrictions",
+          "title": "magento-2-payment-restrictions",
+          "productUrl": "https://landofcoder.com/magento-2-payment-restrictions.html"
+        },
+        {
+          "slug": "paymen-restriction-magento-2-extension-main.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/p/a/paymen-restriction-magento-2-extension-main.png"
+        },
+        {
+          "slug": "magento-2-zalopay-payment-extension",
+          "title": "magento-2-zalopay-payment-extension",
+          "productUrl": "https://landofcoder.com/magento-2-zalopay-payment-extension.html"
+        },
+        {
+          "slug": "magento-2-zalopay-payment-extension-main.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/a/magento-2-zalopay-payment-extension-main.png"
+        },
+        {
+          "slug": "magento-2-multi-warehouse-inventory",
+          "title": "magento-2-multi-warehouse-inventory",
+          "productUrl": "https://landofcoder.com/magento-2-multi-warehouse-inventory.html"
+        },
+        {
+          "slug": "magento-2-multi-warehouse-inventory-main.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/a/magento-2-multi-warehouse-inventory-main.png"
+        },
+        {
+          "slug": "magento-2-onepay-payment-gateway",
+          "title": "magento-2-onepay-payment-gateway",
+          "productUrl": "https://landofcoder.com/magento-2-onepay-payment-gateway.html"
+        },
+        {
+          "slug": "m2-onepay-payment.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/2/m2-onepay-payment.png"
+        },
+        {
+          "slug": "magento-2-pop-up-extension",
+          "title": "magento-2-pop-up-extension",
+          "productUrl": "https://landofcoder.com/magento-2-pop-up-extension.html"
+        },
+        {
+          "slug": "magento-2-poprp-main.png",
+          "title": "Zoom image",
+          "productUrl": "https://landofcoder.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/a/magento-2-poprp-main.png"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Position",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&dir=asc&featured=1&order=position&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Name",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&dir=asc&featured=1&order=name&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Price",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&dir=asc&featured=1&order=price&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Featured",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&dir=asc&featured=1&order=featured&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Set Descending Direction",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&dir=desc&featured=1&order=position&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&featured=1&limit=6&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&featured=1&limit=9&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&featured=1&limit=12&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&featured=1&limit=24&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&featured=1&p=2&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&featured=1&p=3&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-4-4-beta-upcoming-release",
+          "title": "Magento up to present is Magento 2.4.4",
+          "productUrl": "https://blog.landofcoder.com/magento-2-4-4-beta-upcoming-release/"
+        },
+        {
+          "slug": "magento-2-enterprise",
+          "title": "Magento 2 Enterprise",
+          "productUrl": "https://landofcoder.com/magento-2-extensions/magento-2-enterprise.html"
+        },
+        {
+          "slug": "navigation-search",
+          "title": "Navigation & Search",
+          "productUrl": "https://landofcoder.com/navigation-search.html"
+        },
+        {
+          "slug": "user-experience",
+          "title": "User Experience",
+          "productUrl": "https://landofcoder.com/user-experience.html"
+        },
+        {
+          "slug": "sale-motivation",
+          "title": "Sales & Promotions",
+          "productUrl": "https://landofcoder.com/sale-motivation.html"
+        },
+        {
+          "slug": "magento-2-technical-services",
+          "title": "Magento 2 Services",
+          "productUrl": "https://landofcoder.com/magento-2-technical-services.html"
+        },
+        {
+          "slug": "featured-extensions",
+          "title": "Featured Extensions",
+          "productUrl": "https://landofcoder.com/featured-extensions.html"
+        },
+        {
+          "slug": "magento-2-marketplace-solution",
+          "title": "Magento 2 Marketplace Solutions",
+          "productUrl": "https://landofcoder.com/magento-2-marketplace-solution.html"
+        },
+        {
+          "slug": "form-quote",
+          "title": "Forms & Quotes",
+          "productUrl": "https://landofcoder.com/form-quote.html"
+        },
+        {
+          "slug": "order-management",
+          "title": "Order Management",
+          "productUrl": "https://landofcoder.com/order-management.html"
+        },
+        {
+          "slug": "inventory-management",
+          "title": "Inventory Management",
+          "productUrl": "https://landofcoder.com/inventory-management.html"
+        },
+        {
+          "slug": "b2b-company-management",
+          "title": "B2B & Company Management",
+          "productUrl": "https://landofcoder.com/b2b-company-management.html"
+        },
+        {
+          "slug": "payment-restrictions",
+          "title": "Payment & Restrictions",
+          "productUrl": "https://landofcoder.com/payment-restrictions.html"
+        },
+        {
+          "slug": "magento1",
+          "title": "Magento 1",
+          "productUrl": "https://landofcoder.com/magento1.html"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Remove This Item",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&featured=1"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Remove This Item",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Clear All",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Checkout (2)",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&cat=44&featured=1&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Magento 2 Enterprise (2)",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&cat=55&featured=1&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Magento (25)",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&featured=1&opensource=5&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Yes (5)",
+          "productUrl": "https://landofcoder.com/magento-2-extensions.html?amp%3Bdir=desc&amp%3Border=position&amp%3Bpwa_ready=109&featured=1&pwa_ready=109&vesbrand=3"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Magento 2 Extensions",
+          "productUrl": "https://landofcoder.com/magento/magento-2-extensions.html"
+        },
+        {
+          "slug": "magento-2-multi-vendor-marketplace-extension",
+          "title": "Magento 2 Multivendor Marketplace",
+          "productUrl": "https://landofcoder.com/magento-2-multi-vendor-marketplace-extension"
+        },
+        {
+          "slug": "magento-2-b2b-extensions",
+          "title": "Magento 2 B2B Solution",
+          "productUrl": "https://landofcoder.com/magento-2-b2b-extensions.html"
+        },
+        {
+          "slug": "magento-2-services",
+          "title": "Our Services",
+          "productUrl": "https://landofcoder.com/magento-2-services"
+        }
+      ],
+      "extensionCount": 84,
+      "scrapedAt": "2026-04-21T12:59:43.145Z"
+    },
+    {
+      "id": "ubertheme",
+      "name": "Ubertheme",
+      "website": "https://www.ubertheme.com",
+      "listingUrls": [
+        "https://www.ubertheme.com/magento-extensions.html"
+      ],
+      "extensions": [],
+      "extensionCount": 0,
+      "scrapedAt": "2026-04-21T12:59:45.826Z"
+    },
+    {
+      "id": "magedelight",
+      "name": "MageDelight",
+      "website": "https://www.magedelight.com",
+      "listingUrls": [
+        "https://www.magedelight.com/magento-extensions.html"
+      ],
+      "extensions": [
+        {
+          "slug": "magento-2-extensions",
+          "title": "Magento 2 Extensions",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions.html"
+        },
+        {
+          "slug": "ai-powered-magento-2-extensions",
+          "title": "AI-Powered Extensions (11)New",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/ai-powered-magento-2-extensions.html"
+        },
+        {
+          "slug": "magento-2-ai-mcp-integration",
+          "title": "AI Agent MCP Integration",
+          "productUrl": "https://www.magedelight.com/magento-2-ai-mcp-integration.html"
+        },
+        {
+          "slug": "ai-product-qa-chatbot-magento-2",
+          "title": "AI Product Q&A Chatbot",
+          "productUrl": "https://www.magedelight.com/ai-product-qa-chatbot-magento-2.html"
+        },
+        {
+          "slug": "magento-2-multilingual-ai-content-translator",
+          "title": "AI Content Translator",
+          "productUrl": "https://www.magedelight.com/magento-2-multilingual-ai-content-translator.html"
+        },
+        {
+          "slug": "ai-product-recommendations-magento-2",
+          "title": "AI Product Recommendations",
+          "productUrl": "https://www.magedelight.com/ai-product-recommendations-magento-2.html"
+        },
+        {
+          "slug": "ai-product-content-for-magento-2",
+          "title": "AI Content Generator",
+          "productUrl": "https://www.magedelight.com/ai-product-content-for-magento-2.html"
+        },
+        {
+          "slug": "ai-product-review-summarizer-magento-2",
+          "title": "AI Review Summary",
+          "productUrl": "https://www.magedelight.com/ai-product-review-summarizer-magento-2.html"
+        },
+        {
+          "slug": "llms-txt-file-generator-magento-2",
+          "title": "LLMs.txt Generator",
+          "productUrl": "https://www.magedelight.com/llms-txt-file-generator-magento-2.html"
+        },
+        {
+          "slug": "hyva-theme-compatible-extensions-for-magento-2",
+          "title": "Hyva Compatible (45)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/hyva-theme-compatible-extensions-for-magento-2.html"
+        },
+        {
+          "slug": "magento-2-product-personalization-web-to-print-designer",
+          "title": "Personalized Product Print Designer",
+          "productUrl": "https://www.magedelight.com/magento-2-product-personalization-web-to-print-designer.html"
+        },
+        {
+          "slug": "magento-2-advanced-product-reviews-ratings-and-reminders",
+          "title": "Advanced Review Ratings & Reminders",
+          "productUrl": "https://www.magedelight.com/magento-2-advanced-product-reviews-ratings-and-reminders.html"
+        },
+        {
+          "slug": "shop-by-brand-magento-2",
+          "title": "Shop By Brand",
+          "productUrl": "https://www.magedelight.com/shop-by-brand-magento-2.html"
+        },
+        {
+          "slug": "subscriptions-and-recurring-payments-extension-for-magento-2",
+          "title": "Subscribe Now ProBestseller",
+          "productUrl": "https://www.magedelight.com/subscriptions-and-recurring-payments-extension-for-magento-2.html"
+        },
+        {
+          "slug": "mega-menu-magento-2",
+          "title": "Mega MenuBestseller",
+          "productUrl": "https://www.magedelight.com/mega-menu-magento-2.html"
+        },
+        {
+          "slug": "mobile-otp-login-and-order-sms-notifications",
+          "title": "Mobile OTP Login and Order SMS NotificationsBestseller",
+          "productUrl": "https://www.magedelight.com/mobile-otp-login-and-order-sms-notifications.html"
+        },
+        {
+          "slug": "advance-promotions-extension-magento-2",
+          "title": "Advanced Promotions",
+          "productUrl": "https://www.magedelight.com/advance-promotions-extension-magento-2.html"
+        },
+        {
+          "slug": "sales-promotions",
+          "title": "Sale & Marketing (17)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/sales-promotions.html"
+        },
+        {
+          "slug": "magento-2-spin-the-wheel-to-win-coupon",
+          "title": "Spin the Wheel to Win",
+          "productUrl": "https://www.magedelight.com/magento-2-spin-the-wheel-to-win-coupon.html"
+        },
+        {
+          "slug": "magento-2-frequently-viewed-together",
+          "title": "Frequently Viewed Together",
+          "productUrl": "https://www.magedelight.com/magento-2-frequently-viewed-together.html"
+        },
+        {
+          "slug": "magento-2-refer-a-friend",
+          "title": "Refer a Friend & Earn",
+          "productUrl": "https://www.magedelight.com/magento-2-refer-a-friend.html"
+        },
+        {
+          "slug": "customizable-gift-hamper-magento-2",
+          "title": "Custom Gift Box",
+          "productUrl": "https://www.magedelight.com/customizable-gift-hamper-magento-2.html"
+        },
+        {
+          "slug": "shop-by-influencer-look-book-magento-2",
+          "title": "Shop By InfluencerNew",
+          "productUrl": "https://www.magedelight.com/shop-by-influencer-look-book-magento-2.html"
+        },
+        {
+          "slug": "magento-2-content-personalization-extensions",
+          "title": "Content & Personalization (14)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/magento-2-content-personalization-extensions.html"
+        },
+        {
+          "slug": "custom-form-magento-2",
+          "title": "Custom Form Builder",
+          "productUrl": "https://www.magedelight.com/custom-form-magento-2.html"
+        },
+        {
+          "slug": "magento-2-seo-analytics-extensions",
+          "title": "SEO & Analytics (13)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/magento-2-seo-analytics-extensions.html"
+        },
+        {
+          "slug": "advanced-product-feeds-magento-2",
+          "title": "Product Feeds",
+          "productUrl": "https://www.magedelight.com/advanced-product-feeds-magento-2.html"
+        },
+        {
+          "slug": "magento-2-google-analytics-4-ga4-with-gtm",
+          "title": "GA4 Pro with GTM SupportTrending",
+          "productUrl": "https://www.magedelight.com/magento-2-google-analytics-4-ga4-with-gtm.html"
+        },
+        {
+          "slug": "digital-marketing-campaign-performance-tracker-validator-magento-2",
+          "title": "Campaign Performance Tracker",
+          "productUrl": "https://www.magedelight.com/digital-marketing-campaign-performance-tracker-validator-magento-2.html"
+        },
+        {
+          "slug": "instagram-feeds-magento-2",
+          "title": "Instagram Feeds",
+          "productUrl": "https://www.magedelight.com/instagram-feeds-magento-2.html"
+        },
+        {
+          "slug": "meta-facebook-pixel-with-conversion-api-for-magento-2",
+          "title": "Meta Facebook Pixel",
+          "productUrl": "https://www.magedelight.com/meta-facebook-pixel-with-conversion-api-for-magento-2.html"
+        },
+        {
+          "slug": "snapchat-pixel-for-magento-2",
+          "title": "Snapchat Pixel",
+          "productUrl": "https://www.magedelight.com/snapchat-pixel-for-magento-2.html"
+        },
+        {
+          "slug": "payment-gateways",
+          "title": "Payments (9)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/payment-gateways.html"
+        },
+        {
+          "slug": "partial-payment-pro-magento-2",
+          "title": "Layaway & Partial PaymentsBestseller",
+          "productUrl": "https://www.magedelight.com/partial-payment-pro-magento-2.html"
+        },
+        {
+          "slug": "magento2-authorize-net-cim",
+          "title": "Authorize.net CIM Pro",
+          "productUrl": "https://www.magedelight.com/magento2-authorize-net-cim.html"
+        },
+        {
+          "slug": "magento-2-cybersource-tokenization-payment-module",
+          "title": "CyberSource Tokenization",
+          "productUrl": "https://www.magedelight.com/magento-2-cybersource-tokenization-payment-module.html"
+        },
+        {
+          "slug": "first-data-payment-module-magento-2",
+          "title": "First Data Payment Module",
+          "productUrl": "https://www.magedelight.com/first-data-payment-module-magento-2.html"
+        },
+        {
+          "slug": "magento-2-moneris-payment-module",
+          "title": "Moneris Payment Module",
+          "productUrl": "https://www.magedelight.com/magento-2-moneris-payment-module.html"
+        },
+        {
+          "slug": "magento2-stripe-payment-module",
+          "title": "Stripe Payment Module",
+          "productUrl": "https://www.magedelight.com/magento2-stripe-payment-module.html"
+        },
+        {
+          "slug": "e-wallet-magento-2",
+          "title": "eWalletTrending",
+          "productUrl": "https://www.magedelight.com/e-wallet-magento-2.html"
+        },
+        {
+          "slug": "magento-2-subscriptions-extensions",
+          "title": "Subscriptions (3)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/magento-2-subscriptions-extensions.html"
+        },
+        {
+          "slug": "subscribe-now-magento-2",
+          "title": "Subscribe NowBestseller",
+          "productUrl": "https://www.magedelight.com/subscribe-now-magento-2.html"
+        },
+        {
+          "slug": "membership-subscription-magento-2",
+          "title": "Membership Subscription",
+          "productUrl": "https://www.magedelight.com/membership-subscription-magento-2.html"
+        },
+        {
+          "slug": "navigation-search",
+          "title": "Search & Navigation (8)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/navigation-search.html"
+        },
+        {
+          "slug": "magento-2-google-vertex-ai-search-product-recommendations",
+          "title": "Vertex AI Product Recommendations",
+          "productUrl": "https://www.magedelight.com/magento-2-google-vertex-ai-search-product-recommendations.html"
+        },
+        {
+          "slug": "msi-source-inventory-geolocation-store-selector-pickup-magento-2",
+          "title": "Store Selector with Pickup, Locator & MSI",
+          "productUrl": "https://www.magedelight.com/msi-source-inventory-geolocation-store-selector-pickup-magento-2.html"
+        },
+        {
+          "slug": "advanced-layered-navigation-magento-2",
+          "title": "Advanced Layered Navigation",
+          "productUrl": "https://www.magedelight.com/advanced-layered-navigation-magento-2.html"
+        },
+        {
+          "slug": "geoip-advance-magento-2",
+          "title": "GeoIP Advance",
+          "productUrl": "https://www.magedelight.com/geoip-advance-magento-2.html"
+        },
+        {
+          "slug": "store-locator-magento-2",
+          "title": "Store Locator",
+          "productUrl": "https://www.magedelight.com/store-locator-magento-2.html"
+        },
+        {
+          "slug": "user-experience-checkout",
+          "title": "Checkout (11)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/user-experience-checkout.html"
+        },
+        {
+          "slug": "locate-me-at-checkout-using-google-map-magento-2",
+          "title": "Locate Me at Checkout",
+          "productUrl": "https://www.magedelight.com/locate-me-at-checkout-using-google-map-magento-2.html"
+        },
+        {
+          "slug": "one-step-checkout-magento-2",
+          "title": "One Step Checkout",
+          "productUrl": "https://www.magedelight.com/one-step-checkout-magento-2.html"
+        },
+        {
+          "slug": "quick-order-magento-2",
+          "title": "Quick Order By SKU",
+          "productUrl": "https://www.magedelight.com/quick-order-magento-2.html"
+        },
+        {
+          "slug": "extra-fee-magento-2",
+          "title": "Extra FeeBestseller",
+          "productUrl": "https://www.magedelight.com/extra-fee-magento-2.html"
+        },
+        {
+          "slug": "delivery-date-magento-2",
+          "title": "Delivery Date",
+          "productUrl": "https://www.magedelight.com/delivery-date-magento-2.html"
+        },
+        {
+          "slug": "magento-2-catalog-extensions",
+          "title": "Catalog (6)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/magento-2-catalog-extensions.html"
+        },
+        {
+          "slug": "bulk-category-import-export-magento-2",
+          "title": "Category Import Export",
+          "productUrl": "https://www.magedelight.com/bulk-category-import-export-magento-2.html"
+        },
+        {
+          "slug": "facebook-shop-integration-magento-2",
+          "title": "Facebook Shop Integration",
+          "productUrl": "https://www.magedelight.com/facebook-shop-integration-magento-2.html"
+        },
+        {
+          "slug": "pdf-catalog-print-advance-magento-2",
+          "title": "PDF Catalog Print Advance",
+          "productUrl": "https://www.magedelight.com/pdf-catalog-print-advance-magento-2.html"
+        },
+        {
+          "slug": "magento-2-product-pdf-print-extension",
+          "title": "Product PDF Print",
+          "productUrl": "https://www.magedelight.com/magento-2-product-pdf-print-extension.html"
+        },
+        {
+          "slug": "magento-2-order-management-extensions",
+          "title": "Order Management (3)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/magento-2-order-management-extensions.html"
+        },
+        {
+          "slug": "rma-magento-2",
+          "title": "RMA",
+          "productUrl": "https://www.magedelight.com/rma-magento-2.html"
+        },
+        {
+          "slug": "magento-2-order-attributes",
+          "title": "Order Attributes",
+          "productUrl": "https://www.magedelight.com/magento-2-order-attributes.html"
+        },
+        {
+          "slug": "magento-2-shipping-extensions",
+          "title": "Shipping (4)",
+          "productUrl": "https://www.magedelight.com/magento-2-extensions/magento-2-shipping-extensions.html"
+        },
+        {
+          "slug": "delivery-availability-checker-magento-2",
+          "title": "Delivery Availability Checker",
+          "productUrl": "https://www.magedelight.com/delivery-availability-checker-magento-2.html"
+        },
+        {
+          "slug": "store-pickup-magento-2",
+          "title": "In-Store PickupTrending",
+          "productUrl": "https://www.magedelight.com/store-pickup-magento-2.html"
+        },
+        {
+          "slug": "magento-digital-marketing-audit-service",
+          "title": "cms/digital-marketing-audit Magento Digital Marketing Audit",
+          "productUrl": "https://www.magedelight.com/magento-digital-marketing-audit-service.html"
+        },
+        {
+          "slug": "magento-ecommerce-performance-audit",
+          "title": "cms/performance-audit Magento Performance Audit",
+          "productUrl": "https://www.magedelight.com/magento-ecommerce-performance-audit.html"
+        },
+        {
+          "slug": "magento-code-audit",
+          "title": "cms/code-quality-audit Magento Code Quality Audit",
+          "productUrl": "https://www.magedelight.com/magento-code-audit.html"
+        },
+        {
+          "slug": "magento-ui-ux-audit",
+          "title": "cms/UIUX-audit Magento User Experience Audit",
+          "productUrl": "https://www.magedelight.com/magento-ui-ux-audit.html"
+        },
+        {
+          "slug": "magento-seo-audit",
+          "title": "cms/technical-SEO-audit Magento Technical SEO Audit",
+          "productUrl": "https://www.magedelight.com/magento-seo-audit.html"
+        },
+        {
+          "slug": "services",
+          "title": "Services",
+          "productUrl": "https://www.magedelight.com/services.html"
+        },
+        {
+          "slug": "hyva-theme-development-services",
+          "title": "Hyva Theme Development",
+          "productUrl": "https://www.magedelight.com/hyva-theme-development-services.html"
+        },
+        {
+          "slug": "magento-audit-and-optimization-services",
+          "title": "Magento Audit Service",
+          "productUrl": "https://www.magedelight.com/magento-audit-and-optimization-services.html"
+        },
+        {
+          "slug": "magento-development-service",
+          "title": "Magento Development Service",
+          "productUrl": "https://www.magedelight.com/magento-development-service.html"
+        },
+        {
+          "slug": "magento-migrate",
+          "title": "Magento Migration Service",
+          "productUrl": "https://www.magedelight.com/magento-migrate.html"
+        },
+        {
+          "slug": "magento-support-service",
+          "title": "Magento Support Service",
+          "productUrl": "https://www.magedelight.com/magento-support-service.html"
+        },
+        {
+          "slug": "hire-magento-developer",
+          "title": "Hire Magento Developers",
+          "productUrl": "https://www.magedelight.com/hire-magento-developer.html"
+        },
+        {
+          "slug": "magento2-smb-solution-rapid-deployment-packages",
+          "title": "Hyvä Quick Launch Solution",
+          "productUrl": "https://www.magedelight.com/magento2-smb-solution-rapid-deployment-packages.html"
+        },
+        {
+          "slug": "rocketbazaar-magento-2-multi-vendor-marketplace-solution",
+          "title": "Marketplace Solution",
+          "productUrl": "https://www.magedelight.com/rocketbazaar-magento-2-multi-vendor-marketplace-solution.html"
+        },
+        {
+          "slug": "magento-pwa-studio",
+          "title": "Headless PWA Solution",
+          "productUrl": "https://www.magedelight.com/magento-pwa-studio.html"
+        },
+        {
+          "slug": "index",
+          "title": "scale Compare Products item items",
+          "productUrl": "https://www.magedelight.com/catalog/product_compare/index/"
+        },
+        {
+          "slug": "cms-content-import-export-magento-2",
+          "title": "CMS Content Import Export",
+          "productUrl": "https://www.magedelight.com/cms-content-import-export-magento-2.html"
+        },
+        {
+          "slug": "gift-wrap-magento-2",
+          "title": "Gift Wrap",
+          "productUrl": "https://www.magedelight.com/gift-wrap-magento-2.html"
+        },
+        {
+          "slug": "best-seller-m2-products",
+          "title": "All our Bestsellers Extensions",
+          "productUrl": "https://www.magedelight.com/best-seller-m2-products.html"
+        }
+      ],
+      "extensionCount": 85,
+      "scrapedAt": "2026-04-21T12:59:46.922Z"
+    },
+    {
+      "id": "magefan",
+      "name": "Magefan",
+      "website": "https://magefan.com",
+      "listingUrls": [
+        "https://magefan.com/magento-2-extensions",
+        "https://magefan.com/magento-2-extensions/"
+      ],
+      "extensions": [],
+      "extensionCount": 0,
+      "scrapedAt": "2026-04-21T12:59:47.343Z"
+    },
+    {
+      "id": "firebear",
+      "name": "Firebear Studio",
+      "website": "https://firebearstudio.com",
+      "listingUrls": [
+        "https://firebearstudio.com/"
+      ],
+      "extensions": [
+        {
+          "slug": "magento2extensions",
+          "title": "Magento 2 Extensions",
+          "productUrl": "https://firebearstudio.com/magento-extensions/magento2extensions"
+        },
+        {
+          "slug": "the-improved-import",
+          "title": "Improved Import & Export",
+          "productUrl": "https://firebearstudio.com/the-improved-import.html"
+        },
+        {
+          "slug": "improved-import-b2b-addon-for-magento-2-commerce",
+          "title": "B2B Add-on",
+          "productUrl": "https://firebearstudio.com/improved-import-b2b-addon-for-magento-2-commerce.html"
+        },
+        {
+          "slug": "magento2-product-feeds-export-add-on-connector-for-magento2",
+          "title": "FREE Product Feeds Add-on",
+          "productUrl": "https://firebearstudio.com/magento2-product-feeds-export-add-on-connector-for-magento2.html"
+        },
+        {
+          "slug": "improved-configurable-products-for-magento-2",
+          "title": "Improved Configurable Products",
+          "productUrl": "https://firebearstudio.com/improved-configurable-products-for-magento-2.html"
+        },
+        {
+          "slug": "ms-dynamics-magento2-integration-addon",
+          "title": "MS Dynamics Connector",
+          "productUrl": "https://firebearstudio.com/ms-dynamics-magento2-integration-addon.html"
+        },
+        {
+          "slug": "sap-business-one-integration-add-on-for-magento-2",
+          "title": "SAP Business One Connector",
+          "productUrl": "https://firebearstudio.com/sap-business-one-integration-add-on-for-magento-2.html"
+        },
+        {
+          "slug": "salesforce-integration-add-on-for-magento-2",
+          "title": "SalesForce Connector",
+          "productUrl": "https://firebearstudio.com/salesforce-integration-add-on-for-magento-2.html"
+        },
+        {
+          "slug": "ebay-integration-add-on-for-magento-2",
+          "title": "eBay Add-on",
+          "productUrl": "https://firebearstudio.com/ebay-integration-add-on-for-magento-2.html"
+        },
+        {
+          "slug": "woocommerce-magento2-migration-addon",
+          "title": "WooCommerce Add-on",
+          "productUrl": "https://firebearstudio.com/woocommerce-magento2-migration-addon.html"
+        },
+        {
+          "slug": "banggood-dropshipping-add-on-for-magento-2",
+          "title": "Banggood Add-on",
+          "productUrl": "https://firebearstudio.com/banggood-dropshipping-add-on-for-magento-2.html"
+        },
+        {
+          "slug": "chinabrands-dropshipping-add-on-for-magento-2",
+          "title": "Chinabrands Add-on",
+          "productUrl": "https://firebearstudio.com/chinabrands-dropshipping-add-on-for-magento-2.html"
+        },
+        {
+          "slug": "viamedici-integration-add-on-for-magento-2",
+          "title": "Viamedici Add-on",
+          "productUrl": "https://firebearstudio.com/viamedici-integration-add-on-for-magento-2.html"
+        },
+        {
+          "slug": "erpnext-integration-add-on-for-magento-2",
+          "title": "ERPNext Connector",
+          "productUrl": "https://firebearstudio.com/erpnext-integration-add-on-for-magento-2.html"
+        },
+        {
+          "slug": "shapeshift-magento2-extension-bitcoin-ethereum",
+          "title": "Shapeshift Crypto Payments",
+          "productUrl": "https://firebearstudio.com/shapeshift-magento2-extension-bitcoin-ethereum.html"
+        },
+        {
+          "slug": "improved-import-export-shopware-application",
+          "title": "Improved Import & Export app",
+          "productUrl": "https://firebearstudio.com/improved-import-export-shopware-application.html"
+        },
+        {
+          "slug": "sap-shopware-business-one-integration",
+          "title": "SAP B1 Integration Connector",
+          "productUrl": "https://firebearstudio.com/sap-shopware-business-one-integration.html"
+        }
+      ],
+      "extensionCount": 17,
+      "scrapedAt": "2026-04-21T12:59:47.960Z"
+    },
+    {
+      "id": "anowave",
+      "name": "Anowave",
+      "website": "https://www.anowave.com",
+      "listingUrls": [
+        "https://www.anowave.com/magento-2-extensions.html"
+      ],
+      "extensions": [
+        {
+          "slug": "magento-extensions",
+          "title": "Magento 1 Extensions",
+          "productUrl": "https://www.anowave.com/marketplace/magento-extensions/"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "Magento 2 Extensions",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/"
+        },
+        {
+          "slug": "magento-themes",
+          "title": "Magento Themes",
+          "productUrl": "https://www.anowave.com/marketplace/magento-themes/"
+        },
+        {
+          "slug": "enhanced-ecommerce-ga4-gtm-audit",
+          "title": "Enhanced Ecommerce GA4 & GTM Audit",
+          "productUrl": "https://www.anowave.com/marketplace/magento-services/enhanced-ecommerce-ga4-gtm-audit/"
+        },
+        {
+          "slug": "outrank-integration-for-magento-2",
+          "title": "Outrank Integration for Magento 2",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/outrank-integration-for-magento-2/"
+        },
+        {
+          "slug": "ai-buddy-sales-and-marketing-assistant-for-magento-2",
+          "title": "AI Buddy - AI Commerce Assistant for Magento 2",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/ai-buddy-sales-and-marketing-assistant-for-magento-2/"
+        },
+        {
+          "slug": "ai-search-for-magento-2",
+          "title": "AI Search for Magento 2",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/ai-search-for-magento-2/"
+        },
+        {
+          "slug": "attribute-alerts-and-notifications-for-magento-2",
+          "title": "Attribute Alerts and Notifications for Magento 2",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/attribute-alerts-and-notifications-for-magento-2/"
+        },
+        {
+          "slug": "magento-2-ai-powered-smart-pricing-competitor-monitoring",
+          "title": "AI Smart Pricing & Competitor Monitoring for Magento 2",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/magento-2-ai-powered-smart-pricing-competitor-monitoring/"
+        },
+        {
+          "slug": "google-automated-discounts-for-magento-2",
+          "title": "Google Automated Discounts for Magento 2",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/google-automated-discounts-for-magento-2/"
+        },
+        {
+          "slug": "google-merchant-api-for-magento-2",
+          "title": "Google Merchant API for Magento 2",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/google-merchant-api-for-magento-2/"
+        },
+        {
+          "slug": "magento-2-resend-api",
+          "title": "Magento 2 Resend API",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/magento-2-resend-api/"
+        },
+        {
+          "slug": "google-indexing-api-for-magento-2",
+          "title": "Google Indexing API for Magento 2",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/google-indexing-api-for-magento-2/"
+        },
+        {
+          "slug": "magento-2-ai",
+          "title": "AI Workflow Automation for Magento 2",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/magento-2-ai/"
+        },
+        {
+          "slug": "magento-2-google-analytics-4-enhanced-ecommerce-tracking-gtm",
+          "title": "Magento 2 Google Analytics 4 (GA4) GTM Extension",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/magento-2-google-analytics-4-enhanced-ecommerce-tracking-gtm/"
+        },
+        {
+          "slug": "magento-2-loyalty-rewards-program",
+          "title": "AI Loyalty Program & Reward Points Extension for Magento 2",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/magento-2-loyalty-rewards-program/"
+        },
+        {
+          "slug": "magento-2-select-search-filter-dropdown",
+          "title": "Magento 2 Select Search/Filter Dropdown",
+          "productUrl": "https://www.anowave.com/marketplace/magento-2-extensions/magento-2-select-search-filter-dropdown/"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://www.anowave.com/magento-2-extensions.html?page=1&sort[]=date&status[]=1&entity_category_id[]=6952"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://www.anowave.com/magento-2-extensions.html?page=2&sort[]=date&status[]=1&entity_category_id[]=6952"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://www.anowave.com/magento-2-extensions.html?page=3&sort[]=date&status[]=1&entity_category_id[]=6952"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://www.anowave.com/magento-2-extensions.html?page=4&sort[]=date&status[]=1&entity_category_id[]=6952"
+        },
+        {
+          "slug": "magento-2-extensions",
+          "title": "magento-2-extensions",
+          "productUrl": "https://www.anowave.com/magento-2-extensions.html?page=5&sort[]=date&status[]=1&entity_category_id[]=6952"
+        },
+        {
+          "slug": "product-support-policy",
+          "title": "Product support policy",
+          "productUrl": "https://www.anowave.com/product-support-policy/"
+        }
+      ],
+      "extensionCount": 23,
+      "scrapedAt": "2026-04-21T12:59:48.981Z"
+    }
+  ]
+}

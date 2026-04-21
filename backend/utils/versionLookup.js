@@ -1,15 +1,66 @@
 import axios from 'axios'
 
+import { isCoreOrBaseModuleName, shouldSkipForPartnerSelection } from './moduleNameGuards.js'
+
 const packageCache = {}
 const lookupCache = {}
 
 // API endpoints and constants
-const PACKAGIST_API_BASE = 'https://repo.packagist.org/p'
+const PACKAGIST_P2_BASE = 'https://repo.packagist.org/p2'
+const PACKAGIST_P_BASE = 'https://repo.packagist.org/p'
 const PACKAGIST_WEB_BASE = 'https://packagist.org'
 const PACKAGIST_SEARCH_URL = `${PACKAGIST_WEB_BASE}/search.json`
 const GITHUB_API_BASE = 'https://api.github.com/repos'
 const API_TIMEOUT = 5000
+
+/** Some registries block default clients; identify our app. */
+const HTTP_HEADERS = {
+  Accept: 'application/json',
+  'User-Agent': 'AdobeCommerce-ExtensionEvaluator/1.0 (+https://github.com/)',
+}
 const SEARCH_TIMEOUT = 7000
+const AMASTY_BASE_URL = 'https://amasty.com'
+
+/** Vendor-specific product pages — HTML fallback when Packagist/GitHub miss */
+const VENDOR_PAGE_STRATEGIES = {
+  mageplaza: {
+    buildUrls: (moduleKebab) => [
+      `https://www.mageplaza.com/magento-2-${moduleKebab}-extension.html`,
+      `https://www.mageplaza.com/magento-2-${moduleKebab}.html`,
+    ],
+  },
+  mirasvit: {
+    buildUrls: (moduleKebab) => [
+      `https://mirasvit.com/magento-2-${moduleKebab}-extension.html`,
+      `https://mirasvit.com/blog/magento-2-${moduleKebab}.html`,
+    ],
+  },
+  bsscommerce: {
+    buildUrls: (moduleKebab) => [
+      `https://bsscommerce.com/magento-2-${moduleKebab}-extension.html`,
+      `https://bsscommerce.com/magento-2-extension-${moduleKebab}.html`,
+    ],
+  },
+  aheadworks: {
+    buildUrls: (moduleKebab) => [
+      `https://aheadworks.com/magento-2-extensions/${moduleKebab}.html`,
+      `https://aheadworks.com/magento-extensions/${moduleKebab}.html`,
+    ],
+  },
+  swissup: {
+    buildUrls: (moduleKebab) => [
+      `https://swissuplabs.com/magento2-${moduleKebab}.html`,
+      `https://swissuplabs.com/magento-2-${moduleKebab}.html`,
+    ],
+  },
+}
+
+const HTML_VERSION_PATTERNS = [
+  /\b(?:Version|Release|Current)\s*[:\s]+(v?\d{1,4}(?:\.\d{1,4}){1,3}(?:[-.]?(?:p|patch|pl)\d+)?)/i,
+  /data-version=["']([^"']+)["']/i,
+  /"latest_version"\s*:\s*"([^"]+)"/i,
+  /\b(v?\d{1,4}\.\d{1,4}\.\d{1,4})\b\s*(?:<|&lt;|for Magento)/i,
+]
 
 // Optional vendor alias map to improve Packagist matches
 const vendorAliases = {
@@ -81,8 +132,8 @@ function isReasonableVersion(version) {
     return true
   }
 
-  // Semver-like: reject obviously bogus ranges
-  return parts.every((v) => v >= 0 && v <= 100)
+  // Magento / Composer often uses large majors (e.g. 104.0.6 for module releases)
+  return parts.length <= 5 && parts.every((v) => v >= 0 && v <= 999_999)
 }
 
 function compareVersions(a, b) {
@@ -97,10 +148,123 @@ function compareVersions(a, b) {
   return 0
 }
 
+function buildAmastySlugCandidates(item, moduleKebab) {
+  const candidates = new Set()
+
+  const fromPackages = (item.packageCandidates || [])
+    .map((p) => String(p || '').toLowerCase())
+    .filter(Boolean)
+
+  for (const pkg of fromPackages) {
+    const withoutVendor = pkg.includes('/') ? pkg.split('/')[1] : pkg
+    const normalized = withoutVendor
+      .replace(/^module-/, '')
+      .replace(/^magento2-/, '')
+      .replace(/_/g, '-')
+    if (normalized) candidates.add(normalized)
+  }
+
+  if (moduleKebab) candidates.add(moduleKebab)
+
+  return Array.from(candidates)
+}
+
+async function lookupAmastyVersion(item, moduleKebab) {
+  const slugs = buildAmastySlugCandidates(item, moduleKebab)
+  if (!slugs.length) return { found: false }
+
+  const urlCandidates = []
+  for (const slug of slugs) {
+    urlCandidates.push(`${AMASTY_BASE_URL}/${slug}-for-magento-2.html`)
+    urlCandidates.push(`${AMASTY_BASE_URL}/magento-2-${slug}.html`)
+    urlCandidates.push(`${AMASTY_BASE_URL}/${slug}.html`)
+  }
+
+  const versionRegex = /\b(v?\d{1,4}(?:\.\d{1,4}){1,3}(?:[-.]?(?:p|patch|pl)\d+)?)\s*-\s*[A-Za-z]{3}\s+\d{1,2},\s+\d{4}\b/
+
+  for (const url of urlCandidates) {
+    try {
+      const response = await axios.get(url, { timeout: SEARCH_TIMEOUT, headers: HTTP_HEADERS })
+      const html = String(response.data || '')
+      const match = html.match(versionRegex)
+      if (match?.[1] && isReasonableVersion(match[1])) {
+        return {
+          found: true,
+          package: item.foundPackage || item.moduleName || '',
+          latestVersion: match[1],
+          latestUrl: url,
+        }
+      }
+    } catch (err) {
+      // Try next candidate
+    }
+  }
+
+  return { found: false }
+}
+
 /**
- * Lookup package version on Packagist by exact package name
- * @param {string} packageName - Package name (vendor/package format)
- * @returns {Promise<Object>} Result object with found flag and version info
+ * Try to read a semver-like version from common extension landing page HTML.
+ */
+function extractVersionFromHtml(html) {
+  const text = String(html || '').slice(0, 500_000)
+  for (const re of HTML_VERSION_PATTERNS) {
+    const m = text.match(re)
+    if (m?.[1] && isReasonableVersion(m[1])) {
+      return String(m[1]).trim()
+    }
+  }
+  return null
+}
+
+/**
+ * Fallback: fetch known vendor extension URLs (Mageplaza, Mirasvit, etc.).
+ */
+async function lookupVendorWebsitePages(vendor, moduleKebab, item) {
+  const key = (vendorAliases[vendor] || vendor || '').toLowerCase()
+  const strat = VENDOR_PAGE_STRATEGIES[key]
+  if (!strat || !moduleKebab) return { found: false }
+
+  const urls = strat.buildUrls(moduleKebab)
+  for (const url of urls) {
+    try {
+      const response = await axios.get(url, {
+        timeout: SEARCH_TIMEOUT,
+        headers: HTTP_HEADERS,
+        maxRedirects: 3,
+        validateStatus: (s) => s >= 200 && s < 400,
+      })
+      const ver = extractVersionFromHtml(response.data)
+      if (ver && isReasonableVersion(ver)) {
+        return {
+          found: true,
+          package: item.foundPackage || item.moduleName || '',
+          latestVersion: normalizeVersion(ver),
+          latestUrl: url,
+        }
+      }
+    } catch {
+      // next URL
+    }
+  }
+  return { found: false }
+}
+
+/**
+ * Normalize Packagist JSON: `packages[name]` may be an array (p2 / Composer 2)
+ * or an object mapping version string → metadata (legacy `/p/` provider).
+ */
+function versionsArrayFromPackagistPayload(packages, packageName) {
+  const raw = packages?.[packageName]
+  if (!raw) return []
+  if (Array.isArray(raw)) return raw
+  if (typeof raw === 'object') return Object.values(raw)
+  return []
+}
+
+/**
+ * Lookup package version on Packagist by exact package name.
+ * Tries Composer 2 `p2` JSON first, then legacy `p` provider.
  */
 async function lookupPackagistVersion(packageName) {
   const cacheKey = getCacheKey('packagist', packageName)
@@ -108,36 +272,40 @@ async function lookupPackagistVersion(packageName) {
     return lookupCache[cacheKey]
   }
 
-  try {
-    const response = await axios.get(`${PACKAGIST_API_BASE}/${packageName}.json`, {
-      timeout: API_TIMEOUT,
-    })
+  const tryFetch = async (baseUrl) => {
+    const url = `${baseUrl}/${packageName}.json`
+    const response = await axios.get(url, { timeout: API_TIMEOUT, headers: HTTP_HEADERS })
+    const versions = versionsArrayFromPackagistPayload(response.data?.packages, packageName)
+    if (!versions.length) return null
 
-    if (!response.data?.packages?.[packageName]) {
-      return { found: false, package: packageName }
-    }
-
-    const versions = response.data.packages[packageName] || []
-    const stable = versions.filter((v) => isStableVersion(v.version))
-    const candidates = stable
+    const stable = versions.filter((v) => v && isStableVersion(v.version))
+    const pool = stable.length ? stable : versions.filter((v) => v?.version)
+    const candidates = pool
       .map((v) => ({
         ...v,
-        _normalized: v.version_normalized || extractNumericVersion(v.version),
+        _normalized: v.version_normalized || extractNumericVersion(v.version || ''),
       }))
-      .filter((v) => isReasonableVersion(v._normalized))
+      .filter((v) => v.version && isReasonableVersion(v._normalized))
       .sort((a, b) => compareVersions(a._normalized, b._normalized))
 
-    const latestStable = candidates[0] || stable[0]
-
+    const latestStable = candidates[0]
     if (latestStable?.version) {
-      const result = {
+      return {
         found: true,
         package: packageName,
         latestVersion: latestStable.version,
         latestUrl: `${PACKAGIST_WEB_BASE}/packages/${packageName}`,
       }
-      lookupCache[cacheKey] = result
-      return result
+    }
+    return null
+  }
+
+  try {
+    let hit = await tryFetch(PACKAGIST_P2_BASE).catch(() => null)
+    if (!hit) hit = await tryFetch(PACKAGIST_P_BASE).catch(() => null)
+    if (hit) {
+      lookupCache[cacheKey] = hit
+      return hit
     }
   } catch (err) {
     // Not found or error
@@ -147,17 +315,16 @@ async function lookupPackagistVersion(packageName) {
 }
 
 /**
- * Search Packagist for Magento 2 modules
- * @param {string} query - Search query
- * @returns {Promise<Array>} Search results
+ * Search Packagist — prefer Magento 2 module type, then any composer package match.
  */
-async function searchPackagist(query) {
-  const cacheKey = getCacheKey('packagist-search', query)
+async function searchPackagist(query, broad = false) {
+  const cacheKey = getCacheKey(broad ? 'packagist-search-broad' : 'packagist-search', query)
   if (lookupCache[cacheKey]) return lookupCache[cacheKey]
 
   try {
-    const url = `${PACKAGIST_SEARCH_URL}?q=${encodeURIComponent(query)}&type=magento2-module&per_page=10`
-    const response = await axios.get(url, { timeout: SEARCH_TIMEOUT })
+    const typeParam = broad ? '' : 'type=magento2-module&'
+    const url = `${PACKAGIST_SEARCH_URL}?q=${encodeURIComponent(query)}&${typeParam}per_page=25`
+    const response = await axios.get(url, { timeout: SEARCH_TIMEOUT, headers: HTTP_HEADERS })
     const results = response.data?.results || []
     lookupCache[cacheKey] = results
     return results
@@ -167,10 +334,27 @@ async function searchPackagist(query) {
 }
 
 /**
- * Lookup latest release on GitHub
- * @param {string} vendor - GitHub organization/user
- * @param {string} repo - Repository name
- * @returns {Promise<Object>} Result object with found flag and version info
+ * Pick latest reasonable semver from GitHub tags (many OSS modules never publish GitHub “releases”).
+ */
+function latestTagFromGitHubResponse(tagsPayload) {
+  const tags = Array.isArray(tagsPayload) ? tagsPayload : []
+  const candidates = tags
+    .map((t) => t?.name || '')
+    .filter(Boolean)
+    .map((raw) => {
+      const nv = extractNumericVersion(raw)
+      return { raw, nv }
+    })
+    .filter((x) => x.nv && isReasonableVersion(x.nv))
+    .sort((a, b) => compareVersions(a.nv, b.nv))
+
+  const best = candidates[0]
+  if (!best) return null
+  return best.raw
+}
+
+/**
+ * Lookup latest on GitHub: releases/latest first, then tags (common for Magento vendors on GitHub).
  */
 async function lookupGitHubVersion(vendor, repo) {
   const cacheKey = getCacheKey('github', vendor, repo)
@@ -178,9 +362,12 @@ async function lookupGitHubVersion(vendor, repo) {
     return lookupCache[cacheKey]
   }
 
+  const base = `${GITHUB_API_BASE}/${vendor}/${repo}`
+
   try {
-    const response = await axios.get(`${GITHUB_API_BASE}/${vendor}/${repo}/releases/latest`, {
+    const response = await axios.get(`${base}/releases/latest`, {
       timeout: API_TIMEOUT,
+      headers: HTTP_HEADERS,
     })
 
     if (response.data?.tag_name || response.data?.name) {
@@ -193,13 +380,38 @@ async function lookupGitHubVersion(vendor, repo) {
         found: true,
         package: `${vendor}/${repo}`,
         latestVersion: rawVersion,
-        latestUrl: response.data.html_url,
+        latestUrl: response.data.html_url || `https://github.com/${vendor}/${repo}/releases`,
       }
       lookupCache[cacheKey] = result
       return result
     }
   } catch (err) {
-    // Not found
+    // try tags
+  }
+
+  try {
+    const tagRes = await axios.get(`${base}/tags`, {
+      timeout: API_TIMEOUT,
+      headers: HTTP_HEADERS,
+      params: { per_page: 100 },
+    })
+    const tagName = latestTagFromGitHubResponse(tagRes.data)
+    if (tagName) {
+      const normalized = extractNumericVersion(tagName)
+      if (normalized && isReasonableVersion(normalized)) {
+        const encoded = encodeURIComponent(tagName)
+        const result = {
+          found: true,
+          package: `${vendor}/${repo}`,
+          latestVersion: tagName,
+          latestUrl: `https://github.com/${vendor}/${repo}/releases/tag/${encoded}`,
+        }
+        lookupCache[cacheKey] = result
+        return result
+      }
+    }
+  } catch (err) {
+    // fall through
   }
 
   return { found: false }
@@ -223,6 +435,23 @@ function scoreSearchResult(result, vendor, moduleKebab) {
   return score
 }
 
+/** Turn Packagist search JSON hits into latestVersion/latestUrl when possible */
+async function bestResultFromPackagistSearch(searchResults, vendor, moduleKebab) {
+  if (!searchResults?.length) return null
+  const scored = searchResults
+    .map((r) => ({ r, score: scoreSearchResult(r, vendor, moduleKebab) }))
+    .sort((a, b) => b.score - a.score)
+
+  for (const { r } of scored) {
+    if (!r?.name) continue
+    const hit = await lookupPackagistVersion(r.name)
+    if (hit.found) {
+      return { foundPackage: hit.package, latestVersion: hit.latestVersion, latestUrl: hit.latestUrl }
+    }
+  }
+  return null
+}
+
 /**
  * Lookup versions for normalized module list with batch processing
  * @param {Array} normalized - Normalized module list with moduleName and packageCandidates
@@ -230,14 +459,14 @@ function scoreSearchResult(result, vendor, moduleKebab) {
  * @returns {Promise<Array>} Results with version information
  */
 export async function lookupVersions(normalized, options = {}) {
-  const { batchSize = 10, skipErrors = true } = options
+  const { batchSize = 10, skipErrors = true, partnerSkipPrefixes = null } = options
   const results = []
 
   // Process in batches to avoid rate limiting
   for (let i = 0; i < normalized.length; i += batchSize) {
     const batch = normalized.slice(i, i + batchSize)
     const batchResults = await Promise.all(
-      batch.map((item) => lookupModuleVersion(item, skipErrors))
+      batch.map((item) => lookupModuleVersion(item, skipErrors, { partnerSkipPrefixes }))
     )
     results.push(...batchResults)
 
@@ -256,9 +485,21 @@ export async function lookupVersions(normalized, options = {}) {
  * @param {boolean} skipErrors - Whether to skip errors
  * @returns {Promise<Object>} Result with version info
  */
-async function lookupModuleVersion(item, skipErrors = true) {
+async function lookupModuleVersion(item, skipErrors = true, lookupOpts = {}) {
   try {
     const name = item.moduleName || ''
+    if (isCoreOrBaseModuleName(name)) {
+      return {
+        ...item,
+        processedStatus: 'skipped_core_base',
+      }
+    }
+    if (shouldSkipForPartnerSelection(name, lookupOpts.partnerSkipPrefixes)) {
+      return {
+        ...item,
+        processedStatus: 'skipped_partner_selected',
+      }
+    }
     const pieces = name.split('_')
     let vendor = (pieces[0] || '').toLowerCase()
     if (vendorAliases[vendor]) vendor = vendorAliases[vendor]
@@ -273,6 +514,8 @@ async function lookupModuleVersion(item, skipErrors = true) {
       expanded.add(`${vendor}-module-${moduleKebab}`)
       expanded.add(`${vendor}-${moduleKebab}`)
       expanded.add(`${vendor}/magento2-${moduleKebab}`)
+      expanded.add(`${vendor}/magento2-module-${moduleKebab}`)
+      expanded.add(`magento2/${moduleKebab}`)
       // Magento core modules
       if (vendor === 'magento') {
         expanded.add(`magento/module-${moduleKebab}`)
@@ -290,26 +533,45 @@ async function lookupModuleVersion(item, skipErrors = true) {
       }
     }
 
-    // 2) Packagist search fallback
+    // 2) Packagist search — Magento 2 module type
     if (!found) {
       const query = [vendor, moduleKebab].filter(Boolean).join(' ')
-      const searchResults = await searchPackagist(query || name)
-      if (searchResults.length) {
-        const scored = searchResults
-          .map((r) => ({ r, score: scoreSearchResult(r, vendor, moduleKebab) }))
-          .sort((a, b) => b.score - a.score)
+      const searchResults = await searchPackagist(query || name, false)
+      found = await bestResultFromPackagistSearch(searchResults, vendor, moduleKebab)
+    }
 
-        const best = scored[0]?.r
-        if (best?.name) {
-          const hit = await lookupPackagistVersion(best.name)
-          if (hit.found) {
-            found = { foundPackage: hit.package, latestVersion: hit.latestVersion, latestUrl: hit.latestUrl }
-          }
+    // 2b) Packagist broad search (any package type — many vendors omit magento2-module)
+    if (!found) {
+      const query = [vendor, moduleKebab].filter(Boolean).join(' ')
+      const wide = await searchPackagist(query || name, true)
+      found = await bestResultFromPackagistSearch(wide, vendor, moduleKebab)
+    }
+
+    // 3) Amasty product pages (structured date/version line)
+    if (!found && vendor === 'amasty') {
+      const amasty = await lookupAmastyVersion(item, moduleKebab)
+      if (amasty.found) {
+        found = {
+          foundPackage: amasty.package || item.foundPackage || '',
+          latestVersion: amasty.latestVersion,
+          latestUrl: amasty.latestUrl,
         }
       }
     }
 
-    // 3) GitHub fallback
+    // 3b) Other vendor catalog pages (HTML patterns)
+    if (!found && moduleKebab) {
+      const site = await lookupVendorWebsitePages(vendor, moduleKebab, item)
+      if (site.found) {
+        found = {
+          foundPackage: site.package || item.foundPackage || '',
+          latestVersion: site.latestVersion,
+          latestUrl: site.latestUrl,
+        }
+      }
+    }
+
+    // 4) GitHub — latest release or tags
     if (!found) {
       for (const candidate of expanded) {
         if (candidate.includes('/')) {

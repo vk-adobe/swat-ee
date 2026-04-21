@@ -8,13 +8,15 @@ export function useEvaluationForm(apiBase) {
   const [file, setFile] = useState(null)
   const [projectId, setProjectId] = useState('')
   const [limit, setLimit] = useState('')
-  const [aiProvider, setAiProvider] = useState('perplexity') // 'perplexity' or 'openai'
+  const [aiProvider, setAiProvider] = useState('adobe_llm')
+  const [partnerId, setPartnerId] = useState('none')
 
   const resetForm = useCallback(() => {
     setFile(null)
     setProjectId('')
     setLimit('')
-    setAiProvider('perplexity')
+    setAiProvider('adobe_llm')
+    setPartnerId('none')
   }, [])
 
   const isFormValid = () => !!(file || projectId.trim())
@@ -25,8 +27,9 @@ export function useEvaluationForm(apiBase) {
     if (projectId.trim()) formData.append('projectId', projectId.trim())
     if (limit.trim()) formData.append('limit', limit.trim())
     formData.append('aiProvider', aiProvider)
+    formData.append('partnerId', partnerId || 'none')
     return formData
-  }, [file, projectId, limit, aiProvider])
+  }, [file, projectId, limit, aiProvider, partnerId])
 
   const submitForm = useCallback(async () => {
     const formData = prepareFormData()
@@ -39,6 +42,7 @@ export function useEvaluationForm(apiBase) {
     projectId, setProjectId,
     limit, setLimit,
     aiProvider, setAiProvider,
+    partnerId, setPartnerId,
     resetForm,
     isFormValid,
     submitForm,
@@ -88,6 +92,12 @@ export function useJobPolling(apiBase) {
     pollStatus(newJobId)
   }, [pollStatus])
 
+  const cancelJob = useCallback(async () => {
+    if (!jobId) return
+    await axios.post(`${apiBase}/api/job/${jobId}/cancel`)
+    setStatus('cancelled')
+  }, [apiBase, jobId])
+
   const reset = useCallback(() => {
     setJobId(null)
     setStatus('idle')
@@ -103,6 +113,7 @@ export function useJobPolling(apiBase) {
     job,
     error, setError,
     startJob,
+    cancelJob,
     reset,
   }
 }

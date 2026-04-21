@@ -16,6 +16,8 @@ import fs from 'fs'
 import jobManager from './services/jobManager.js'
 import moduleLoadingService from './services/moduleLoadingService.js'
 import excelService from './services/excelService.js'
+import { AI_PROVIDERS, DEFAULT_AI_PROVIDER, isValidAiProvider } from './config/aiProviders.js'
+import { getPartnerLabel, isValidPartnerId, partnersSearchForApi } from './config/adobeCommercePartners.js'
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -30,9 +32,34 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
+// AI provider list for UI (keeps options in sync with backend validation)
+app.get('/api/ai-providers', (req, res) => {
+  res.json({
+    providers: AI_PROVIDERS.map((p) => ({ id: p.id, label: p.label, description: p.description })),
+  })
+})
+
+// Adobe Commerce partner search — use ?q= (avoid sending the full ~1MB list to the browser)
+app.get('/api/partners', (req, res) => {
+  const lim = Math.min(Math.max(parseInt(String(req.query.limit || '150'), 10) || 150, 1), 500)
+  const q = req.query.q != null ? String(req.query.q).trim() : ''
+
+  if (!q) {
+    return res.json({
+      partners: [{ id: 'none', label: 'None — evaluate all vendors' }],
+      searchHint: 'Send ?q=your query to search the marketplace partner list.',
+    })
+  }
+
+  const hits = partnersSearchForApi(q, lim)
+  res.json({
+    partners: [{ id: 'none', label: 'None — evaluate all vendors' }, ...hits.filter((p) => p.id !== 'none')],
+  })
+})
+
 // POST /api/evaluate - Main evaluation endpoint
 app.post('/api/evaluate', upload.single('file'), async (req, res) => {
-  const { projectId, limit, aiProvider } = req.body
+  const { projectId, limit, aiProvider, partnerId: rawPartnerId } = req.body
   const inputFile = req.file?.path
 
   // Validate input
@@ -40,11 +67,15 @@ app.post('/api/evaluate', upload.single('file'), async (req, res) => {
     return res.status(400).json({ error: 'Please provide either a file or a project ID' })
   }
 
-  // Validate AI provider
-  const validProviders = ['perplexity', 'openai']
-  const selectedProvider = (aiProvider || 'perplexity').toLowerCase()
-  if (!validProviders.includes(selectedProvider)) {
-    return res.status(400).json({ error: `Invalid AI provider. Must be one of: ${validProviders.join(', ')}` })
+  const selectedProvider = (aiProvider || DEFAULT_AI_PROVIDER).toLowerCase().trim()
+  if (!isValidAiProvider(selectedProvider)) {
+    const allowed = AI_PROVIDERS.map((p) => p.id).join(', ')
+    return res.status(400).json({ error: `Invalid AI provider. Must be one of: ${allowed}` })
+  }
+
+  const partnerId = (rawPartnerId == null || rawPartnerId === '' ? 'none' : String(rawPartnerId).trim()) || 'none'
+  if (!isValidPartnerId(partnerId)) {
+    return res.status(400).json({ error: 'Invalid partner selection.' })
   }
 
   // Create job
@@ -52,13 +83,15 @@ app.post('/api/evaluate', upload.single('file'), async (req, res) => {
     projectId: projectId || null,
     isFileUpload: !!inputFile,
     aiProvider: selectedProvider,
+    partnerId,
+    partnerLabel: getPartnerLabel(partnerId),
   })
 
   // Return job ID immediately
   res.json({ jobId, message: 'Processing started' })
 
   // Process asynchronously
-  processEvaluationJob(jobId, { inputFile, projectId, limit, aiProvider: selectedProvider })
+  processEvaluationJob(jobId, { inputFile, projectId, limit, aiProvider: selectedProvider, partnerId })
 })
 
 /**
@@ -66,10 +99,15 @@ app.post('/api/evaluate', upload.single('file'), async (req, res) => {
  */
 async function processEvaluationJob(jobId, input) {
   try {
+    const shouldAbort = () => jobManager.getJob(jobId)?.cancelled
+
     // Step 1: Load modules from file or projectId
     const modules = await moduleLoadingService.loadModules(input, (status, progress) => {
       jobManager.updateJob(jobId, { status, progress })
     })
+    if (shouldAbort()) {
+      return
+    }
 
     // Initialize per-module status tracking
     const items = modules.map((mod) => ({
@@ -81,6 +119,7 @@ async function processEvaluationJob(jobId, input) {
 
     // Step 2: Process modules (version lookup + AI evaluation)
     const evaluated = await moduleLoadingService.processModules(modules, input.aiProvider, {
+      partnerId: input.partnerId,
       onStatusUpdate: (status, progress) => {
         if (status) {
           jobManager.updateJob(jobId, { status, progress })
@@ -104,7 +143,11 @@ async function processEvaluationJob(jobId, input) {
         }
         jobManager.updateJob(jobId, { items: next })
       },
+      shouldAbort,
     })
+    if (shouldAbort()) {
+      return
+    }
 
     // Step 3: Generate Excel report
     jobManager.updateJob(jobId, { status: 'writing_results', progress: 90 })
@@ -128,6 +171,19 @@ app.get('/api/job/:jobId', (req, res) => {
     return res.status(404).json({ error: 'Job not found' })
   }
   res.json(job)
+})
+
+// POST /api/job/:jobId/cancel - Cancel job
+app.post('/api/job/:jobId/cancel', (req, res) => {
+  const job = jobManager.getJob(req.params.jobId)
+  if (!job) {
+    return res.status(404).json({ error: 'Job not found' })
+  }
+  if (job.status === 'completed' || job.status === 'failed' || job.status === 'cancelled') {
+    return res.status(400).json({ error: `Job already ${job.status}` })
+  }
+  jobManager.setCancelled(req.params.jobId)
+  res.json({ id: job.id, status: 'cancelled' })
 })
 
 // GET /api/download/:jobId - Download result file

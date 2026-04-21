@@ -1,14 +1,86 @@
-import { OpenAI } from 'openai'
 import axios from 'axios'
+import fs from 'fs/promises'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-let client = null
-if (process.env.OPENAI_API_KEY) {
-  client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+import { assertValidAiProvider, DEFAULT_AI_PROVIDER } from '../config/aiProviders.js'
+import { chatCompletion, ensureOpenAIClientIfNeeded, providerLabelForLogs } from './aiChat.js'
+import {
+  findCatalogMatchesForModule,
+  formatCatalogContextForPrompt,
+  getExtensionVendorCatalogMtimeKey,
+} from './extensionVendorCatalog.js'
+import { isCoreOrBaseModuleName, shouldSkipForPartnerSelection } from './moduleNameGuards.js'
+
+const GITHUB_HTTP_HEADERS = {
+  Accept: 'application/vnd.github+json',
+  'User-Agent': 'AdobeCommerce-ExtensionEvaluator/1.0',
 }
 
 // Simple in-memory caches to avoid repeated calls in a single process
 const moduleResearchCache = {}
 const moduleEvalCache = {}
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const aiCachePath = path.resolve(__dirname, '../data/ai-cache.json')
+/** mtime (ms) of ai-cache.json last time we loaded or wrote it; null until first touch */
+let diskCacheFileMtimeMs = null
+const diskCache = { research: {}, evaluation: {} }
+
+/**
+ * Reload disk JSON when the file changes on disk (e.g. `npm run refresh-ai-cache` or manual edit).
+ * Clears in-memory LRU so disk stays authoritative across external resets.
+ */
+async function syncDiskCacheFromFileIfStale() {
+  try {
+    const st = await fs.stat(aiCachePath)
+    if (diskCacheFileMtimeMs !== null && st.mtimeMs === diskCacheFileMtimeMs) {
+      return
+    }
+    const raw = await fs.readFile(aiCachePath, 'utf8')
+    const parsed = JSON.parse(raw)
+    diskCache.research = parsed?.research || {}
+    diskCache.evaluation = parsed?.evaluation || {}
+    diskCacheFileMtimeMs = st.mtimeMs
+    Object.keys(moduleResearchCache).forEach((k) => {
+      delete moduleResearchCache[k]
+    })
+    Object.keys(moduleEvalCache).forEach((k) => {
+      delete moduleEvalCache[k]
+    })
+  } catch {
+    diskCache.research = {}
+    diskCache.evaluation = {}
+    await persistDiskCache()
+  }
+}
+
+async function persistDiskCache() {
+  const dir = path.dirname(aiCachePath)
+  await fs.mkdir(dir, { recursive: true })
+  await fs.writeFile(aiCachePath, JSON.stringify(diskCache, null, 2), 'utf8')
+  try {
+    const st = await fs.stat(aiCachePath)
+    diskCacheFileMtimeMs = st.mtimeMs
+  } catch {
+    // keep previous diskCacheFileMtimeMs
+  }
+}
+
+async function getDiskCache(section, key) {
+  if (diskCacheFileMtimeMs === null) {
+    await syncDiskCacheFromFileIfStale()
+  }
+  return diskCache?.[section]?.[key]
+}
+
+async function setDiskCache(section, key, value) {
+  if (diskCacheFileMtimeMs === null) {
+    await syncDiskCacheFromFileIfStale()
+  }
+  if (!diskCache[section]) diskCache[section] = {}
+  diskCache[section][key] = value
+  await persistDiskCache()
+}
 // Note: we intentionally avoid scraping vendor websites for versions
 // because it produces unreliable results (e.g., placeholder or unrelated numbers).
 
@@ -91,7 +163,8 @@ function isReasonableVersion(version) {
     if (patch < 0 || patch > 31) return false
     return true
   }
-  return parts.every((v) => v >= 0 && v <= 100)
+  // Align with versionLookup: allow Magento-style majors (e.g. 104.0.6)
+  return parts.length <= 5 && parts.every((v) => v >= 0 && v <= 999_999)
 }
 
 function sanitizeLatestVersion(version) {
@@ -110,14 +183,45 @@ function sanitizeUpgradeNote(note) {
   return ''
 }
 
+function formatAiError(err) {
+  if (!err) return 'Unknown error'
+  const status = err.response?.status
+  const data = err.response?.data
+  if (data) {
+    const serialized = typeof data === 'string' ? data : JSON.stringify(data)
+    return status ? `HTTP ${status}: ${serialized}` : serialized
+  }
+  return err.message || String(err)
+}
+
 // Phase 1: Research what the module does using AI
-async function researchModuleInfo(moduleName, description, aiProvider = 'perplexity') {
-  const cacheKey = `${moduleName}::${description || ''}::${aiProvider}`
-  if (moduleResearchCache[cacheKey]) return moduleResearchCache[cacheKey]
+async function researchModuleInfo(moduleName, description, aiProvider = DEFAULT_AI_PROVIDER) {
+  const catKey = await getExtensionVendorCatalogMtimeKey()
+  const cacheKey = `${moduleName}::${description || ''}::${aiProvider}::${catKey}`
+  if (moduleResearchCache[cacheKey]) {
+    const diskHit = await getDiskCache('research', cacheKey)
+    if (!diskHit) {
+      await setDiskCache('research', cacheKey, moduleResearchCache[cacheKey])
+    }
+    return moduleResearchCache[cacheKey]
+  }
+  const diskHit = await getDiskCache('research', cacheKey)
+  if (diskHit) {
+    moduleResearchCache[cacheKey] = diskHit
+    return diskHit
+  }
+  let catalogCtx = ''
+  try {
+    const matches = await findCatalogMatchesForModule(moduleName)
+    catalogCtx = formatCatalogContextForPrompt(matches)
+  } catch {
+    /* optional enrichment */
+  }
   const researchPrompt = `You are analyzing an Adobe Commerce (Magento 2) extension/module to understand its real functionality.
 
 Module: ${moduleName}
 User Description: ${description || '(No description provided)'}
+${catalogCtx}
 
 Use your product knowledge to determine:
 1. The primary functionality and scope (what it does, who uses it, where it fits in Commerce).
@@ -139,77 +243,52 @@ Respond with ONLY a JSON object (no markdown, no extra text):
 If unsure, still return valid JSON and state uncertainty in notes.`
 
   try {
-    // Use provided aiProvider instead of environment variable
-    if (aiProvider === 'perplexity') {
-      if (!process.env.PERPLEXITY_API_KEY) {
-        throw new Error('PERPLEXITY_API_KEY not configured')
-      }
+    const label = providerLabelForLogs(aiProvider)
+    const content = await callAIWithRetry(() =>
+      chatCompletion(aiProvider, {
+        messages: [{ role: 'user', content: researchPrompt }],
+        maxTokens: 300,
+        temperature: 0.3,
+      })
+    )
 
-      const response = await callAIWithRetry(() =>
-        axios.post(
-          'https://api.perplexity.ai/chat/completions',
-          {
-            model: 'sonar',
-            messages: [{ role: 'user', content: researchPrompt }],
-            temperature: 0.3,
-            max_tokens: 300,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.PERPLEXITY_API_KEY}`,
-              'Content-Type': 'application/json',
-            },
-            timeout: 30_000,
-          }
-        )
-      )
-
-      const content = response.data?.choices?.[0]?.message?.content || '{}'
-      const jsonMatch = content.match(/\{[\s\S]*\}/)
-      const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
-      console.info(`Research complete for ${moduleName} (Perplexity):`, parsed)
-      moduleResearchCache[cacheKey] = parsed
-      return parsed
-    } else {
-      // Use OpenAI
-      if (!client) {
-        throw new Error('OpenAI client not available')
-      }
-
-      const response = await callAIWithRetry(() =>
-        client.chat.completions.create({
-          model: process.env.OPENAI_MODEL || 'gpt-4o',
-          messages: [{ role: 'user', content: researchPrompt }],
-          temperature: 0.3,
-          max_tokens: 300,
-        })
-      )
-
-      const content = response.choices[0]?.message?.content || '{}'
-      const jsonMatch = content.match(/\{[\s\S]*\}/)
-      const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
-      console.info(`Research complete for ${moduleName} (OpenAI):`, parsed)
-      moduleResearchCache[cacheKey] = parsed
-      return parsed
-    }
+    const jsonMatch = content.match(/\{[\s\S]*\}/)
+    const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
+    console.info(`Research complete for ${moduleName} (${label}):`, parsed)
+    moduleResearchCache[cacheKey] = parsed
+    await setDiskCache('research', cacheKey, parsed)
+    return parsed
   } catch (err) {
     const is429 = err.response?.status === 429 || err.message?.includes('429')
     const isQuotaError = err.message?.includes('quota') || err.message?.includes('exceeded')
-    
+
     if (is429 || isQuotaError) {
-      console.error(`OpenAI API QUOTA EXCEEDED for ${moduleName}. Please check your OpenAI account billing at https://platform.openai.com/account/billing/overview`)
+      console.error(
+        `AI API quota or rate limit (${providerLabelForLogs(aiProvider)}) for ${moduleName}. Check provider billing/configuration.`
+      )
     } else {
       console.error(`Research failed for ${moduleName}:`, err.message)
     }
     
-    return { purpose: 'Unknown', vendor_url: '', common_versions: '', notes: 'Research failed' }
+    return { purpose: 'Unknown', vendor_url: '', common_versions: '', notes: `Research failed: ${formatAiError(err)}` }
   }
 }
 
 // Phase 2: Evaluate against Adobe Commerce native features
-async function evaluateAgainstNative(moduleName, purpose, foundVersion, aiProvider = 'perplexity') {
+async function evaluateAgainstNative(moduleName, purpose, foundVersion, aiProvider = DEFAULT_AI_PROVIDER) {
   const evalCacheKey = `${moduleName}::${purpose || ''}::${foundVersion || ''}::${aiProvider}`
-  if (moduleEvalCache[evalCacheKey]) return moduleEvalCache[evalCacheKey]
+  if (moduleEvalCache[evalCacheKey]) {
+    const diskHit = await getDiskCache('evaluation', evalCacheKey)
+    if (!diskHit) {
+      await setDiskCache('evaluation', evalCacheKey, moduleEvalCache[evalCacheKey])
+    }
+    return moduleEvalCache[evalCacheKey]
+  }
+  const diskHit = await getDiskCache('evaluation', evalCacheKey)
+  if (diskHit) {
+    moduleEvalCache[evalCacheKey] = diskHit
+    return diskHit
+  }
   const evaluationPrompt = `You are an Adobe Commerce (Magento 2) consultant deciding whether this extension is needed, or can be replaced by native functionality.
 
 Extension: ${moduleName}
@@ -244,74 +323,35 @@ Rules:
 
   try {
     const MAX_TOKENS = parseInt(process.env.EVAL_MAX_TOKENS || '300', 10)
-    // Use provided aiProvider instead of environment variable
-    if (aiProvider === 'perplexity') {
-      if (!process.env.PERPLEXITY_API_KEY) {
-        throw new Error('PERPLEXITY_API_KEY not configured')
-      }
+    const label = providerLabelForLogs(aiProvider)
+    const content = await callAIWithRetry(() =>
+      chatCompletion(aiProvider, {
+        messages: [{ role: 'user', content: evaluationPrompt }],
+        maxTokens: MAX_TOKENS,
+        temperature: 0.3,
+      })
+    )
 
-      const response = await callAIWithRetry(() =>
-        axios.post(
-          'https://api.perplexity.ai/chat/completions',
-          {
-            model: 'sonar',
-            messages: [{ role: 'user', content: evaluationPrompt }],
-            temperature: 0.3,
-            max_tokens: MAX_TOKENS,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.PERPLEXITY_API_KEY}`,
-              'Content-Type': 'application/json',
-            },
-            timeout: 30_000,
-          }
-        )
-      )
-
-      const content = response.data?.choices?.[0]?.message?.content || '{}'
-      const jsonMatch = content.match(/\{[\s\S]*\}/)
-      const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
-      const normalized = normalizeEvaluationShape(parsed)
-      console.info(`Evaluation complete for ${moduleName} (Perplexity):`, normalized)
-      moduleEvalCache[evalCacheKey] = normalized
-      return normalized
-    } else {
-      // Use OpenAI
-      if (!client) {
-        throw new Error('OpenAI client not available')
-      }
-
-      const response = await callAIWithRetry(() =>
-        client.chat.completions.create({
-          model: process.env.OPENAI_MODEL || 'gpt-4o',
-          messages: [{ role: 'user', content: evaluationPrompt }],
-          temperature: 0.3,
-          max_tokens: MAX_TOKENS,
-        })
-      )
-
-      const content = response.choices[0]?.message?.content || '{}'
-      const jsonMatch = content.match(/\{[\s\S]*\}/)
-      const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
-      const normalized = normalizeEvaluationShape(parsed)
-      console.info(`Evaluation complete for ${moduleName} (OpenAI):`, normalized)
-      moduleEvalCache[evalCacheKey] = normalized
-      return normalized
-    }
+    const jsonMatch = content.match(/\{[\s\S]*\}/)
+    const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
+    const normalized = normalizeEvaluationShape(parsed)
+    console.info(`Evaluation complete for ${moduleName} (${label}):`, normalized)
+    moduleEvalCache[evalCacheKey] = normalized
+    await setDiskCache('evaluation', evalCacheKey, normalized)
+    return normalized
   } catch (err) {
-    // Check if it's a rate limit or quota error
     const is429 = err.response?.status === 429 || err.message?.includes('429')
     const isQuotaError = err.message?.includes('quota') || err.message?.includes('exceeded')
-    
+    const pl = providerLabelForLogs(aiProvider)
+
     if (is429 || isQuotaError) {
-      console.error(`OpenAI API QUOTA EXCEEDED for ${moduleName}. Please check your OpenAI account billing at https://platform.openai.com/account/billing/overview`)
+      console.error(`AI API quota or rate limit (${pl}) for ${moduleName}. Check provider billing/configuration.`)
       return {
         recommendation: 'KEEP',
         confidence: 50,
         native_alternative: 'Unknown (quota exceeded)',
-        reason: 'OpenAI API quota exceeded. Please upgrade your OpenAI account. Using conservative KEEP recommendation.',
-        upgrade_note: 'Please add payment method at https://platform.openai.com/account/billing/overview',
+        reason: `${pl} API error: ${formatAiError(err)}`,
+        upgrade_note: 'Resolve API quota or billing with your AI provider',
       }
     }
     
@@ -322,17 +362,17 @@ Rules:
       recommendation: 'KEEP',
       confidence: 50,
       native_alternative: 'Unknown',
-      reason: 'Evaluation failed; using conservative recommendation',
+      reason: `Evaluation failed: ${formatAiError(err)}`,
       upgrade_note: '',
     }
   }
 }
 
-export async function evaluateExtensions(withVersions, aiProvider = 'perplexity', progressCallback) {
+export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_PROVIDER, progressCallback) {
   // Handle callback parameter position for backwards compatibility
   if (typeof aiProvider === 'function') {
     progressCallback = aiProvider
-    aiProvider = 'perplexity'
+    aiProvider = DEFAULT_AI_PROVIDER
   }
 
   const callbacks = typeof progressCallback === 'object' && progressCallback !== null
@@ -340,21 +380,15 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
     : { onProgress: progressCallback }
   const onProgress = typeof callbacks.onProgress === 'function' ? callbacks.onProgress : null
   const onItemStatus = typeof callbacks.onItemStatus === 'function' ? callbacks.onItemStatus : null
+  const shouldAbort = typeof callbacks.shouldAbort === 'function' ? callbacks.shouldAbort : null
+  const partnerSkipPrefixes = callbacks.partnerSkipPrefixes ?? null
 
+  assertValidAiProvider(aiProvider)
   console.info(`evaluateExtensions called with provider: ${aiProvider}`)
-  console.info('OPENAI_API_KEY present?', !!process.env.OPENAI_API_KEY)
-  
-  // Validate provider
-  const validProviders = ['perplexity', 'openai']
-  if (!validProviders.includes(aiProvider)) {
-    throw new Error(`Invalid AI provider: ${aiProvider}. Must be one of: ${validProviders.join(', ')}`)
-  }
 
-  // Ensure OpenAI client reflects current environment at call time (handles restarts)
-  if (aiProvider === 'openai' && !client && process.env.OPENAI_API_KEY) {
-    client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-    console.info('OpenAI client instantiated')
-  }
+  await syncDiskCacheFromFileIfStale()
+
+  ensureOpenAIClientIfNeeded(aiProvider)
 
   const total = withVersions.length
   let processed = 0
@@ -364,6 +398,9 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
   // Use sequential processing with delays instead of Promise.all to avoid rate limits
   const results = []
   for (const item of withVersions) {
+    if (shouldAbort && shouldAbort()) {
+      throw new Error('Job cancelled by user')
+    }
     try {
       // Allow explicit mock mode for deterministic testing
       if (process.env.OPENAI_MODE === 'mock') {
@@ -381,6 +418,58 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
           nativeCoverage: 'none',
           upgradeNote: 'N/A',
           processedStatus: 'ai_mocked',
+        })
+        continue
+      }
+
+      if (isCoreOrBaseModuleName(item.moduleName)) {
+        console.info(`Skipping exploration for ${item.moduleName} (module segment is Core/Base)`)
+        if (onItemStatus) {
+          onItemStatus({
+            rowIndex: item.rowIndex,
+            moduleName: item.moduleName,
+            status: 'skipped_core_base',
+          })
+        }
+        processed++
+        if (onProgress) onProgress(processed / total)
+        results.push({
+          ...item,
+          recommendedAction: 'KEEP',
+          confidence: 100,
+          explanation:
+            'Skipped AI/extension research: the module name includes a Core or Base segment (platform or vendor foundation package), not a typical third-party feature extension.',
+          nativeAlternative: 'N/A',
+          nativeCoverage: 'none',
+          upgradeNote: '',
+          citations: [],
+          processedStatus: 'skipped_core_base',
+        })
+        continue
+      }
+
+      if (shouldSkipForPartnerSelection(item.moduleName, partnerSkipPrefixes)) {
+        console.info(`Skipping extension evaluation for ${item.moduleName} (matches selected partner vendor)`)
+        if (onItemStatus) {
+          onItemStatus({
+            rowIndex: item.rowIndex,
+            moduleName: item.moduleName,
+            status: 'skipped_partner_selected',
+          })
+        }
+        processed++
+        if (onProgress) onProgress(processed / total)
+        results.push({
+          ...item,
+          recommendedAction: 'KEEP',
+          confidence: 100,
+          explanation:
+            'Skipped version lookup and AI evaluation: the module vendor matches the partner / organization you selected (extensions from your own catalog are excluded from this pass).',
+          nativeAlternative: 'N/A',
+          nativeCoverage: 'none',
+          upgradeNote: '',
+          citations: [],
+          processedStatus: 'skipped_partner_selected',
         })
         continue
       }
@@ -411,14 +500,20 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
             const repo = m[2].replace(/\.git$/, '')
             // Try releases/latest, fallback to tags
             try {
-              const ghRel = await axios.get(`https://api.github.com/repos/${owner}/${repo}/releases/latest`, { timeout: 7000 })
+              const ghRel = await axios.get(`https://api.github.com/repos/${owner}/${repo}/releases/latest`, {
+                timeout: 7000,
+                headers: GITHUB_HTTP_HEADERS,
+              })
               if (ghRel.data?.tag_name || ghRel.data?.name) {
                 item.latestVersion = ghRel.data.tag_name || ghRel.data.name
                 item.latestUrl = ghRel.data.html_url
               }
             } catch (e1) {
               try {
-                const ghTags = await axios.get(`https://api.github.com/repos/${owner}/${repo}/tags`, { timeout: 7000 })
+                const ghTags = await axios.get(`https://api.github.com/repos/${owner}/${repo}/tags`, {
+                  timeout: 7000,
+                  headers: GITHUB_HTTP_HEADERS,
+                })
                 const first = (ghTags.data || [])[0]
                 if (first?.name) {
                   item.latestVersion = first.name
@@ -458,8 +553,9 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
         explanation: evaluation.reason || evaluation.explanation || 'Evaluation completed',
         nativeAlternative: evaluation.native_alternative || 'N/A',
         nativeCoverage: evaluation.coverage || '',
-        // Latest version comes strictly from lookup (Packagist/GitHub), not AI
+        // Latest version comes strictly from lookup (Packagist/GitHub/research GitHub), not AI
         latestVersion: sanitizeLatestVersion(item.latestVersion || ''),
+        latestUrl: item.latestUrl || '',
         upgradeNote: evaluation.upgrade_note || '',
         citations,
         processedStatus: 'ai_evaluated',
@@ -473,7 +569,8 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
     } catch (err) {
       processed++
       if (onProgress) onProgress(processed / total)
-      console.error(`Failed to evaluate ${item.moduleName}:`, err.message)
+      const detail = formatAiError(err)
+      console.error(`Failed to evaluate ${item.moduleName}:`, detail)
 
       if (onItemStatus) {
         onItemStatus({ rowIndex: item.rowIndex, moduleName: item.moduleName, status: 'ai_failed' })
@@ -482,7 +579,7 @@ export async function evaluateExtensions(withVersions, aiProvider = 'perplexity'
         ...item,
         recommendedAction: 'ERROR',
         confidence: 0,
-        explanation: `Evaluation failed: ${err.message}`,
+        explanation: `Evaluation failed: ${detail}`,
         nativeAlternative: 'Unknown',
         nativeCoverage: '',
         upgradeNote: '',

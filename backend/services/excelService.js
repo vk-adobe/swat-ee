@@ -46,8 +46,9 @@ class ExcelService {
       'Functionality & Business Details': item.description || item.moduleName,
       'Enabled / Disabled': item.enabled || 'Unknown',
       'Found Package': item.foundPackage || '',
-      'Latest Version': (item.latestVersion && String(item.latestVersion).match(/^v?\d{1,4}(\.\d{1,4}){1,3}([-.]?(?:p|patch|pl)\d+)?$/i)) ? item.latestVersion : '',
-      'Latest URL': item.latestUrl || '',
+      /* Version comes from Packagist/GitHub lookup; avoid stripping valid Magento-style tags here */
+      'Latest Version': item.latestVersion != null && String(item.latestVersion).trim() !== '' ? String(item.latestVersion) : '',
+      'Latest URL': item.latestUrl != null && String(item.latestUrl).trim() !== '' ? String(item.latestUrl) : '',
       'Recommended Action': item.recommendedAction || '',
       'Confidence %': item.confidence || '',
       'Native Alternative': item.nativeAlternative || '',
