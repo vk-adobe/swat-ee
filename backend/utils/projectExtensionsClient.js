@@ -1,4 +1,5 @@
 import axios from 'axios'
+import logger from './logger.js'
 
 let cachedAccessToken = null
 let cachedTokenExpiry = null
@@ -9,7 +10,7 @@ class ProjectExtensionsClient {
     this.clientId = config.clientId || process.env.AUTH_CLIENT_ID
     this.clientSecret = config.clientSecret || process.env.AUTH_CLIENT_SECRET
     this.code = config.code || process.env.CODE
-    this.graphqlEndpoint = config.graphqlEndpoint || 'https://swat-api.adobe.io/query'
+    this.graphqlEndpoint = config.graphqlEndpoint || process.env.SWAT_API_ENDPOINT || 'https://swat-api.adobe.io/query'
     this.apiKey = config.apiKey || process.env.AUTH_CLIENT_ID // x-api-key uses clientId
 
     this.accessToken = null
@@ -54,7 +55,7 @@ class ProjectExtensionsClient {
 
       return this.accessToken
     } catch (err) {
-      console.error('Token fetch failed:', err.message)
+      logger.error('Token fetch failed', { error: err.message })
       throw new Error(`Failed to get access token: ${err.message}`)
     }
   }
@@ -67,42 +68,44 @@ class ProjectExtensionsClient {
     try {
       const accessToken = await this.getAccessToken()
 
-      const graphqlQuery = `{
-  info(
-    criteria: {
-      solutionsFilter: {
-        adobeCommerce: {
-          projectId: "${projectId}",
-          environment: "production"
+      const graphqlQuery = `
+        query GetExtensions($projectId: String!, $environment: String!) {
+          info(
+            criteria: {
+              solutionsFilter: {
+                adobeCommerce: {
+                  projectId: $projectId,
+                  environment: $environment
+                }
+              }
+              codeFilter: { codeList: ["thirdPartyModules"] }
+            }
+            pageSize: 100
+          ) {
+            results {
+              data
+              code
+              label
+              entityMetadata {
+                ... on AdobeCommerceEnvironment {
+                  projectId
+                  environment
+                }
+              }
+            }
+            pageInfo {
+              page
+              hasNextPage
+            }
+          }
         }
-      }
-      codeFilter: { codeList: ["thirdPartyModules"] }
-    }
-    pageSize: 100
-  ) {
-    results {
-      data
-      code
-      label
-      entityMetadata {
-        ... on AdobeCommerceEnvironment {
-          projectId
-          environment
-        }
-      }
-    }
-    pageInfo {
-      page
-      hasNextPage
-    }
-  }
-}`
+      `
 
       const response = await axios.post(
         this.graphqlEndpoint,
         {
           query: graphqlQuery,
-          variables: {}
+          variables: { projectId, environment: 'production' },
         },
         {
           headers: {
@@ -118,18 +121,27 @@ class ProjectExtensionsClient {
         throw new Error(`GraphQL Error: ${JSON.stringify(response.data.errors)}`)
       }
 
+      logger.debug('Raw SWAT API response', { projectId, payload: response.data })
+
       // Extract modules from response
       const results = response.data?.data?.info?.results || []
       const modules = this.parseModules(results)
+
+      logger.info('SWAT API modules parsed', {
+        projectId,
+        resultCount: results.length,
+        modulesCount: modules.length,
+        sampleModule: modules[0] ?? null,
+      })
 
       return {
         projectId,
         modulesCount: modules.length,
         modules,
-        rawResponse: response.data
+        rawResponse: response.data,
       }
     } catch (err) {
-      console.error('Failed to fetch extensions:', err.message)
+      logger.error('Failed to fetch extensions', { error: err.message })
       throw err
     }
   }
@@ -157,7 +169,7 @@ class ProjectExtensionsClient {
             })
           })
         } catch (err) {
-          console.warn('Failed to parse module data:', err.message)
+          logger.warn('Failed to parse module data', { error: err.message })
         }
       }
     })

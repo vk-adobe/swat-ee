@@ -1,4 +1,5 @@
 import axios from 'axios'
+import logger from './logger.js'
 
 const API_TIMEOUT = 10000
 const TOKEN_CACHE_DURATION = 82800000 // ~23 hours
@@ -9,7 +10,7 @@ const TOKEN_CACHE_DURATION = 82800000 // ~23 hours
 class ExtensionApiClient {
   constructor(config = {}) {
     this.tokenUrl = config.tokenUrl || 'https://ims-na1.adobelogin.com/ims/token/v1'
-    this.extensionsUrl = config.extensionsUrl || 'https://swat-api.adobe.io/query'
+    this.extensionsUrl = config.extensionsUrl || process.env.SWAT_API_ENDPOINT || 'https://swat-api.adobe.io/query'
     this.clientId = config.clientId
     this.clientSecret = config.clientSecret
     this.authorizationCode = config.authorizationCode
@@ -38,7 +39,7 @@ class ExtensionApiClient {
       try {
         return await this.refreshAccessToken()
       } catch (err) {
-        console.warn('Token refresh failed, attempting new authorization:', err.message)
+        logger.warn('Token refresh failed, attempting new authorization', { error: err.message })
       }
     }
 
@@ -69,7 +70,7 @@ class ExtensionApiClient {
 
       return this.handleTokenResponse(response.data)
     } catch (err) {
-      console.error('Authorization code authentication failed:', err.message)
+      logger.error('Authorization code authentication failed', { error: err.message })
       throw new Error(`OAuth2 authentication failed: ${err.message}`)
     }
   }
@@ -95,7 +96,7 @@ class ExtensionApiClient {
 
       return this.handleTokenResponse(response.data)
     } catch (err) {
-      console.error('Token refresh failed:', err.message)
+      logger.error('Token refresh failed', { error: err.message })
       throw err
     }
   }
@@ -149,7 +150,7 @@ class ExtensionApiClient {
 
       return this.normalizeExtensions(results)
     } catch (err) {
-      console.error(`Failed to fetch extensions from ${this.extensionsUrl}:`, err.message)
+      logger.error('Failed to fetch extensions', { url: this.extensionsUrl, error: err.message })
       throw err
     }
   }

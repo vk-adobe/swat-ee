@@ -5,12 +5,17 @@ import { fileURLToPath } from 'url'
 
 import { assertValidAiProvider, DEFAULT_AI_PROVIDER } from '../config/aiProviders.js'
 import { chatCompletion, ensureOpenAIClientIfNeeded, providerLabelForLogs } from './aiChat.js'
+import logger from './logger.js'
 import {
   findCatalogMatchesForModule,
   formatCatalogContextForPrompt,
   getExtensionVendorCatalogMtimeKey,
 } from './extensionVendorCatalog.js'
-import { isCoreOrBaseModuleName, shouldSkipForPartnerSelection } from './moduleNameGuards.js'
+import {
+  hasMagentoInModuleName,
+  isCoreOrBaseModuleName,
+  shouldSkipForPartnerSelection,
+} from './moduleNameGuards.js'
 
 const GITHUB_HTTP_HEADERS = {
   Accept: 'application/vnd.github+json',
@@ -102,7 +107,7 @@ async function callAIWithRetry(fn, maxRetries = 2, timeout = 8000) {
       if ((is429 || isTimeout) && attempt < maxRetries) {
         // Only retry once for quota exhaustion, then fail fast
         const delayMs = 1000
-        console.warn(`Rate limit or timeout; retrying in ${delayMs}ms (attempt ${attempt}/${maxRetries})`)
+        logger.warn(`Rate limit or timeout; retrying in ${delayMs}ms (attempt ${attempt}/${maxRetries})`)
         await new Promise(r => setTimeout(r, delayMs))
       } else {
         throw err
@@ -140,6 +145,32 @@ function normalizeEvaluationShape(input) {
   const cites = Array.isArray(obj.citations)
     ? obj.citations
     : (typeof obj.citations === 'string' ? obj.citations.split(/[;,\n]\s*/).filter(Boolean) : [])
+  const cloudRaw =
+    obj.commerce_cloud ??
+    obj.commerce_cloud_availability ??
+    obj.cloud_availability ??
+    obj.adobe_commerce_cloud ??
+    ''
+  const onPremRaw =
+    obj.commerce_on_premise ??
+    obj.commerce_on_premise_availability ??
+    obj.on_premise_availability ??
+    obj.adobe_commerce_on_premise ??
+    ''
+  const deployNote =
+    obj.deployment_note ??
+    obj.deployment_availability_note ??
+    obj.cloud_on_premise_note ??
+    ''
+  const allowedDeploy = ['full', 'partial', 'none', 'not_applicable', 'unknown']
+  const normDeploy = (v) => {
+    const s = String(v || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '_')
+    if (s === 'n/a' || s === 'na') return 'not_applicable'
+    return allowedDeploy.includes(s) ? s : ''
+  }
   return {
     recommendation: String(rec).toUpperCase(),
     confidence: isNaN(conf) ? 50 : Math.max(0, Math.min(100, Math.round(conf))),
@@ -148,6 +179,9 @@ function normalizeEvaluationShape(input) {
     coverage: ['equivalent', 'partial', 'none'].includes(coverage) ? coverage : '',
     upgrade_note: sanitizeUpgradeNote(upg),
     citations: cites,
+    commerce_cloud: normDeploy(cloudRaw) || 'unknown',
+    commerce_on_premise: normDeploy(onPremRaw) || 'unknown',
+    deployment_note: typeof deployNote === 'string' ? deployNote.trim() : '',
   }
 }
 
@@ -254,7 +288,7 @@ If unsure, still return valid JSON and state uncertainty in notes.`
 
     const jsonMatch = content.match(/\{[\s\S]*\}/)
     const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
-    console.info(`Research complete for ${moduleName} (${label}):`, parsed)
+    logger.info(`Research complete for ${moduleName} (${label})`, { parsed })
     moduleResearchCache[cacheKey] = parsed
     await setDiskCache('research', cacheKey, parsed)
     return parsed
@@ -263,11 +297,9 @@ If unsure, still return valid JSON and state uncertainty in notes.`
     const isQuotaError = err.message?.includes('quota') || err.message?.includes('exceeded')
 
     if (is429 || isQuotaError) {
-      console.error(
-        `AI API quota or rate limit (${providerLabelForLogs(aiProvider)}) for ${moduleName}. Check provider billing/configuration.`
-      )
+      logger.error(`AI API quota or rate limit for ${moduleName}`, { provider: providerLabelForLogs(aiProvider) })
     } else {
-      console.error(`Research failed for ${moduleName}:`, err.message)
+      logger.error(`Research failed for ${moduleName}`, { error: err.message })
     }
     
     return { purpose: 'Unknown', vendor_url: '', common_versions: '', notes: `Research failed: ${formatAiError(err)}` }
@@ -282,12 +314,13 @@ async function evaluateAgainstNative(moduleName, purpose, foundVersion, aiProvid
     if (!diskHit) {
       await setDiskCache('evaluation', evalCacheKey, moduleEvalCache[evalCacheKey])
     }
-    return moduleEvalCache[evalCacheKey]
+    return normalizeEvaluationShape(moduleEvalCache[evalCacheKey])
   }
   const diskHit = await getDiskCache('evaluation', evalCacheKey)
   if (diskHit) {
-    moduleEvalCache[evalCacheKey] = diskHit
-    return diskHit
+    const normalizedHit = normalizeEvaluationShape(diskHit)
+    moduleEvalCache[evalCacheKey] = normalizedHit
+    return normalizedHit
   }
   const evaluationPrompt = `You are an Adobe Commerce (Magento 2) consultant deciding whether this extension is needed, or can be replaced by native functionality.
 
@@ -298,12 +331,22 @@ Currently Available Version: ${foundVersion || 'Unknown/Not in Packagist'}
 Adobe Commerce OOTB Features (partial list):
 ${adobeCommerceOOTBFeatures}
 
+Deployment context (you MUST apply this when judging native alternatives):
+- **Adobe Commerce on cloud** means Adobe's managed cloud offering (Commerce as a Cloud Service): SaaS-style constraints, cloud tooling, Fastly/WAF, read-only app code in production, cloud-specific services and limits.
+- **Adobe Commerce on-premises** means a customer-licensed, self-hosted Adobe Commerce deployment (not the Adobe-managed cloud stack), where operations, infrastructure, and some product options differ from cloud.
+
 Evaluate in this order:
 1. Identify the exact business function (payment, shipping, catalog, merchandising, marketing, search, admin UX, integrations, etc.).
 2. Determine whether Adobe Commerce provides equivalent native capability.
 3. If native exists, specify what feature and whether it is equivalent, partial, or requires configuration/third-party services.
-4. If native does NOT exist, justify KEEP (or UPDATE if version is outdated).
-5. If the extension is obsolete or unused, recommend REMOVE with rationale.
+4. For the **native capability path** (or, if no native path, the **extension's functional scope**), assess availability separately for **Adobe Commerce on cloud** vs **Adobe Commerce on-premises** using:
+   - "full" — available in that deployment model without a fundamentally different product.
+   - "partial" — available with meaningful gaps, restrictions, add-ons, or different operational requirements on that model.
+   - "none" — not meaningfully available on that model (or blocked by platform constraints).
+   - "not_applicable" — only when there is truly no relevant native or extension capability to compare (e.g. pure REMOVE with no substitute).
+   - "unknown" — insufficient public information; explain briefly in deployment_note.
+5. If native does NOT exist, justify KEEP (or UPDATE if version is outdated).
+6. If the extension is obsolete or unused, recommend REMOVE with rationale.
 
 Return ONLY valid JSON with:
 {
@@ -311,6 +354,9 @@ Return ONLY valid JSON with:
   "confidence": 0-100,
   "native_alternative": "Exact native feature name (or 'None')",
   "coverage": "equivalent" | "partial" | "none",
+  "commerce_cloud": "full" | "partial" | "none" | "not_applicable" | "unknown",
+  "commerce_on_premise": "full" | "partial" | "none" | "not_applicable" | "unknown",
+  "deployment_note": "0-2 sentences only when cloud vs on-prem differ, or when noting cloud-only / on-prem-only constraints",
   "reason": "2-4 sentences explaining the decision",
   "upgrade_note": "If native feature requires a newer Commerce version, mention minimum version"
 }
@@ -319,10 +365,11 @@ Rules:
 - If unsure about native coverage, use "partial" and lower confidence.
 - Prefer "REPLACE_WITH_NATIVE" only when native coverage is equivalent or close with minor config.
 - Use "UPDATE" when the extension is needed but version is old or missing.
+- commerce_cloud and commerce_on_premise must reflect the **same** capability you named in native_alternative (or the extension scope if native_alternative is "None").
 - Always return valid JSON, no markdown.`
 
   try {
-    const MAX_TOKENS = parseInt(process.env.EVAL_MAX_TOKENS || '300', 10)
+    const MAX_TOKENS = parseInt(process.env.EVAL_MAX_TOKENS || '450', 10)
     const label = providerLabelForLogs(aiProvider)
     const content = await callAIWithRetry(() =>
       chatCompletion(aiProvider, {
@@ -335,7 +382,7 @@ Rules:
     const jsonMatch = content.match(/\{[\s\S]*\}/)
     const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
     const normalized = normalizeEvaluationShape(parsed)
-    console.info(`Evaluation complete for ${moduleName} (${label}):`, normalized)
+    logger.info(`Evaluation complete for ${moduleName} (${label})`, { normalized })
     moduleEvalCache[evalCacheKey] = normalized
     await setDiskCache('evaluation', evalCacheKey, normalized)
     return normalized
@@ -345,17 +392,20 @@ Rules:
     const pl = providerLabelForLogs(aiProvider)
 
     if (is429 || isQuotaError) {
-      console.error(`AI API quota or rate limit (${pl}) for ${moduleName}. Check provider billing/configuration.`)
+      logger.error(`AI API quota or rate limit for ${moduleName}`, { provider: pl })
       return {
         recommendation: 'KEEP',
         confidence: 50,
         native_alternative: 'Unknown (quota exceeded)',
         reason: `${pl} API error: ${formatAiError(err)}`,
         upgrade_note: 'Resolve API quota or billing with your AI provider',
+        commerce_cloud: 'unknown',
+        commerce_on_premise: 'unknown',
+        deployment_note: '',
       }
     }
     
-    console.error(`Evaluation failed for ${moduleName}:`, err.message)
+    logger.error(`Evaluation failed for ${moduleName}`, { error: err.message })
 
     
     return {
@@ -364,6 +414,9 @@ Rules:
       native_alternative: 'Unknown',
       reason: `Evaluation failed: ${formatAiError(err)}`,
       upgrade_note: '',
+      commerce_cloud: 'unknown',
+      commerce_on_premise: 'unknown',
+      deployment_note: '',
     }
   }
 }
@@ -384,7 +437,7 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
   const partnerSkipPrefixes = callbacks.partnerSkipPrefixes ?? null
 
   assertValidAiProvider(aiProvider)
-  console.info(`evaluateExtensions called with provider: ${aiProvider}`)
+  logger.info(`evaluateExtensions called`, { provider: aiProvider })
 
   await syncDiskCacheFromFileIfStale()
 
@@ -402,28 +455,8 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
       throw new Error('Job cancelled by user')
     }
     try {
-      // Allow explicit mock mode for deterministic testing
-      if (process.env.OPENAI_MODE === 'mock') {
-        if (onItemStatus) {
-          onItemStatus({ rowIndex: item.rowIndex, moduleName: item.moduleName, status: 'ai_mocked' })
-        }
-        processed++
-        if (onProgress) onProgress(processed / total)
-        results.push({
-          ...item,
-          recommendedAction: 'KEEP',
-          confidence: 80,
-          explanation: 'Mock evaluation (OPENAI_MODE=mock)',
-          nativeAlternative: 'N/A',
-          nativeCoverage: 'none',
-          upgradeNote: 'N/A',
-          processedStatus: 'ai_mocked',
-        })
-        continue
-      }
-
       if (isCoreOrBaseModuleName(item.moduleName)) {
-        console.info(`Skipping exploration for ${item.moduleName} (module segment is Core/Base)`)
+        logger.info(`Skipping Core/Base module`, { module: item.moduleName })
         if (onItemStatus) {
           onItemStatus({
             rowIndex: item.rowIndex,
@@ -441,6 +474,9 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
             'Skipped AI/extension research: the module name includes a Core or Base segment (platform or vendor foundation package), not a typical third-party feature extension.',
           nativeAlternative: 'N/A',
           nativeCoverage: 'none',
+          commerceCloudAvailability: 'not_applicable',
+          commerceOnPremiseAvailability: 'not_applicable',
+          deploymentAvailabilityNote: '',
           upgradeNote: '',
           citations: [],
           processedStatus: 'skipped_core_base',
@@ -448,8 +484,37 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
         continue
       }
 
+      if (hasMagentoInModuleName(item.moduleName)) {
+        logger.info(`Skipping module name containing Magento`, { module: item.moduleName })
+        if (onItemStatus) {
+          onItemStatus({
+            rowIndex: item.rowIndex,
+            moduleName: item.moduleName,
+            status: 'skipped_magento_in_name',
+          })
+        }
+        processed++
+        if (onProgress) onProgress(processed / total)
+        results.push({
+          ...item,
+          recommendedAction: 'KEEP',
+          confidence: 100,
+          explanation:
+            'Skipped version lookup and AI evaluation: the module name contains "Magento" (typically Adobe / core-style naming), not a third-party extension to score here.',
+          nativeAlternative: 'N/A',
+          nativeCoverage: 'none',
+          commerceCloudAvailability: 'not_applicable',
+          commerceOnPremiseAvailability: 'not_applicable',
+          deploymentAvailabilityNote: '',
+          upgradeNote: '',
+          citations: [],
+          processedStatus: 'skipped_magento_in_name',
+        })
+        continue
+      }
+
       if (shouldSkipForPartnerSelection(item.moduleName, partnerSkipPrefixes)) {
-        console.info(`Skipping extension evaluation for ${item.moduleName} (matches selected partner vendor)`)
+        logger.info(`Skipping partner-matched module`, { module: item.moduleName })
         if (onItemStatus) {
           onItemStatus({
             rowIndex: item.rowIndex,
@@ -467,6 +532,9 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
             'Skipped version lookup and AI evaluation: the module vendor matches the partner / organization you selected (extensions from your own catalog are excluded from this pass).',
           nativeAlternative: 'N/A',
           nativeCoverage: 'none',
+          commerceCloudAvailability: 'not_applicable',
+          commerceOnPremiseAvailability: 'not_applicable',
+          deploymentAvailabilityNote: '',
           upgradeNote: '',
           citations: [],
           processedStatus: 'skipped_partner_selected',
@@ -474,7 +542,30 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
         continue
       }
 
-      console.info(`\n=== Evaluating ${item.moduleName} ===`)
+      // Allow explicit mock mode for deterministic testing (after structural skips)
+      if (process.env.OPENAI_MODE === 'mock') {
+        if (onItemStatus) {
+          onItemStatus({ rowIndex: item.rowIndex, moduleName: item.moduleName, status: 'ai_mocked' })
+        }
+        processed++
+        if (onProgress) onProgress(processed / total)
+        results.push({
+          ...item,
+          recommendedAction: 'KEEP',
+          confidence: 80,
+          explanation: 'Mock evaluation (OPENAI_MODE=mock)',
+          nativeAlternative: 'N/A',
+          nativeCoverage: 'none',
+          commerceCloudAvailability: 'unknown',
+          commerceOnPremiseAvailability: 'unknown',
+          deploymentAvailabilityNote: '',
+          upgradeNote: 'N/A',
+          processedStatus: 'ai_mocked',
+        })
+        continue
+      }
+
+      logger.info(`Evaluating module`, { module: item.moduleName })
 
       if (onItemStatus) {
         onItemStatus({ rowIndex: item.rowIndex, moduleName: item.moduleName, status: 'evaluating' })
@@ -482,10 +573,10 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
 
       let research = { purpose: item.description || item.moduleName, vendor_url: '' }
       if (!fastMode) {
-        console.info('Phase 1: Researching module purpose...')
+        logger.info('Phase 1: researching module purpose')
         research = await researchModuleInfo(item.moduleName, item.description, aiProvider)
       } else {
-        console.info('Fast mode enabled: skipping research phase')
+        logger.info('Fast mode: skipping research phase')
       }
 
       // Optional delay between calls (tunable via env)
@@ -528,7 +619,7 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
       } catch (_) {}
 
       // Phase 2: Evaluate against Adobe Commerce native features
-      console.info('Phase 2: Evaluating against native features...')
+      logger.info('Phase 2: evaluating against native features')
       const evaluation = await evaluateAgainstNative(item.moduleName, research.purpose, item.latestVersion, aiProvider)
 
       if (interCallDelayMs > 0) await new Promise(r => setTimeout(r, interCallDelayMs))
@@ -553,6 +644,9 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
         explanation: evaluation.reason || evaluation.explanation || 'Evaluation completed',
         nativeAlternative: evaluation.native_alternative || 'N/A',
         nativeCoverage: evaluation.coverage || '',
+        commerceCloudAvailability: evaluation.commerce_cloud || 'unknown',
+        commerceOnPremiseAvailability: evaluation.commerce_on_premise || 'unknown',
+        deploymentAvailabilityNote: evaluation.deployment_note || '',
         // Latest version comes strictly from lookup (Packagist/GitHub/research GitHub), not AI
         latestVersion: sanitizeLatestVersion(item.latestVersion || ''),
         latestUrl: item.latestUrl || '',
@@ -561,7 +655,7 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
         processedStatus: 'ai_evaluated',
       }
 
-      console.info(`Result for ${item.moduleName}: ${result.recommendedAction} (${result.confidence}%)`)
+      logger.info(`Result for ${item.moduleName}`, { action: result.recommendedAction, confidence: result.confidence })
       if (onItemStatus) {
         onItemStatus({ rowIndex: item.rowIndex, moduleName: item.moduleName, status: result.processedStatus })
       }
@@ -570,7 +664,7 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
       processed++
       if (onProgress) onProgress(processed / total)
       const detail = formatAiError(err)
-      console.error(`Failed to evaluate ${item.moduleName}:`, detail)
+      logger.error(`Failed to evaluate ${item.moduleName}`, { error: detail })
 
       if (onItemStatus) {
         onItemStatus({ rowIndex: item.rowIndex, moduleName: item.moduleName, status: 'ai_failed' })
@@ -582,6 +676,9 @@ export async function evaluateExtensions(withVersions, aiProvider = DEFAULT_AI_P
         explanation: `Evaluation failed: ${detail}`,
         nativeAlternative: 'Unknown',
         nativeCoverage: '',
+        commerceCloudAvailability: '',
+        commerceOnPremiseAvailability: '',
+        deploymentAvailabilityNote: '',
         upgradeNote: '',
         citations: [],
         processedStatus: 'ai_failed',

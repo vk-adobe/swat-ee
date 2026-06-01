@@ -1,6 +1,10 @@
 import axios from 'axios'
 
-import { isCoreOrBaseModuleName, shouldSkipForPartnerSelection } from './moduleNameGuards.js'
+import {
+  hasMagentoInModuleName,
+  isCoreOrBaseModuleName,
+  shouldSkipForPartnerSelection,
+} from './moduleNameGuards.js'
 
 const packageCache = {}
 const lookupCache = {}
@@ -492,6 +496,12 @@ async function lookupModuleVersion(item, skipErrors = true, lookupOpts = {}) {
       return {
         ...item,
         processedStatus: 'skipped_core_base',
+      }
+    }
+    if (hasMagentoInModuleName(name)) {
+      return {
+        ...item,
+        processedStatus: 'skipped_magento_in_name',
       }
     }
     if (shouldSkipForPartnerSelection(name, lookupOpts.partnerSkipPrefixes)) {

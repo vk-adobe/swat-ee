@@ -28,3 +28,9 @@ export function shouldSkipForPartnerSelection(moduleName, matchPrefixes) {
   if (!seg) return false
   return matchPrefixes.some((p) => seg === String(p || '').toLowerCase())
 }
+
+/** True when the full module name contains "Magento" (case-insensitive), e.g. Magento_Catalog or Foo_MagentoBar. */
+export function hasMagentoInModuleName(moduleName) {
+  if (!moduleName || typeof moduleName !== 'string') return false
+  return moduleName.toLowerCase().includes('magento')
+}

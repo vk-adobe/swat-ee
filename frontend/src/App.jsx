@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState, Component } from 'react'
 import axios from 'axios'
 
 const FALLBACK_AI_PROVIDERS = [
@@ -187,7 +187,9 @@ function FormSection({ form, providerOptions, apiBase, onSubmit, error }) {
               />
             </div>
             <div className="space-y-2">
-              <FieldLabel hint="When using Project ID: cap how many extensions to evaluate; leave empty for all.">Evaluation limit</FieldLabel>
+              <FieldLabel hint="When using Project ID: caps how many extensions get a full version lookup + AI pass. If you also select a partner, the limit counts modules outside that partner’s vendor (their own Vendor_* rows are skipped first). Leave empty for all.">
+                Evaluation limit
+              </FieldLabel>
               <input
                 type="number"
                 min="1"
@@ -254,7 +256,7 @@ function FormSection({ form, providerOptions, apiBase, onSubmit, error }) {
         icon={<IconPartners />}
         title="Partner filter (optional)"
         badge="Marketplace"
-        meta="Skip version + AI steps for modules whose vendor matches the partner you select."
+        meta="Skip version + AI steps for modules whose vendor matches the partner you select. With a project Evaluation limit, we count up to that many non-skipped extensions (not the first N rows from the API)."
       >
         <div className="space-y-3">
           <FieldLabel hint="Searches the public Adobe Commerce Marketplace partner directory. Type at least 2 characters, then choose a result from the list.">
@@ -613,12 +615,24 @@ function CompletedSection({ job, rows, visibleCount, loading, error, onLoadMore,
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-emerald-400/90">Ready to share</p>
+        <p className="text-xs font-semibold uppercase tracking-wider text-emerald-400/90">Analysis complete</p>
         <h2 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-100">Report generated</h2>
         <p className="mt-1 max-w-xl text-sm leading-relaxed text-zinc-400">
-          Download the Excel workbook for workshops, SOW scoping, or stakeholder readouts. Use the preview below to scan
-          key columns before export.
+          Review and validate the findings below before using them in workshops, SOW scoping, or stakeholder readouts.
         </p>
+      </div>
+
+      {/* AI Disclaimer */}
+      <div className="flex gap-3 rounded-xl border border-amber-700/60 bg-amber-950/40 px-4 py-4 text-sm text-amber-200 shadow-sm">
+        <svg className="mt-0.5 h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" aria-hidden>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+        </svg>
+        <div className="space-y-1">
+          <p className="font-semibold text-amber-300">AI-generated output — internal use only</p>
+          <p className="leading-relaxed text-amber-200/80">
+            These recommendations were produced by an AI model and <span className="font-semibold text-amber-300">must be reviewed and validated by a qualified engineer or consultant</span> before acting on them. Do not share this report directly with customers or use it as a final deliverable without human verification.
+          </p>
+        </div>
       </div>
 
       {job && (
@@ -695,13 +709,60 @@ function FailedSection({ error, onRetry }) {
   )
 }
 
+// ── Error Boundary ────────────────────────────────────────────────────────────
+export class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false, error: null }
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error, info) {
+    console.error('React Error Boundary caught:', error, info)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex min-h-screen items-center justify-center bg-zinc-950 p-8 text-center">
+          <div className="max-w-md space-y-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-red-400">Unexpected error</p>
+            <h1 className="text-xl font-semibold text-zinc-100">Something went wrong</h1>
+            <p className="rounded-xl border border-red-900/50 bg-red-950/50 p-4 text-left text-sm text-red-200">
+              {this.state.error?.message || 'An unknown error occurred'}
+            </p>
+            <button
+              type="button"
+              className="btn-primary w-full"
+              onClick={() => this.setState({ hasError: false, error: null })}
+            >
+              Try again
+            </button>
+          </div>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
+// ── Resolve API base URL once at module load ──────────────────────────────────
+function resolveApiBase() {
+  const fromEnv = (import.meta?.env?.VITE_API_BASE_URL || '').trim()
+  if (fromEnv) return fromEnv
+  // Same-origin `/api/*`: Vite dev + preview proxy to the backend (see vite.config.js).
+  // For a split deploy (static UI + separate API host), set VITE_API_BASE_URL at build time.
+  return ''
+}
+
+const RESOLVED_API_BASE = resolveApiBase()
+
 // Main App
 export default function App() {
-  const defaultApiBase =
-    typeof window !== 'undefined' && window.location && window.location.port !== '5173'
-      ? 'http://localhost:3001'
-      : ''
-  const API_BASE = (import.meta?.env?.VITE_API_BASE_URL || '').trim() || defaultApiBase
+  const API_BASE = RESOLVED_API_BASE
 
   const [providerOptions, setProviderOptions] = useState(null)
 

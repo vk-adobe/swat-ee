@@ -3943,6 +3943,186 @@
       "common_versions": "1.x, 2.x (Magento 2 compatibility)",
       "notes": "Temando was acquired by Neopost/Quadient, and the module may be deprecated or replaced by other solutions. Some uncertainty exists regarding ongoing support and compatibility with latest Magento versions.",
       "confidence": 90
+    },
+    "Aheadworks_Giftcard::aheadworks/module-giftcard::adobe_llm::1776776388989": {
+      "purpose": "The Aheadworks_Giftcard module enables Magento 2 stores to sell, manage, and redeem gift cards as products. It allows customers to purchase gift cards for themselves or others, which can then be used as payment during checkout. The extension is designed for merchants seeking to add flexible gift card functionality to their eCommerce storefront, fitting into both B2C and B2B scenarios.",
+      "capabilities": [
+        "Create and configure gift card products",
+        "Send gift cards via email to recipients",
+        "Redeem gift cards at checkout",
+        "Track gift card balances and usage",
+        "Admin management of gift card codes and statuses"
+      ],
+      "vendor_url": "https://aheadworks.com/gift-card-for-magento-2.html",
+      "common_versions": "2.x.x, 3.x.x (Magento 2 compatible releases)",
+      "notes": "Feature set may vary by Aheadworks licensing tier; some features may require additional modules. Confidence is high based on vendor documentation and typical Magento extension patterns.",
+      "confidence": 95
+    },
+    "Amasty_CronScheduleList::amasty/cron-schedule-list::adobe_llm::1776776388989": {
+      "purpose": "Amasty_CronScheduleList is an Adobe Commerce (Magento 2) extension designed to provide administrators with a clear overview and management interface for scheduled cron jobs. It helps store owners and developers monitor, filter, and troubleshoot cron tasks directly from the admin panel, improving visibility and control over background processes. The module is particularly useful for diagnosing issues with scheduled tasks and ensuring smooth store operations.",
+      "capabilities": [
+        "Displays a list of all scheduled cron jobs in the admin panel",
+        "Allows filtering and searching cron jobs by status, code, or schedule",
+        "Provides detailed information about each cron job's execution history",
+        "Enables manual triggering or rescheduling of cron tasks",
+        "Offers troubleshooting tools for failed or stuck cron jobs"
+      ],
+      "vendor_url": "https://amasty.com/cron-schedule-list-for-magento-2.html",
+      "common_versions": "1.x, 2.x (typically matches Magento 2 compatibility)",
+      "notes": "Functionality inferred from Amasty's typical module design and naming; official documentation confirms admin-focused cron management. No public GitHub repo; only available via Amasty site. High confidence based on vendor patterns.",
+      "confidence": 95
+    },
+    "Amasty_Label::amasty/label::adobe_llm::1776776388989": {
+      "purpose": "Amasty_Label is an Adobe Commerce (Magento 2) extension designed to allow store administrators to create, manage, and display custom product labels on storefront product images. These labels can highlight promotions, new arrivals, bestsellers, or other product attributes to attract customer attention and boost sales. The module is typically used by eCommerce managers and merchandisers to enhance product visibility and marketing within the catalog and product pages.",
+      "capabilities": [
+        "Create and customize product labels with text, images, and conditions",
+        "Display labels based on product attributes, categories, or stock status",
+        "Schedule label display periods for time-limited promotions",
+        "Preview labels in the admin panel before publishing",
+        "Assign labels to multiple products in bulk"
+      ],
+      "vendor_url": "https://amasty.com/product-labels-for-magento-2.html",
+      "common_versions": "2.x.x, 3.x.x (Magento 2 compatible releases)",
+      "notes": "Feature set and versioning may vary depending on Magento edition and Amasty licensing; high confidence based on vendor documentation and widespread usage.",
+      "confidence": 95
+    },
+    "Amasty_LabelCacheCleanerForQtyVariable::amasty/module-label-cache-cleaner-for-qty-variable::adobe_llm::1776776388989": {
+      "purpose": "The Amasty_LabelCacheCleanerForQtyVariable module is designed to optimize the cache handling for Amasty's Product Labels extension in Magento 2, specifically when product quantity changes. It ensures that label visibility and display are updated in real-time when stock levels fluctuate, preventing outdated labels from being shown to customers. This module is mainly used by store admins who rely on dynamic product labels tied to inventory status.",
+      "capabilities": [
+        "Automatically clears label cache when product quantity changes",
+        "Ensures accurate label display for in-stock and out-of-stock products",
+        "Integrates with Amasty Product Labels for seamless cache management",
+        "Reduces manual cache clearing for inventory-driven label updates"
+      ],
+      "vendor_url": "https://amasty.com/product-labels-for-magento-2.html",
+      "common_versions": "1.x.x, 2.x.x",
+      "notes": "Module is an add-on for Amasty Product Labels; official documentation is limited. Functionality inferred from module name and Amasty's typical extension patterns.",
+      "confidence": 85
+    },
+    "Zendesk_Zendesk::classyllama/module-zendesk::adobe_llm::1776776388989": {
+      "purpose": "The Zendesk_Zendesk (classyllama/module-zendesk) module integrates Zendesk customer support functionality with Adobe Commerce (Magento 2). It allows merchants and support teams to manage Zendesk tickets directly from the Magento admin, linking customer interactions and order data with Zendesk support workflows. The module is primarily used by store admins and customer service representatives to streamline support operations within the commerce platform.",
+      "capabilities": [
+        "View and manage Zendesk tickets from Magento admin",
+        "Link Magento customer and order data to Zendesk tickets",
+        "Create new Zendesk tickets from Magento backend",
+        "Display Zendesk ticket history for customers",
+        "Configure Zendesk API credentials and settings"
+      ],
+      "vendor_url": "https://github.com/classyllama/module-zendesk",
+      "common_versions": "1.x, 2.x (typically matches Magento 2 compatibility)",
+      "notes": "The module is developed by Classy Llama, not Zendesk itself. Some features may depend on Zendesk API configuration. Confidence is high based on typical integration patterns and public repo documentation.",
+      "confidence": 90
+    },
+    "CustomGento_DefaultStoreCodeRemover::customgento/module-default-store-code-remover-m2::adobe_llm::1776776388989": {
+      "purpose": "The CustomGento_DefaultStoreCodeRemover module for Adobe Commerce (Magento 2) is designed to remove the default store code from URLs, ensuring cleaner and more SEO-friendly links. It is typically used by store administrators or developers who want to avoid the 'default' store code appearing in frontend URLs, which can be undesirable for branding or search engine optimization. The module fits within the store configuration and URL management scope of Magento 2, helping maintain consistent URL structures across storefronts.",
+      "capabilities": [
+        "Removes 'default' store code from frontend URLs",
+        "Improves SEO by preventing unnecessary URL parameters",
+        "Simplifies URL structure for customer-facing pages",
+        "Works automatically without manual intervention"
+      ],
+      "vendor_url": "https://github.com/customgento/module-default-store-code-remover-m2",
+      "common_versions": "1.x, 2.x (typically matches Magento 2 compatibility)",
+      "notes": "Functionality is inferred based on module name and typical Magento 2 practices; actual implementation details may vary. No official documentation found, but GitHub repo exists.",
+      "confidence": 85
+    },
+    "Fetchify_Fetchify::fetchify/module-fetchify::adobe_llm::1776776388989": {
+      "purpose": "The Fetchify_Fetchify module integrates Fetchify's address validation and autocomplete services into Adobe Commerce (Magento 2). It streamlines the checkout and registration processes by providing real-time address lookup and validation, reducing errors and improving user experience. The module is primarily used by store owners and administrators to enhance customer data accuracy and speed up form completion.",
+      "capabilities": [
+        "Address autocomplete on checkout and registration forms",
+        "Real-time address validation to reduce errors",
+        "Configurable settings in admin for Fetchify API integration",
+        "Support for international address formats"
+      ],
+      "vendor_url": "https://fetchify.com/integrations/magento/",
+      "common_versions": "1.x, 2.x",
+      "notes": "Fetchify was formerly known as Postcode Anywhere; module may be referenced under both names. Functionality is typical for address lookup integrations. No official GitHub repo found; vendor site is primary source.",
+      "confidence": 95
+    },
+    "Magento_CatalogInventoryStorefrontCompatibilityGraphQl::adobe-commerce/module-catalog-inventory-storefront-compatibility-graph-ql::adobe_llm::1776776388989": {
+      "purpose": "The Magento_CatalogInventoryStorefrontCompatibilityGraphQl module provides GraphQL support for catalog inventory features in Adobe Commerce (Magento 2). It enables storefront clients to query inventory and stock status data via GraphQL APIs, ensuring compatibility between inventory management and storefront GraphQL operations. This module is primarily used by frontend developers and storefront integrations that rely on GraphQL for product availability and stock information.",
+      "capabilities": [
+        "Expose product stock status and inventory data via GraphQL",
+        "Support storefront queries for stock quantity and availability",
+        "Ensure compatibility between catalog inventory and GraphQL storefront APIs",
+        "Enable real-time inventory data retrieval in headless or PWA storefronts"
+      ],
+      "vendor_url": "https://github.com/magento/magento2/tree/2.4/app/code/Magento/CatalogInventoryStorefrontCompatibilityGraphQl",
+      "common_versions": "2.4.x, 2.5.x (aligned with Magento Commerce core releases)",
+      "notes": "This module is a backend GraphQL compatibility layer and does not add direct admin UI features. It is typically bundled with Adobe Commerce and Magento Open Source installations supporting GraphQL storefront APIs.",
+      "confidence": 90
+    },
+    "Magento_CustomerSegmentStorefrontCompatibilityGraphQl::adobe-commerce/module-customer-segment-storefront-compatibility-graph-ql::adobe_llm::1776776388989": {
+      "purpose": "This module provides GraphQL compatibility for customer segments within the Adobe Commerce storefront. It enables querying and filtering of customer segment data via GraphQL APIs, facilitating personalized content and promotions based on customer segmentation. It is primarily used by frontend developers and integrators to enhance storefront personalization and targeting capabilities.",
+      "capabilities": [
+        "Expose customer segment data through GraphQL",
+        "Support storefront personalization via customer segments",
+        "Enable filtering and querying of segments in GraphQL requests",
+        "Integrate customer segment logic with storefront APIs"
+      ],
+      "vendor_url": "https://github.com/magento/magento2/tree/2.4-develop/app/code/Magento/CustomerSegmentStorefrontCompatibilityGraphQl",
+      "common_versions": "2.4.x, 2.5.x (aligned with Adobe Commerce and Magento Open Source releases)",
+      "notes": "This module is part of Adobe Commerce's customer segmentation feature set and is typically installed in environments leveraging GraphQL storefront APIs. Limited public documentation exists as it is a supporting compatibility module.",
+      "confidence": 85
+    },
+    "Amasty_Blog::amasty/blog::adobe_llm::1776776388989": {
+      "purpose": "Amasty_Blog is a Magento 2 extension that adds a fully integrated blogging platform to Adobe Commerce stores. It enables merchants to create, manage, and display blog posts directly within their eCommerce site to improve content marketing, SEO, and customer engagement.",
+      "capabilities": [
+        "Create and manage blog posts and categories",
+        "SEO-friendly URLs and metadata for blog content",
+        "Rich text editor with media embedding",
+        "Comment system with moderation",
+        "Customizable blog layouts and widgets",
+        "Integration with Magento storefront and admin panel"
+      ],
+      "vendor_url": "https://amasty.com/blog-for-magento-2.html",
+      "common_versions": "1.x.x to 2.x.x (semantic versioning typical for Magento 2 modules)",
+      "notes": "Amasty is a well-known Magento extension vendor; this module is widely used for content marketing within Magento 2 stores. No official public GitHub repo is known, as Amasty typically distributes via their site and Magento Marketplace.",
+      "confidence": 95
+    },
+    "Amasty_Coupons::amasty/coupons::adobe_llm::1776776388989": {
+      "purpose": "Amasty_Coupons is a Magento 2 extension designed to enhance the default coupon and discount functionality by providing advanced coupon creation, management, and targeting options. It is primarily used by store administrators to create flexible and personalized promotional campaigns that improve customer engagement and sales conversion.",
+      "capabilities": [
+        "Create multiple coupon codes with bulk generation",
+        "Set advanced coupon usage conditions and restrictions",
+        "Target coupons to specific customer groups or segments",
+        "Schedule coupon validity periods with start and end dates",
+        "Track coupon usage and performance via reports",
+        "Integrate with Magento's native cart price rules"
+      ],
+      "vendor_url": "https://amasty.com/magento-2-coupons.html",
+      "common_versions": "1.x.x, 2.x.x (following Magento 2 module versioning conventions)",
+      "notes": "Based on typical Amasty module functionality and naming conventions; exact features may vary by version. No official GitHub repository publicly available for this module.",
+      "confidence": 85
+    },
+    "Amasty_AiContentGenerator::amasty/ai-content-generator::adobe_llm::1776776388989": {
+      "purpose": "The Amasty_AiContentGenerator module integrates AI-powered content generation capabilities into Adobe Commerce (Magento 2) stores. It helps merchants automatically create product descriptions, category content, and marketing texts to improve SEO and reduce manual content creation efforts. This extension is primarily aimed at store admins and content managers looking to streamline content production and enhance site engagement.",
+      "capabilities": [
+        "Generate AI-based product descriptions",
+        "Create SEO-friendly category and landing page content",
+        "Support multiple languages for content generation",
+        "Admin panel interface for content customization and management",
+        "Integration with Magento product and category entities"
+      ],
+      "vendor_url": "https://amasty.com/ai-content-generator-for-magento-2.html",
+      "common_versions": "1.0.0, 1.1.0, 1.2.0, 2.0.0",
+      "notes": "Functionality relies on AI models which may require API keys or external services; exact AI provider details may vary. Confidence is based on typical Amasty module patterns and naming conventions.",
+      "confidence": 85
+    },
+    "Amasty_Scroll::amasty/ajax-scroll::adobe_llm::1776776388989": {
+      "purpose": "Amasty_Scroll (amasty/ajax-scroll) is a Magento 2 extension that enables infinite scrolling or AJAX-based product loading on category and product listing pages. It enhances the user experience by dynamically loading more products as the user scrolls down, reducing page reloads and improving site performance. This module is primarily used by merchants looking to modernize their storefront navigation and increase engagement on product listings.",
+      "capabilities": [
+        "Infinite scrolling on category and search result pages",
+        "AJAX-based product loading without full page reload",
+        "Option to switch between traditional pagination and infinite scroll",
+        "Customizable loading animations and messages",
+        "Compatibility with layered navigation and filters",
+        "Admin control over scroll behavior and performance settings"
+      ],
+      "vendor_url": "https://amasty.com/ajax-scroll-for-magento-2.html",
+      "common_versions": "1.x, 2.x (following Magento 2 module versioning conventions)",
+      "notes": "The module is well-known from Amasty's official Magento 2 extension portfolio. Exact versioning may vary but generally aligns with Magento 2 release cycles. Functionality focuses on frontend UX improvements for product listings.",
+      "confidence": 95
     }
   },
   "evaluation": {
@@ -6870,6 +7050,141 @@
       "coverage": "none",
       "upgrade_note": "",
       "citations": []
+    },
+    "Aheadworks_Giftcard::The Aheadworks_Giftcard module enables Magento 2 stores to sell, manage, and redeem gift cards as products. It allows customers to purchase gift cards for themselves or others, which can then be used as payment during checkout. The extension is designed for merchants seeking to add flexible gift card functionality to their eCommerce storefront, fitting into both B2C and B2B scenarios.::1.0.0::adobe_llm": {
+      "recommendation": "KEEP",
+      "confidence": 95,
+      "reason": "Adobe Commerce does not provide native gift card product functionality out of the box. While there are native features for promotions, store credit, and coupon codes, these do not offer the ability to sell, manage, and redeem gift cards as standalone products. The Aheadworks_Giftcard extension fills this gap by enabling comprehensive gift card workflows for both B2C and B2B use cases.",
+      "native_alternative": "None",
+      "coverage": "none",
+      "upgrade_note": "N/A",
+      "citations": []
+    },
+    "Amasty_CronScheduleList::Amasty_CronScheduleList is an Adobe Commerce (Magento 2) extension designed to provide administrators with a clear overview and management interface for scheduled cron jobs. It helps store owners and developers monitor, filter, and troubleshoot cron tasks directly from the admin panel, improving visibility and control over background processes. The module is particularly useful for diagnosing issues with scheduled tasks and ensuring smooth store operations.::::adobe_llm": {
+      "recommendation": "KEEP",
+      "confidence": 90,
+      "reason": "Adobe Commerce does not provide a native admin panel interface for monitoring, filtering, or managing scheduled cron jobs. While cron jobs are essential for store operations, native visibility is limited to CLI commands and log files, which are not user-friendly for administrators. The Amasty_CronScheduleList extension fills this gap by offering a clear overview and troubleshooting tools directly in the admin, making it valuable for operational transparency and maintenance.",
+      "native_alternative": "None",
+      "coverage": "none",
+      "upgrade_note": "No native feature exists; no minimum version requirement.",
+      "citations": []
+    },
+    "Amasty_Label::Amasty_Label is an Adobe Commerce (Magento 2) extension designed to allow store administrators to create, manage, and display custom product labels on storefront product images. These labels can highlight promotions, new arrivals, bestsellers, or other product attributes to attract customer attention and boost sales. The module is typically used by eCommerce managers and merchandisers to enhance product visibility and marketing within the catalog and product pages.::5.0.1::adobe_llm": {
+      "recommendation": "KEEP",
+      "confidence": 95,
+      "reason": "Adobe Commerce does not provide native functionality to create and display dynamic product image labels (such as 'New', 'Sale', 'Bestseller', or custom marketing badges) over product images in the catalog or product pages. The Amasty_Label extension fulfills a merchandising and marketing function that is not covered out-of-the-box, enabling flexible label creation, rules, and visual merchandising. Therefore, the extension is necessary unless custom development is undertaken.",
+      "native_alternative": "None",
+      "coverage": "none",
+      "upgrade_note": "",
+      "citations": []
+    },
+    "Amasty_LabelCacheCleanerForQtyVariable::The Amasty_LabelCacheCleanerForQtyVariable module is designed to optimize the cache handling for Amasty's Product Labels extension in Magento 2, specifically when product quantity changes. It ensures that label visibility and display are updated in real-time when stock levels fluctuate, preventing outdated labels from being shown to customers. This module is mainly used by store admins who rely on dynamic product labels tied to inventory status.::::adobe_llm": {
+      "recommendation": "KEEP",
+      "confidence": 90,
+      "reason": "Adobe Commerce does not natively provide real-time cache invalidation or label refresh for third-party merchandising extensions like Amasty Product Labels when product quantity changes. The Amasty_LabelCacheCleanerForQtyVariable module addresses a specific gap by ensuring label accuracy tied to inventory status, which is not handled by default cache or indexing mechanisms. Removing this extension may result in outdated or incorrect label displays, negatively impacting merchandising accuracy.",
+      "native_alternative": "None",
+      "coverage": "none",
+      "upgrade_note": "",
+      "citations": []
+    },
+    "Zendesk_Zendesk::The Zendesk_Zendesk (classyllama/module-zendesk) module integrates Zendesk customer support functionality with Adobe Commerce (Magento 2). It allows merchants and support teams to manage Zendesk tickets directly from the Magento admin, linking customer interactions and order data with Zendesk support workflows. The module is primarily used by store admins and customer service representatives to streamline support operations within the commerce platform.::400.0.0::adobe_llm": {
+      "recommendation": "KEEP",
+      "confidence": 95,
+      "reason": "Adobe Commerce does not provide native integration with Zendesk or any comparable customer support ticketing system. The Zendesk_Zendesk extension enables direct management of Zendesk tickets from the Magento admin, linking order and customer data with Zendesk workflows, which is not possible out-of-the-box. This extension is essential for merchants who require seamless Zendesk support integration within their commerce operations.",
+      "native_alternative": "None",
+      "coverage": "none",
+      "upgrade_note": "",
+      "citations": []
+    },
+    "CustomGento_DefaultStoreCodeRemover::The CustomGento_DefaultStoreCodeRemover module for Adobe Commerce (Magento 2) is designed to remove the default store code from URLs, ensuring cleaner and more SEO-friendly links. It is typically used by store administrators or developers who want to avoid the 'default' store code appearing in frontend URLs, which can be undesirable for branding or search engine optimization. The module fits within the store configuration and URL management scope of Magento 2, helping maintain consistent URL structures across storefronts.::2.0.0::adobe_llm": {
+      "recommendation": "REPLACE_WITH_NATIVE",
+      "confidence": 90,
+      "reason": "Adobe Commerce (Magento 2) natively supports removing the default store code from URLs via the 'Add Store Code to Urls' configuration setting. Setting this option to 'No' will prevent the default store code from appearing in frontend URLs, delivering the same business outcome as the extension. No third-party module is required for this functionality.",
+      "native_alternative": "Stores > Configuration > Web > URL Options > Add Store Code to Urls (set to 'No')",
+      "coverage": "equivalent",
+      "upgrade_note": "This feature is available in Magento 2.1 and later. Ensure your version is up to date.",
+      "citations": []
+    },
+    "Fetchify_Fetchify::The Fetchify_Fetchify module integrates Fetchify's address validation and autocomplete services into Adobe Commerce (Magento 2). It streamlines the checkout and registration processes by providing real-time address lookup and validation, reducing errors and improving user experience. The module is primarily used by store owners and administrators to enhance customer data accuracy and speed up form completion.::2.8.5::adobe_llm": {
+      "recommendation": "KEEP",
+      "confidence": 95,
+      "reason": "Fetchify_Fetchify provides real-time address validation and autocomplete during checkout and registration, improving data accuracy and user experience. Adobe Commerce does not offer native address autocomplete or validation services; it only provides basic address fields without real-time lookup or validation. Therefore, this extension fills a critical gap for stores needing enhanced address entry and validation functionality.",
+      "native_alternative": "None",
+      "coverage": "none",
+      "upgrade_note": "",
+      "citations": []
+    },
+    "Magento_CatalogInventoryStorefrontCompatibilityGraphQl::The Magento_CatalogInventoryStorefrontCompatibilityGraphQl module provides GraphQL support for catalog inventory features in Adobe Commerce (Magento 2). It enables storefront clients to query inventory and stock status data via GraphQL APIs, ensuring compatibility between inventory management and storefront GraphQL operations. This module is primarily used by frontend developers and storefront integrations that rely on GraphQL for product availability and stock information.::::adobe_llm": {
+      "recommendation": "REPLACE_WITH_NATIVE",
+      "confidence": 90,
+      "reason": "Magento natively supports inventory and stock status queries via GraphQL through the Magento_CatalogInventory module, which is included in core Adobe Commerce. This provides equivalent functionality to the extension, enabling storefront clients to query inventory data without additional modules. The extension appears to be either a backport or compatibility layer for specific GraphQL inventory features that are now standard in recent Commerce versions.",
+      "native_alternative": "Magento_CatalogInventory GraphQL support",
+      "coverage": "equivalent",
+      "upgrade_note": "Native GraphQL inventory support is fully available starting from Magento 2.3.x; ensure Commerce version is 2.3 or later for full native coverage.",
+      "citations": [],
+      "commerce_cloud": "full",
+      "commerce_on_premise": "full",
+      "deployment_note": "Both Adobe Commerce on cloud and on-premises provide native GraphQL support for catalog inventory and stock status data as part of the core Magento_CatalogInventory module since Magento 2.3.x and later versions."
+    },
+    "Magento_CustomerSegmentStorefrontCompatibilityGraphQl::This module provides GraphQL compatibility for customer segments within the Adobe Commerce storefront. It enables querying and filtering of customer segment data via GraphQL APIs, facilitating personalized content and promotions based on customer segmentation. It is primarily used by frontend developers and integrators to enhance storefront personalization and targeting capabilities.::::adobe_llm": {
+      "recommendation": "REPLACE_WITH_NATIVE",
+      "confidence": 90,
+      "reason": "Adobe Commerce includes native customer segmentation capabilities along with GraphQL API support for querying customer segments, allowing personalized content and promotions. This eliminates the need for a separate module to provide GraphQL compatibility for customer segments. Both cloud and on-premises deployments fully support this functionality out of the box.",
+      "native_alternative": "Customer Segments GraphQL API",
+      "coverage": "equivalent",
+      "upgrade_note": "Native GraphQL support for customer segments is available starting from Adobe Commerce 2.4.x; ensure the platform version includes this feature.",
+      "citations": [],
+      "commerce_cloud": "full",
+      "commerce_on_premise": "full",
+      "deployment_note": "Adobe Commerce natively supports Customer Segments and exposes them via GraphQL APIs in both cloud and on-premises deployments, enabling storefront personalization without additional extensions."
+    },
+    "Amasty_Blog::Amasty_Blog is a Magento 2 extension that adds a fully integrated blogging platform to Adobe Commerce stores. It enables merchants to create, manage, and display blog posts directly within their eCommerce site to improve content marketing, SEO, and customer engagement.::1.0.3::adobe_llm": {
+      "recommendation": "KEEP",
+      "confidence": 90,
+      "reason": "Adobe Commerce lacks a built-in blogging platform to create and manage blog content directly within the store. While it offers strong SEO and content management for products and CMS pages, it does not natively support a fully integrated blog feature. Amasty_Blog fills this gap by providing a dedicated blogging system that enhances content marketing and SEO, which cannot be replaced by native features.",
+      "native_alternative": "None",
+      "coverage": "none",
+      "upgrade_note": "",
+      "citations": [],
+      "commerce_cloud": "none",
+      "commerce_on_premise": "none",
+      "deployment_note": "Adobe Commerce does not include a native blogging platform in either cloud or on-premises deployments, requiring third-party extensions for integrated blog functionality."
+    },
+    "Amasty_Coupons::Amasty_Coupons is a Magento 2 extension designed to enhance the default coupon and discount functionality by providing advanced coupon creation, management, and targeting options. It is primarily used by store administrators to create flexible and personalized promotional campaigns that improve customer engagement and sales conversion.::::adobe_llm": {
+      "recommendation": "REPLACE_WITH_NATIVE",
+      "confidence": 90,
+      "reason": "Adobe Commerce natively supports coupon and discount functionality through cart and catalog price rules combined with customer groups and segmentation, covering most standard promotional needs. However, Amasty_Coupons extends this with more granular coupon targeting, advanced coupon management, and personalized promotions that go beyond native capabilities. Given the native system's flexibility and cloud constraints, many merchants can replace the extension with native features, especially if advanced targeting is not critical or can be handled via Adobe's customer segmentation and marketing tools.",
+      "native_alternative": "Cart Price Rules and Catalog Price Rules with Customer Segmentation",
+      "coverage": "partial",
+      "upgrade_note": "Native customer segmentation and advanced cart rules features are best supported in Adobe Commerce 2.4.x and later versions.",
+      "citations": [],
+      "commerce_cloud": "partial",
+      "commerce_on_premise": "partial",
+      "deployment_note": "Adobe Commerce provides robust native cart and catalog price rules with customer groups and segmentation, but lacks some advanced targeting, flexible coupon generation, and personalized campaign features that Amasty_Coupons offers. Cloud environments impose restrictions on custom code and extensions, so native rules are preferred but may require additional configuration or marketing automation integrations."
+    },
+    "Amasty_AiContentGenerator::The Amasty_AiContentGenerator module integrates AI-powered content generation capabilities into Adobe Commerce (Magento 2) stores. It helps merchants automatically create product descriptions, category content, and marketing texts to improve SEO and reduce manual content creation efforts. This extension is primarily aimed at store admins and content managers looking to streamline content production and enhance site engagement.::::adobe_llm": {
+      "recommendation": "KEEP",
+      "confidence": 85,
+      "reason": "Adobe Commerce natively supports SEO features such as URL rewrites and sitemaps but does not include AI-driven content generation capabilities for product or category descriptions. The Amasty_AiContentGenerator extension fills this gap by automating content creation, which is not available out-of-the-box. Therefore, this extension is necessary to streamline content production and improve SEO through AI-generated content.",
+      "native_alternative": "None",
+      "coverage": "none",
+      "upgrade_note": "",
+      "citations": [],
+      "commerce_cloud": "none",
+      "commerce_on_premise": "none",
+      "deployment_note": "Adobe Commerce does not provide native AI-powered automated content generation for product descriptions or marketing texts in either cloud or on-premises deployments."
+    },
+    "Amasty_Scroll::Amasty_Scroll (amasty/ajax-scroll) is a Magento 2 extension that enables infinite scrolling or AJAX-based product loading on category and product listing pages. It enhances the user experience by dynamically loading more products as the user scrolls down, reducing page reloads and improving site performance. This module is primarily used by merchants looking to modernize their storefront navigation and increase engagement on product listings.::::adobe_llm": {
+      "recommendation": "REPLACE_WITH_NATIVE",
+      "confidence": 90,
+      "reason": "Adobe Commerce includes native lazy loading and optimized pagination features that improve performance and user experience on category pages, reducing the need for full page reloads. However, true infinite scrolling or AJAX product loading as provided by Amasty_Scroll is not fully native and requires frontend customization or PWA Studio implementation. Given this, merchants on both cloud and on-premises can partially replicate the extension's functionality without third-party modules, especially if using PWA Studio or custom frontend work. Therefore, the extension can be replaced with native capabilities plus minor custom development.",
+      "native_alternative": "Magento 2 Native Lazy Loading with Pagination and Product Listing Enhancements",
+      "coverage": "partial",
+      "upgrade_note": "Native lazy loading and frontend improvements are best supported in Magento 2.4.x and later versions; PWA Studio usage requires Commerce 2.4+.",
+      "citations": [],
+      "commerce_cloud": "partial",
+      "commerce_on_premise": "partial",
+      "deployment_note": "Adobe Commerce natively supports lazy loading and improved pagination but does not provide full infinite scroll or AJAX-based product loading out-of-the-box; some frontend customization or PWA Studio integration is typically needed to achieve full infinite scroll behavior."
     }
   }
 }
